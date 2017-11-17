@@ -37,7 +37,12 @@
 		60DE906C1FBD91690093A322 /* SwitchCurrencyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE90341FBD8E0A0093A322 /* SwitchCurrencyCollectionViewCell.swift */; };
 		60DE906D1FBD91690093A322 /* SwitchCurrencyCollectionViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 60DE90351FBD8E0A0093A322 /* SwitchCurrencyCollectionViewCell.xib */; };
 		60DE906F1FBD92670093A322 /* UICollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE906E1FBD92670093A322 /* UICollectionView+Reusable.swift */; };
+		60F21E3C1FBDFB99005D10BB /* CurrencyExchange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60F21E3B1FBDFB99005D10BB /* CurrencyExchange.storyboard */; };
+		60F21E451FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F21E431FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.swift */; };
+		60F21E461FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60F21E441FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.xib */; };
 		60F8B2DA1FBD9E8800C4D849 /* Crypto+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8B2D91FBD9E8800C4D849 /* Crypto+NavigationBar.swift */; };
+		60F8B2DC1FBDC9A000C4D849 /* SelectCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8B2DB1FBDC9A000C4D849 /* SelectCurrencyViewController.swift */; };
+		60F8B2DE1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8B2DD1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,7 +99,12 @@
 		60DE90561FBD8F040093A322 /* UIViewController+Nib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Nib.swift"; sourceTree = "<group>"; };
 		60DE90581FBD8F040093A322 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		60DE906E1FBD92670093A322 /* UICollectionView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Reusable.swift"; sourceTree = "<group>"; };
+		60F21E3B1FBDFB99005D10BB /* CurrencyExchange.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CurrencyExchange.storyboard; sourceTree = "<group>"; };
+		60F21E431FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedCurrencyTableViewCell.swift; sourceTree = "<group>"; };
+		60F21E441FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConvertedCurrencyTableViewCell.xib; sourceTree = "<group>"; };
 		60F8B2D91FBD9E8800C4D849 /* Crypto+NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Crypto+NavigationBar.swift"; sourceTree = "<group>"; };
+		60F8B2DB1FBDC9A000C4D849 /* SelectCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrencyViewController.swift; sourceTree = "<group>"; };
+		60F8B2DD1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedCurrencyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				60DE90051FBD8BCB0093A322 /* Main.storyboard */,
+				60F21E3B1FBDFB99005D10BB /* CurrencyExchange.storyboard */,
 			);
 			path = StoryBoard;
 			sourceTree = "<group>";
@@ -188,6 +199,8 @@
 			children = (
 				60DE90341FBD8E0A0093A322 /* SwitchCurrencyCollectionViewCell.swift */,
 				60DE90351FBD8E0A0093A322 /* SwitchCurrencyCollectionViewCell.xib */,
+				60F21E431FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.swift */,
+				60F21E441FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -224,6 +237,8 @@
 			children = (
 				60DE902F1FBD8C330093A322 /* SwitchCurrencyViewController.swift */,
 				60DE90361FBD8E4E0093A322 /* HeaderView.swift */,
+				60F8B2DB1FBDC9A000C4D849 /* SelectCurrencyViewController.swift */,
+				60F8B2DD1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -368,7 +383,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60F21E3C1FBDFB99005D10BB /* CurrencyExchange.storyboard in Resources */,
 				60DE900C1FBD8BCB0093A322 /* LaunchScreen.storyboard in Resources */,
+				60F21E461FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.xib in Resources */,
 				60DE90091FBD8BCB0093A322 /* Assets.xcassets in Resources */,
 				60DE90071FBD8BCB0093A322 /* Main.storyboard in Resources */,
 			);
@@ -413,12 +430,15 @@
 				60DE90651FBD915C0093A322 /* UIColor+Hex.swift in Sources */,
 				60DE90661FBD915C0093A322 /* UINib.swift in Sources */,
 				60DE906F1FBD92670093A322 /* UICollectionView+Reusable.swift in Sources */,
+				60F21E451FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.swift in Sources */,
 				60DE90671FBD915C0093A322 /* UITableView+Reusable.swift in Sources */,
 				60DE90681FBD915C0093A322 /* UIView+Nib.swift in Sources */,
 				60DE90691FBD915C0093A322 /* UIViewController+Alert.swift in Sources */,
 				60DE906A1FBD915C0093A322 /* UIViewController+Nib.swift in Sources */,
 				60DE906B1FBD915C0093A322 /* UIViewExtensions.swift in Sources */,
 				60DE90301FBD8C330093A322 /* SwitchCurrencyViewController.swift in Sources */,
+				60F8B2DE1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift in Sources */,
+				60F8B2DC1FBDC9A000C4D849 /* SelectCurrencyViewController.swift in Sources */,
 				60DE90371FBD8E4E0093A322 /* HeaderView.swift in Sources */,
 				60DE90021FBD8BCB0093A322 /* AppDelegate.swift in Sources */,
 			);
@@ -592,7 +612,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Crownstack.com.Crypto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -606,7 +626,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Crownstack.com.Crypto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
