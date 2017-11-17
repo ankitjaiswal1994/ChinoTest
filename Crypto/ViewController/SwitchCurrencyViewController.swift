@@ -32,6 +32,12 @@ class SwitchCurrencyViewController: UIViewController {
     
     var currencyNameArray = ["Common Currency","Cryptocurrency"]
     
+    
+    // selected
+    var selectedCurrency = ""
+    var selectedItems = ""
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
        
@@ -70,6 +76,14 @@ class SwitchCurrencyViewController: UIViewController {
     @IBAction func confirmButtonAction(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "CurrencyExchange", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "ConvertedCurrencyViewController") as? ConvertedCurrencyViewController else { return }
+        
+        vc.selectedArray = selectedArray.map({ (cuurency) -> String in
+            return cuurency.code
+        }).joined(separator: ",")
+        
+        vc.currency = selectedCurrency
+        
+            
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -172,8 +186,10 @@ extension SwitchCurrencyViewController: UITextFieldDelegate {
 
 extension SwitchCurrencyViewController: SelectCurrencyDelegate {
     
-    func showAlert() {
+    func showAlert(selectedCurrecny: String) {
         isCurrencySelect = true
+        
+        self.selectedCurrency = selectedCurrecny
         alert(message: "Select up to 3 alternate currencies", title: "Notice", OKAction: nil)
     }
 }

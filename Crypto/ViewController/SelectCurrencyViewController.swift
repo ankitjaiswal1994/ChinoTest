@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SelectCurrencyDelegate: class {
-    func showAlert()
+    func showAlert(selectedCurrecny: String)
 }
 
 class SelectCurrencyViewController: UIViewController {
@@ -64,7 +64,7 @@ class SelectCurrencyViewController: UIViewController {
     
     @objc func donePressed() {
         navigationController?.popViewController(animated: true)
-        delegate?.showAlert()
+        delegate?.showAlert(selectedCurrecny: code)
     }
 }
 

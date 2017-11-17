@@ -10,6 +10,16 @@ import UIKit
 
 class ConvertedCurrencyViewController: UIViewController {
     
+    struct Item {
+        var name: String
+        var value: Float
+    }
+    
+    var items: [Item]?
+    var keys =  [String]()
+    var values = [Float]()
+    
+    
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.register(cellType: ConvertedCurrencyTableViewCell.self)
@@ -19,7 +29,11 @@ class ConvertedCurrencyViewController: UIViewController {
     
     var currencyInfo = [CurrencyInfo]()
     
+    var currency: String = ""
+    var selectedArray: String = "" // this contains comma separated values
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         
         let title = UserDefaults.standard.value(forKey: "price") as? String ?? "Currency Price"
         navigationController?.navigationBar.isHidden = false
@@ -43,7 +57,9 @@ class ConvertedCurrencyViewController: UIViewController {
     }
     
     func getCalculatedData() {
-        guard let url = URL(string: "https://min-api.cryptocompare.com/data/price?fsym=INR&tsyms=BTC,USD,GBP") else { return }
+        
+        let urlPath = "https://min-api.cryptocompare.com/data/price?fsym=\(currency)&tsyms=\(selectedArray)"
+        guard let url = URL(string: urlPath) else { return }
         URLSession.shared.dataTask(with: url, completionHandler: {
             (data, response, error) in
             if(error != nil){
@@ -51,7 +67,8 @@ class ConvertedCurrencyViewController: UIViewController {
             } else {
                 do {
                     if let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? NSDictionary {
-                     
+                        self.keys = json.allKeys as? [String] ?? []
+                        self.values = json.allValues as? [Float] ?? []
                     }
                     dispatch {
                         self.tableView.reloadData()
@@ -72,9 +89,17 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConvertedCurrencyTableViewCell.self)
-        cell.currencyType.text = "BTC"
-        cell.currencyValue.text = "1823764812364"
-        cell.currencyName.text = "Bitcoin"
+        
+        
+        if indexPath.row < self.keys.count {
+            cell.currencyType.text = self.keys[indexPath.row]
+        }
+        
+        if indexPath.row < self.values.count {
+            cell.currencyValue.text = "\(self.values[indexPath.row])"
+        }
+     
+        cell.currencyName.text = ""
         return cell
     }
     
