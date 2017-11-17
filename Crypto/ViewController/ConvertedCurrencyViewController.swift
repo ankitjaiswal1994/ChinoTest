@@ -9,10 +9,10 @@
 import UIKit
 
 class ConvertedCurrencyViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView! {
         didSet {
-                 tableView.register(cellType: ConvertedCurrencyTableViewCell.self)
+            tableView.register(cellType: ConvertedCurrencyTableViewCell.self)
         }
     }
 }
