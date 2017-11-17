@@ -1,0 +1,62 @@
+[
+{
+"icon": "usa",
+"name": "United States of America",
+"code": "USD"
+},
+{
+"icon": "india",
+"name": "India",
+"code": "INR"
+},
+{
+"icon": "eur",
+"name": "Europe",
+"code": "EUR"
+},
+{
+"icon": "canada",
+"name": "Canada",
+"code": "CAD"
+},
+{
+"icon": "aus",
+"name": "Autralia",
+"code": "AUD"
+},
+{
+"icon": "uk",
+"name": "United Kingdom",
+"code": "GBP"
+},
+{
+"icon": "china",
+"name": "China",
+"code": "CNY"
+},
+{
+"icon": "japan",
+"name": "Japan",
+"code": "JPY"
+},
+{
+"icon": "hongkong",
+"name": "Hong Kong",
+"code": "HKD"
+},
+{
+"icon": "newzealand",
+"name": "New Zealand",
+"code": "NZD"
+},
+{
+"icon": "singapore",
+"name": "Singapore",
+"code": "SGD"
+},
+{
+"icon": "russia",
+"name": "Russia",
+"code": "RUB"
+}
+]
