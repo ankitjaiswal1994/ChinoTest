@@ -254,8 +254,12 @@
 			isa = PBXGroup;
 			children = (
 				60DE902F1FBD8C330093A322 /* SwitchCurrencyViewController.swift */,
+<<<<<<< HEAD
+=======
+				60DE90361FBD8E4E0093A322 /* HeaderView.swift */,
 				60F8B2DB1FBDC9A000C4D849 /* SelectCurrencyViewController.swift */,
 				60F8B2DD1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift */,
+>>>>>>> feature/UI
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -458,8 +462,12 @@
 				60DE906A1FBD915C0093A322 /* UIViewController+Nib.swift in Sources */,
 				60DE906B1FBD915C0093A322 /* UIViewExtensions.swift in Sources */,
 				60DE90301FBD8C330093A322 /* SwitchCurrencyViewController.swift in Sources */,
+<<<<<<< HEAD
+=======
 				60F8B2DE1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift in Sources */,
 				60F8B2DC1FBDC9A000C4D849 /* SelectCurrencyViewController.swift in Sources */,
+				60DE90371FBD8E4E0093A322 /* HeaderView.swift in Sources */,
+>>>>>>> feature/UI
 				60DE90021FBD8BCB0093A322 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
