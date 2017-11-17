@@ -11,6 +11,7 @@
 		609988A51FBEBB9700735256 /* cryptoIcon.json in Resources */ = {isa = PBXBuildFile; fileRef = 609988A41FBEBB9700735256 /* cryptoIcon.json */; };
 		609988A71FBEBE5000735256 /* File+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609988A61FBEBE5000735256 /* File+JSON.swift */; };
 		609988AA1FBEC49A00735256 /* CurrencyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609988A91FBEC49A00735256 /* CurrencyInfo.swift */; };
+		609988AE1FBF181400735256 /* Crypto+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609988AD1FBF181400735256 /* Crypto+NavigationBar.swift */; };
 		60DE90021FBD8BCB0093A322 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE90011FBD8BCB0093A322 /* AppDelegate.swift */; };
 		60DE90071FBD8BCB0093A322 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60DE90051FBD8BCB0093A322 /* Main.storyboard */; };
 		60DE90091FBD8BCB0093A322 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60DE90081FBD8BCB0093A322 /* Assets.xcassets */; };
@@ -43,7 +44,7 @@
 		60F21E3C1FBDFB99005D10BB /* CurrencyExchange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60F21E3B1FBDFB99005D10BB /* CurrencyExchange.storyboard */; };
 		60F21E451FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F21E431FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.swift */; };
 		60F21E461FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60F21E441FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.xib */; };
-		60F8B2DA1FBD9E8800C4D849 /* Crypto+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8B2D91FBD9E8800C4D849 /* Crypto+NavigationBar.swift */; };
+		60F8B2DA1FBD9E8800C4D849 /* Crypto+Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8B2D91FBD9E8800C4D849 /* Crypto+Constant.swift */; };
 		60F8B2DC1FBDC9A000C4D849 /* SelectCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8B2DB1FBDC9A000C4D849 /* SelectCurrencyViewController.swift */; };
 		60F8B2DE1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8B2DD1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		609988A41FBEBB9700735256 /* cryptoIcon.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cryptoIcon.json; sourceTree = "<group>"; };
 		609988A61FBEBE5000735256 /* File+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "File+JSON.swift"; sourceTree = "<group>"; };
 		609988A91FBEC49A00735256 /* CurrencyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyInfo.swift; sourceTree = "<group>"; };
+		609988AD1FBF181400735256 /* Crypto+NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Crypto+NavigationBar.swift"; sourceTree = "<group>"; };
 		60DE8FFE1FBD8BCB0093A322 /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60DE90011FBD8BCB0093A322 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60DE90061FBD8BCB0093A322 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -108,7 +110,7 @@
 		60F21E3B1FBDFB99005D10BB /* CurrencyExchange.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CurrencyExchange.storyboard; sourceTree = "<group>"; };
 		60F21E431FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedCurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		60F21E441FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConvertedCurrencyTableViewCell.xib; sourceTree = "<group>"; };
-		60F8B2D91FBD9E8800C4D849 /* Crypto+NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Crypto+NavigationBar.swift"; sourceTree = "<group>"; };
+		60F8B2D91FBD9E8800C4D849 /* Crypto+Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Crypto+Constant.swift"; sourceTree = "<group>"; };
 		60F8B2DB1FBDC9A000C4D849 /* SelectCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrencyViewController.swift; sourceTree = "<group>"; };
 		60F8B2DD1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedCurrencyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -288,7 +290,8 @@
 		60F8B2D81FBD9E4F00C4D849 /* Crypto+Theme */ = {
 			isa = PBXGroup;
 			children = (
-				60F8B2D91FBD9E8800C4D849 /* Crypto+NavigationBar.swift */,
+				60F8B2D91FBD9E8800C4D849 /* Crypto+Constant.swift */,
+				609988AD1FBF181400735256 /* Crypto+NavigationBar.swift */,
 			);
 			path = "Crypto+Theme";
 			sourceTree = "<group>";
@@ -441,7 +444,7 @@
 				60DE905E1FBD915C0093A322 /* ORDesinables.swift in Sources */,
 				60DE905F1FBD915C0093A322 /* Reusable.swift in Sources */,
 				60DE90601FBD915C0093A322 /* String+CoreFoundation.swift in Sources */,
-				60F8B2DA1FBD9E8800C4D849 /* Crypto+NavigationBar.swift in Sources */,
+				60F8B2DA1FBD9E8800C4D849 /* Crypto+Constant.swift in Sources */,
 				609988A71FBEBE5000735256 /* File+JSON.swift in Sources */,
 				60DE90611FBD915C0093A322 /* String+Empty.swift in Sources */,
 				60DE90621FBD915C0093A322 /* String+Regex.swift in Sources */,
@@ -453,6 +456,7 @@
 				60DE906F1FBD92670093A322 /* UICollectionView+Reusable.swift in Sources */,
 				60F21E451FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.swift in Sources */,
 				60DE90671FBD915C0093A322 /* UITableView+Reusable.swift in Sources */,
+				609988AE1FBF181400735256 /* Crypto+NavigationBar.swift in Sources */,
 				60DE90681FBD915C0093A322 /* UIView+Nib.swift in Sources */,
 				60DE90691FBD915C0093A322 /* UIViewController+Alert.swift in Sources */,
 				60DE906A1FBD915C0093A322 /* UIViewController+Nib.swift in Sources */,

@@ -14,5 +14,4 @@ class ConvertedCurrencyTableViewCell: UITableViewCell,NibReusable {
     @IBOutlet weak var currencyType: UILabel!
     @IBOutlet weak var currencyValue: UILabel!
     @IBOutlet weak var currencyName: UILabel!
-    
 }

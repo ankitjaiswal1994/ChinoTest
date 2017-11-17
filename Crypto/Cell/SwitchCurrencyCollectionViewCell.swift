@@ -12,4 +12,5 @@ class SwitchCurrencyCollectionViewCell: UICollectionViewCell, NibReusable {
 
     @IBOutlet weak var currencyName: UILabel!
     @IBOutlet weak var currencyImage: UIImageView!
+    @IBOutlet weak var selectionView: UIView!
 }

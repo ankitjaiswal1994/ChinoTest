@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
         <array key="HelveticaNeueLights.ttc">
             <string>HelveticaNeue-Light</string>
         </array>
@@ -100,7 +103,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="toggleButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HEI-fP-ht1"/>
+                                                    <action selector="commonButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jzF-xp-Kri"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFU-dg-wla">
@@ -129,7 +132,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="toggleButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wWb-Cw-f63"/>
+                                                    <action selector="cryptoButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wE9-Gy-aH9"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -175,6 +178,20 @@
                                     <constraint firstItem="LNN-Hd-AvA" firstAttribute="leading" secondItem="PpP-g1-3w4" secondAttribute="leading" constant="20" id="zSc-in-C6Q"/>
                                 </constraints>
                             </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sb2-gm-VuR">
+                                <rect key="frame" x="0.0" y="597" width="375" height="70"/>
+                                <color key="backgroundColor" red="0.0" green="0.73725490196078436" blue="0.96862745098039216" alpha="0.49761879280821919" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="1Sh-eD-yKm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                <state key="normal" title="Confirm">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ijx-wp-Fae"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -184,10 +201,13 @@
                             <constraint firstItem="S7H-1z-aGa" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="L0m-MB-15N"/>
                             <constraint firstItem="PpP-g1-3w4" firstAttribute="top" secondItem="bEv-tY-hR8" secondAttribute="bottom" id="NkB-nl-3zI"/>
                             <constraint firstItem="bEv-tY-hR8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="RLW-6E-87l"/>
+                            <constraint firstItem="Sb2-gm-VuR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ROn-Yw-tr6"/>
                             <constraint firstItem="bEv-tY-hR8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="d3n-Gv-1Li"/>
                             <constraint firstItem="S7H-1z-aGa" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ehV-zI-w6t"/>
                             <constraint firstItem="PpP-g1-3w4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iRs-cH-JcR"/>
                             <constraint firstItem="PpP-g1-3w4" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="pNR-dh-ymA"/>
+                            <constraint firstItem="Sb2-gm-VuR" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="qyC-qe-KlP"/>
+                            <constraint firstItem="Sb2-gm-VuR" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="re3-Pc-wmQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -195,6 +215,7 @@
                     <connections>
                         <outlet property="collectionView" destination="S7H-1z-aGa" id="Llt-yh-HKq"/>
                         <outlet property="commonButton" destination="kMB-bA-jie" id="MGP-ep-n9l"/>
+                        <outlet property="confirmButton" destination="Sb2-gm-VuR" id="PRb-nM-JV5"/>
                         <outlet property="cryptoButton" destination="qFU-dg-wla" id="1bU-YT-qcr"/>
                         <outlet property="searchTextField" destination="Adw-7b-it9" id="dAo-cL-pAO"/>
                     </connections>

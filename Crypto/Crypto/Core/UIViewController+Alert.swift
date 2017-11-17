@@ -10,10 +10,10 @@ public extension UIViewController {
     func alert(message: String, title: String = "", OKAction: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default, handler: OKAction)
-        
         alertController.addAction(OKAction)
-        
-        present(alertController, animated: true, completion: nil)
+        dispatch {
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     func alertWithTwoAction(message: String, title: String = "", OkButtonTitle: String = "", cancelButtonTitle: String = "", OKAction: ((UIAlertAction) -> Void)? = nil) {

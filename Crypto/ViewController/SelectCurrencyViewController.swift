@@ -8,25 +8,45 @@
 
 import UIKit
 
+protocol SelectCurrencyDelegate: class {
+    func showAlert()
+}
+
 class SelectCurrencyViewController: UIViewController {
 
     @IBOutlet weak var currencyTextField: UITextField!
+    @IBOutlet weak var iconImageview: UIImageView!
+    @IBOutlet weak var codeLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+
+    var code = ""
+    var name = ""
+    var icon = ""
+    var delegate: SelectCurrencyDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        currencyTextField.becomeFirstResponder()
         addToolBar(textField: currencyTextField)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        currencyTextField.becomeFirstResponder()
+        navigationController?.navigationBar.isHidden = false
         navigationItem.title = Crypto.navigationTitle.selectCurrency
+        navigationItem.leftBarButtonItem = CryptoNavigationBar.backButton(self, action: #selector(leftBarButtonAction(_:)))
+        nameLabel.text = name
+        codeLabel.text = code
+        iconImageview.image = UIImage(named: icon)
     }
-}
-
-extension SelectCurrencyViewController: UITextFieldDelegate {
+    
+    @objc func leftBarButtonAction(_ sender: Any) {
+        view.endEditing(true)
+        navigationController?.popViewController(animated: true)
+    }
+    
     func addToolBar(textField: UITextField) {
         let toolBar = UIToolbar()
         toolBar.barStyle = .default
@@ -42,6 +62,16 @@ extension SelectCurrencyViewController: UITextFieldDelegate {
         textField.inputAccessoryView = toolBar
     }
     
-    @objc func donePressed() {   }
-    
+    @objc func donePressed() {
+        navigationController?.popViewController(animated: true)
+        delegate?.showAlert()
+    }
+}
+
+extension SelectCurrencyViewController: UITextFieldDelegate {
+   
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let text = textField.text ?? ""
+        UserDefaults.standard.set(text + " " + code + " " + "Equals", forKey: "price")
+    }
 }

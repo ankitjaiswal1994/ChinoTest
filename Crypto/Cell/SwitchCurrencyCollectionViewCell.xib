@@ -12,14 +12,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SwitchCurrencyCollectionViewCell" id="gTV-IL-0wX" customClass="SwitchCurrencyCollectionViewCell" customModule="Crypto" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="71" height="80"/>
+            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="71" height="80"/>
+                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitcoin" translatesAutoresizingMaskIntoConstraints="NO" id="cbT-Ht-Lzt" customClass="ORDesignableImageView" customModule="Crypto" customModuleProvider="target">
-                        <rect key="frame" x="3" y="5" width="65" height="40"/>
+                        <rect key="frame" x="7.6666666666666643" y="5" width="65" height="40"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="65" id="G5b-E5-DvT"/>
@@ -32,7 +32,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IND" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Wm-Ep-J9f">
-                        <rect key="frame" x="13" y="53" width="44" height="20"/>
+                        <rect key="frame" x="13" y="53" width="53" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="UQ1-IZ-Wph"/>
                         </constraints>
@@ -40,21 +40,37 @@
                         <color key="textColor" red="0.43917480111122131" green="0.43924182653427124" blue="0.43916010856628418" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zNV-SY-wHN" customClass="ORDesignableView" customModule="Crypto" customModuleProvider="target">
+                        <rect key="frame" x="70" y="58" width="10" height="10"/>
+                        <color key="backgroundColor" red="0.0" green="0.93725490196078431" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="3Pa-oZ-cVh"/>
+                            <constraint firstAttribute="height" constant="10" id="Rje-JG-fLg"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="1Wm-Ep-J9f" secondAttribute="trailing" constant="14" id="3uO-6i-hww"/>
+                <constraint firstAttribute="trailing" secondItem="zNV-SY-wHN" secondAttribute="trailing" id="MxV-bY-6Oy"/>
                 <constraint firstItem="cbT-Ht-Lzt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="PLg-e6-YQd"/>
                 <constraint firstItem="cbT-Ht-Lzt" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Unh-YZ-yKm"/>
                 <constraint firstItem="1Wm-Ep-J9f" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="13" id="XY0-6Q-Ukt"/>
+                <constraint firstItem="zNV-SY-wHN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="58" id="bZV-wk-0Zd"/>
                 <constraint firstItem="1Wm-Ep-J9f" firstAttribute="top" secondItem="cbT-Ht-Lzt" secondAttribute="bottom" constant="8" id="iTJ-zv-Xiu"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
                 <outlet property="currencyImage" destination="cbT-Ht-Lzt" id="xuP-Dp-5eu"/>
                 <outlet property="currencyName" destination="1Wm-Ep-J9f" id="y1H-jB-bwG"/>
+                <outlet property="selectionView" destination="zNV-SY-wHN" id="eRr-Vn-R23"/>
             </connections>
-            <point key="canvasLocation" x="97.5" y="68"/>
+            <point key="canvasLocation" x="97" y="68"/>
         </collectionViewCell>
     </objects>
     <resources>

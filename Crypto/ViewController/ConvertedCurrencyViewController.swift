@@ -13,7 +13,54 @@ class ConvertedCurrencyViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.register(cellType: ConvertedCurrencyTableViewCell.self)
+            tableView.tableFooterView = UIView()
         }
+    }
+    
+    var currencyInfo = [CurrencyInfo]()
+    
+    override func viewDidLoad() {
+        
+        let title = UserDefaults.standard.value(forKey: "price") as? String ?? "Currency Price"
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.title = title
+        navigationItem.leftBarButtonItem = CryptoNavigationBar.backButton(self, action: #selector(leftBarButtonAction(_:)))
+        getCalculatedData()
+    }
+    
+    @objc func leftBarButtonAction(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func startOverButtonAction(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+        UserDefaults.standard.removeObject(forKey: "price")
+        UserDefaults.standard.synchronize()
+    }
+    
+    @IBAction func getFreeBitCoinButtonAction(_ sender: UIButton) {
+        UIApplication.shared.open(URL(string: "https://goo.gl/6yznGQ")!)
+    }
+    
+    func getCalculatedData() {
+        guard let url = URL(string: "https://min-api.cryptocompare.com/data/price?fsym=INR&tsyms=BTC,USD,GBP") else { return }
+        URLSession.shared.dataTask(with: url, completionHandler: {
+            (data, response, error) in
+            if(error != nil){
+                print("error")
+            } else {
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? NSDictionary {
+                     
+                    }
+                    dispatch {
+                        self.tableView.reloadData()
+                    }
+                } catch let error as NSError {
+                    print(error)
+                }
+            }
+        }).resume()
     }
 }
 

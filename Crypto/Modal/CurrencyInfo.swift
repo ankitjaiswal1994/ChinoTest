@@ -12,6 +12,8 @@ class CurrencyInfo {
     var icon = ""
     var name = ""
     var code = ""
+    var currencyPrice = ""
+    var isSelected = false
     
     class func parseCurrencyList(dict: NSDictionary) -> CurrencyInfo {
         let currencyObject = CurrencyInfo()
