@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="64.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="india" translatesAutoresizingMaskIntoConstraints="NO" id="Ofv-Nb-qyI" customClass="ORDesignableImageView" customModule="Crypto" customModuleProvider="target">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitcoin" translatesAutoresizingMaskIntoConstraints="NO" id="Ofv-Nb-qyI" customClass="ORDesignableImageView" customModule="Crypto" customModuleProvider="target">
                         <rect key="frame" x="16" y="13" width="50" height="40"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -32,7 +32,7 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3i-Oa-7Ow">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3i-Oa-7Ow">
                         <rect key="frame" x="74" y="20" width="60" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="IJL-3I-4Pq"/>
@@ -42,8 +42,8 @@
                         <color key="textColor" red="0.46270227432250977" green="0.4627724289894104" blue="0.46268689632415771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INA-PE-ARF">
-                        <rect key="frame" x="145" y="20" width="147" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INA-PE-ARF">
+                        <rect key="frame" x="144" y="20" width="150" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="DJo-Ml-zVQ"/>
                         </constraints>
@@ -51,8 +51,8 @@
                         <color key="textColor" red="0.80777186155319214" green="0.80788880586624146" blue="0.80774611234664917" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDo-2w-C9K">
-                        <rect key="frame" x="74" y="42" width="218" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDo-2w-C9K">
+                        <rect key="frame" x="294" y="42" width="0.0" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="jfX-kN-0ya"/>
                         </constraints>
@@ -67,11 +67,12 @@
                     <constraint firstItem="v3i-Oa-7Ow" firstAttribute="leading" secondItem="Ofv-Nb-qyI" secondAttribute="trailing" constant="8" id="BEv-Qg-BLd"/>
                     <constraint firstItem="Ofv-Nb-qyI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="CyT-Zh-BUb"/>
                     <constraint firstItem="pDo-2w-C9K" firstAttribute="top" secondItem="INA-PE-ARF" secondAttribute="bottom" constant="1" id="GBv-x2-4TJ"/>
-                    <constraint firstItem="pDo-2w-C9K" firstAttribute="leading" secondItem="Ofv-Nb-qyI" secondAttribute="trailing" constant="8" id="fMH-lI-cDb"/>
+                    <constraint firstItem="Ofv-Nb-qyI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="esu-QH-fMQ"/>
                     <constraint firstItem="v3i-Oa-7Ow" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="foh-1R-fCQ"/>
                     <constraint firstItem="INA-PE-ARF" firstAttribute="trailing" secondItem="pDo-2w-C9K" secondAttribute="trailing" id="n2C-67-u8A"/>
-                    <constraint firstItem="INA-PE-ARF" firstAttribute="leading" secondItem="v3i-Oa-7Ow" secondAttribute="trailing" constant="11" id="wbD-VM-HzF"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="INA-PE-ARF" secondAttribute="trailing" constant="12" id="xsi-dC-G3e"/>
+                    <constraint firstItem="Ofv-Nb-qyI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="vbm-HL-Q37"/>
+                    <constraint firstItem="INA-PE-ARF" firstAttribute="leading" secondItem="v3i-Oa-7Ow" secondAttribute="trailing" constant="10" id="wbD-VM-HzF"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="INA-PE-ARF" secondAttribute="trailing" constant="10" id="xsi-dC-G3e"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -85,6 +86,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="india" width="200" height="125"/>
+        <image name="bitcoin" width="64" height="64"/>
     </resources>
 </document>

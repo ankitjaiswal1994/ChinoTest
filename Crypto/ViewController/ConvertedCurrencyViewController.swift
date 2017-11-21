@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol StatrOverDelegate: class {
+    func startOver()
+}
+
 class ConvertedCurrencyViewController: UIViewController {
     
     struct Item {
@@ -18,7 +22,8 @@ class ConvertedCurrencyViewController: UIViewController {
     var items: [Item]?
     var keys =  [String]()
     var values = [Float]()
-    
+    var flags = [CurrencyInfo]()
+    var delegate: StatrOverDelegate?
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -28,18 +33,36 @@ class ConvertedCurrencyViewController: UIViewController {
     }
     
     var currencyInfo = [CurrencyInfo]()
-    
+    var valueForCalculation: Float = 1e+07
     var currency: String = ""
     var selectedArray: String = "" // this contains comma separated values
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let title = UserDefaults.standard.value(forKey: "price") as? String ?? "Currency Price"
+        if let title = UserDefaults.standard.value(forKey: "price") as? String {
+            let value = title.components(separatedBy: " ")
+            if let quantity = value.first, let doubleValue = Float(quantity) {
+                valueForCalculation = doubleValue
+            }
+            navigationItem.title = title
+        }
         navigationController?.navigationBar.isHidden = false
-        navigationItem.title = title
         navigationItem.leftBarButtonItem = CryptoNavigationBar.backButton(self, action: #selector(leftBarButtonAction(_:)))
         getCalculatedData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.count += 1
+        
+        if appdelegate.count > 2 {
+            alert(message: "In App Purchase")
+        }
     }
     
     @objc func leftBarButtonAction(_ sender: Any) {
@@ -50,6 +73,7 @@ class ConvertedCurrencyViewController: UIViewController {
         navigationController?.popViewController(animated: true)
         UserDefaults.standard.removeObject(forKey: "price")
         UserDefaults.standard.synchronize()
+        delegate?.startOver()
     }
     
     @IBAction func getFreeBitCoinButtonAction(_ sender: UIButton) {
@@ -90,15 +114,22 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConvertedCurrencyTableViewCell.self)
         
+        if indexPath.row < self.flags.count {
+            cell.currencyImageView.image = UIImage(named: flags[indexPath.row].icon)
+        }
         
         if indexPath.row < self.keys.count {
             cell.currencyType.text = self.keys[indexPath.row]
         }
         
         if indexPath.row < self.values.count {
-            cell.currencyValue.text = "\(self.values[indexPath.row])"
+            if self.values[indexPath.row] >= 1 {
+                cell.currencyValue.text = String(format: "%.2f", self.values[indexPath.row] * valueForCalculation)
+            } else {
+                cell.currencyValue.text = String(format: "%.8f", self.values[indexPath.row] * valueForCalculation)
+            }
         }
-     
+        
         cell.currencyName.text = ""
         return cell
     }

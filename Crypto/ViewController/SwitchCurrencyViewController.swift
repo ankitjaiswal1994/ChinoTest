@@ -25,24 +25,26 @@ class SwitchCurrencyViewController: UIViewController {
         }
     }
     var search: String=""
-    var currencyObject = [CurrencyInfo]()
-    var searchArray = [CurrencyInfo]()
+    var cryptoCurrencyArray = [CurrencyInfo]()
+    var countryCurrencyArray = [CurrencyInfo]()
     var selectedArray = [CurrencyInfo]()
+    var serachArray = [CurrencyInfo]()
     var isCurrencySelect = false
-    
-    var currencyNameArray = ["Common Currency","Cryptocurrency"]
-    
     
     // selected
     var selectedCurrency = ""
-    var selectedItems = ""
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        confirmButton.isHidden = true
+        currencyList()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        
         setUpView()
-        currencyList()
     }
     
     @IBAction func cryptoButtonAction(_ sender: UIButton) {
@@ -50,12 +52,12 @@ class SwitchCurrencyViewController: UIViewController {
         if sender.isSelected {
             return
         }
+        search = ""
         cryptoButton.isSelected = true
         commonButton.isSelected = false
         cryptoButton.backgroundColor = .blue
         commonButton.backgroundColor = .clear
         searchTextField.text = nil
-        currencyList()
         collectionView.reloadData()
     }
     
@@ -64,49 +66,56 @@ class SwitchCurrencyViewController: UIViewController {
         if sender.isSelected {
             return
         }
+        search = ""
         cryptoButton.isSelected = false
         commonButton.isSelected = true
         cryptoButton.backgroundColor = .clear
         commonButton.backgroundColor = .blue
         searchTextField.text = nil
-        currencyList()
         collectionView.reloadData()
     }
-
+    
     @IBAction func confirmButtonAction(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "CurrencyExchange", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "ConvertedCurrencyViewController") as? ConvertedCurrencyViewController else { return }
-        
+        vc.delegate = self
         vc.selectedArray = selectedArray.map({ (cuurency) -> String in
             return cuurency.code
         }).joined(separator: ",")
-        
+        vc.flags = selectedArray
         vc.currency = selectedCurrency
         
-            
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func setUpView () {
-        
-        confirmButton.isHidden = true
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = Crypto.navigationTitle.switchCurrency
     }
     
     func currencyList() {
-        if let response = JSONData.load(from: cryptoButton.isSelected ? "cryptoIcon" : "CountryList") {
-            currencyObject.removeAll()
+        if let response = JSONData.load(from: "CountryList") {
+            countryCurrencyArray.removeAll()
             for data in response {
-                currencyObject.append(CurrencyInfo.parseCurrencyList(dict: data as NSDictionary))
+                countryCurrencyArray.append(CurrencyInfo.parseCurrencyList(dict: data as NSDictionary))
             }
-            searchArray = currencyObject
         }
+        
+        if let response = JSONData.load(from: "cryptoIcon") {
+            cryptoCurrencyArray.removeAll()
+            for data in response {
+                cryptoCurrencyArray.append(CurrencyInfo.parseCurrencyList(dict: data as NSDictionary))
+            }
+        }
+        
+        
     }
     
     func filterForSearchText(_ searchText: String) {
-        searchArray = searchText.isEmpty ? currencyObject : currencyObject.filter {
-            $0.code.lowercased().contains(searchText.lowercased()) }
+        serachArray = cryptoButton.isSelected ? cryptoCurrencyArray.filter {
+            $0.code.lowercased().contains(searchText.lowercased()) } : countryCurrencyArray.filter {
+                $0.code.lowercased().contains(searchText.lowercased()) }
         collectionView.reloadData()
     }
 }
@@ -118,53 +127,77 @@ extension SwitchCurrencyViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchArray.count
+        if search.isEmpty {
+            return cryptoButton.isSelected ? cryptoCurrencyArray.count : countryCurrencyArray.count
+        } else {
+            return serachArray.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SwitchCurrencyCollectionViewCell.self)
-        
         var obj = CurrencyInfo()
-        obj = searchArray[indexPath.item]
-        
+        if search.isEmpty {
+            obj = cryptoButton.isSelected ? cryptoCurrencyArray[indexPath.item] : countryCurrencyArray[indexPath.item]
+        } else {
+            obj = serachArray[indexPath.item]
+        }
         cell.currencyName.text = obj.code
         cell.currencyImage.image = UIImage(named: obj.icon)
         cell.currencyImage.contentMode = cryptoButton.isSelected ? .scaleAspectFit : .scaleAspectFill
-        if obj.isSelected && selectedArray.count <= 3 {
         cell.selectionView.isHidden = !obj.isSelected
-        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      
+        
         if !isCurrencySelect {
-        let storyboard = UIStoryboard(name: "CurrencyExchange", bundle: nil)
-            guard let vc = storyboard.instantiateViewController(withIdentifier: "SelectCurrencyViewController") as? SelectCurrencyViewController else { return }
-        vc.delegate = self
-        vc.code = searchArray[indexPath.item].code
-        vc.name = searchArray[indexPath.item].name
-        vc.icon = searchArray[indexPath.item].icon
-        navigationController?.pushViewController(vc, animated: true)
-        } else {
-            let currencyModal = searchArray[indexPath.item]
-            currencyModal.isSelected = !currencyModal.isSelected
-            if currencyModal.isSelected && selectedArray.count <= 3 {
-                selectedArray.append(currencyModal)
-                if selectedArray.count == 3 {
-                 confirmButton.isHidden = false
-                }
-            } else if !currencyModal.isSelected {
-                selectedArray.remove(at: indexPath.item)
+            if search.isEmpty {
+                pushToCurrencyExchange(indexPath, array: cryptoButton.isSelected ? cryptoCurrencyArray : countryCurrencyArray)
             } else {
-                
+                pushToCurrencyExchange(indexPath, array: serachArray)
             }
-            collectionView.reloadItems(at: [IndexPath(item: indexPath.item, section: 0)])
+        } else {
+            if search.isEmpty {
+                refreshCurrency(indexPath, array: cryptoButton.isSelected ? cryptoCurrencyArray : countryCurrencyArray)
+            } else {
+                refreshCurrency(indexPath, array: serachArray)
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.size.width/3 - 40, height:80 )
+    }
+    
+    func pushToCurrencyExchange(_ indexPath: IndexPath, array: [CurrencyInfo]) {
+        let storyboard = UIStoryboard(name: "CurrencyExchange", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "SelectCurrencyViewController") as? SelectCurrencyViewController else { return }
+        vc.delegate = self
+        let obj = array[indexPath.item]
+        vc.code = obj.code
+        vc.name = obj.name
+        vc.icon = obj.icon
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func refreshCurrency(_ indexPath: IndexPath, array: [CurrencyInfo])  {
+        let currencyModal = array[indexPath.item]
+        currencyModal.isSelected = !currencyModal.isSelected
+        if currencyModal.isSelected && selectedArray.count < 3 {
+            selectedArray.append(currencyModal)
+            if selectedArray.count == 3 {
+                confirmButton.isHidden = false
+            }
+        } else if !currencyModal.isSelected {
+            if let index = selectedArray.index(where: {$0 === currencyModal}) {
+                selectedArray.remove(at: index)
+            }
+            confirmButton.isHidden = true
+        } else {
+            currencyModal.isSelected = !currencyModal.isSelected
+        }
+        collectionView.reloadItems(at: [IndexPath(item: indexPath.item, section: 0)])
     }
 }
 
@@ -191,6 +224,18 @@ extension SwitchCurrencyViewController: SelectCurrencyDelegate {
         
         self.selectedCurrency = selectedCurrecny
         alert(message: "Select up to 3 alternate currencies", title: "Notice", OKAction: nil)
+    }
+}
+
+extension SwitchCurrencyViewController: StatrOverDelegate {
+    
+    func startOver() {
+        isCurrencySelect = false
+        search = ""
+        selectedArray = [CurrencyInfo]()
+        confirmButton.isHidden = true
+        currencyList()
+        collectionView.reloadData()
     }
 }
 
