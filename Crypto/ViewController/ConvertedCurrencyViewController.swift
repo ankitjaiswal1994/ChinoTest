@@ -29,6 +29,7 @@ class ConvertedCurrencyViewController: UIViewController {
         didSet {
             tableView.register(cellType: ConvertedCurrencyTableViewCell.self)
             tableView.tableFooterView = UIView()
+            tableView.addSubview(self.refreshControl)
         }
     }
     
@@ -103,12 +104,28 @@ class ConvertedCurrencyViewController: UIViewController {
             }
         }).resume()
     }
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(ConvertedCurrencyViewController.handleRefresh(_:)),
+                                 for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor.lightGray
+        
+        return refreshControl
+    }()
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        getCalculatedData()
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
 }
 
 extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return keys.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

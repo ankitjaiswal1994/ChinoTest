@@ -35,7 +35,8 @@ class SelectCurrencyViewController: UIViewController {
         
         currencyTextField.becomeFirstResponder()
         navigationController?.navigationBar.isHidden = false
-        navigationItem.title = Crypto.navigationTitle.selectCurrency
+       // navigationItem.title = Crypto.navigationTitle.selectCurrency
+        navigationItem.title = "Convert \(code) to..."
         navigationItem.leftBarButtonItem = CryptoNavigationBar.backButton(self, action: #selector(leftBarButtonAction(_:)))
         nameLabel.text = name
         codeLabel.text = code

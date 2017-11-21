@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60044F481FC40D9F005B51CD /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60044F471FC40D9F005B51CD /* HeaderView.swift */; };
 		609988A31FBEA89600735256 /* CountryList.json in Resources */ = {isa = PBXBuildFile; fileRef = 609988A21FBEA89600735256 /* CountryList.json */; };
 		609988A51FBEBB9700735256 /* cryptoIcon.json in Resources */ = {isa = PBXBuildFile; fileRef = 609988A41FBEBB9700735256 /* cryptoIcon.json */; };
 		609988A71FBEBE5000735256 /* File+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609988A61FBEBE5000735256 /* File+JSON.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		60044F471FC40D9F005B51CD /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		609988A21FBEA89600735256 /* CountryList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CountryList.json; sourceTree = "<group>"; };
 		609988A41FBEBB9700735256 /* cryptoIcon.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cryptoIcon.json; sourceTree = "<group>"; };
 		609988A61FBEBE5000735256 /* File+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "File+JSON.swift"; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				60DE902F1FBD8C330093A322 /* SwitchCurrencyViewController.swift */,
 				60F8B2DB1FBDC9A000C4D849 /* SelectCurrencyViewController.swift */,
 				60F8B2DD1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift */,
+				60044F471FC40D9F005B51CD /* HeaderView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				60DE90611FBD915C0093A322 /* String+Empty.swift in Sources */,
 				60DE90621FBD915C0093A322 /* String+Regex.swift in Sources */,
 				60DE90631FBD915C0093A322 /* String+Validation.swift in Sources */,
+				60044F481FC40D9F005B51CD /* HeaderView.swift in Sources */,
 				60DE90641FBD915C0093A322 /* SwifterSwift.swift in Sources */,
 				60DE90651FBD915C0093A322 /* UIColor+Hex.swift in Sources */,
 				60DE90661FBD915C0093A322 /* UINib.swift in Sources */,
