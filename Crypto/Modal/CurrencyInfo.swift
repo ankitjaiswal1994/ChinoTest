@@ -22,6 +22,7 @@ class CurrencyInfo {
         currencyObject.icon = dict.value(forKey: "icon") as? String ?? ""
         currencyObject.name = dict.value(forKey: "name") as? String ?? ""
         currencyObject.code = dict.value(forKey: "code") as? String ?? ""
+        
         return currencyObject
     }
     
@@ -33,6 +34,7 @@ class CurrencyInfo {
                 currencyObject.counryArray.append(CurrencyInfo.parseCurrencyList(dict: country as NSDictionary))
             }
         }
+        
         return currencyObject
     }
 }

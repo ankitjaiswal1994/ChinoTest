@@ -20,7 +20,9 @@ class SwitchCurrencyViewController: UIViewController {
     @IBOutlet weak var commonButton: UIButton!
     @IBOutlet weak var cryptoButton: UIButton! {
         didSet {
-            cryptoButton.backgroundColor = .blue
+            cryptoButton.backgroundColor = UIColor(red: 11.0/255.0, green: 106.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+            
+
             cryptoButton.isSelected = true
         }
     }
@@ -39,6 +41,7 @@ class SwitchCurrencyViewController: UIViewController {
         
         confirmButton.isHidden = true
         currencyList()
+        navigationItem.title = Crypto.navigationTitle.switchCurrency
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +58,8 @@ class SwitchCurrencyViewController: UIViewController {
         search = ""
         cryptoButton.isSelected = true
         commonButton.isSelected = false
-        cryptoButton.backgroundColor = .blue
+        cryptoButton.backgroundColor = UIColor(red: 11.0/255.0, green: 106.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+
         commonButton.backgroundColor = .clear
         searchTextField.text = nil
         collectionView.reloadData()
@@ -70,7 +74,7 @@ class SwitchCurrencyViewController: UIViewController {
         cryptoButton.isSelected = false
         commonButton.isSelected = true
         cryptoButton.backgroundColor = .clear
-        commonButton.backgroundColor = .blue
+        commonButton.backgroundColor = UIColor(red: 11.0/255.0, green: 106.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         searchTextField.text = nil
         collectionView.reloadData()
     }
@@ -91,7 +95,6 @@ class SwitchCurrencyViewController: UIViewController {
     
     func setUpView () {
         navigationController?.navigationBar.isHidden = false
-        navigationItem.title = Crypto.navigationTitle.switchCurrency
     }
     
     func currencyList() {
@@ -112,7 +115,8 @@ class SwitchCurrencyViewController: UIViewController {
     
     func filterForSearchText(_ searchText: String) {
         serachArray = cryptoButton.isSelected ? cryptoCurrencyArray.filter {
-            $0.code.lowercased().contains(searchText.lowercased()) } : countryCurrencyArray.filter {
+            $0.code.lowercased().contains(searchText.lowercased()) } :
+            countryCurrencyArray.filter {
                 $0.code.lowercased().contains(searchText.lowercased()) }
         collectionView.reloadData()
     }
@@ -228,18 +232,15 @@ extension SwitchCurrencyViewController: UICollectionViewDataSource {
         currencyModal.isSelected = !currencyModal.isSelected
         if currencyModal.isSelected && selectedArray.count < 3 {
             selectedArray.append(currencyModal)
-            if selectedArray.count == 1 {
-                confirmButton.isHidden = false
-            }
         } else if !currencyModal.isSelected {
             if let index = selectedArray.index(where: {$0 === currencyModal}) {
                 selectedArray.remove(at: index)
             }
-            confirmButton.isHidden = true
         } else {
             currencyModal.isSelected = !currencyModal.isSelected
         }
-        collectionView.reloadItems(at: [IndexPath(item: indexPath.item, section: 0)])
+        confirmButton.isHidden = selectedArray.count >= 1 ? false: true
+        collectionView.reloadItems(at: [IndexPath(item: indexPath.item, section: indexPath.section)])
     }
 }
 
@@ -261,9 +262,9 @@ extension SwitchCurrencyViewController: UITextFieldDelegate {
 
 extension SwitchCurrencyViewController: SelectCurrencyDelegate {
     
-    func showAlert(selectedCurrecny: String) {
+    func showAlert(selectedCurrecny: String,  changeTitle: String) {
         isCurrencySelect = true
-        
+        title = changeTitle
         self.selectedCurrency = selectedCurrecny
         alert(message: "Select up to 3 alternate currencies", title: "Notice", OKAction: nil)
     }

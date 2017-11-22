@@ -9,10 +9,10 @@
 import UIKit
 
 protocol SelectCurrencyDelegate: class {
-    func showAlert(selectedCurrecny: String)
+    func showAlert(selectedCurrecny: String, changeTitle: String)
 }
 
-class SelectCurrencyViewController: UIViewController {
+class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
 
     @IBOutlet weak var currencyTextField: UITextField!
     @IBOutlet weak var iconImageview: UIImageView!
@@ -35,7 +35,6 @@ class SelectCurrencyViewController: UIViewController {
         
         currencyTextField.becomeFirstResponder()
         navigationController?.navigationBar.isHidden = false
-       // navigationItem.title = Crypto.navigationTitle.selectCurrency
         navigationItem.title = "Convert \(code) to..."
         navigationItem.leftBarButtonItem = CryptoNavigationBar.backButton(self, action: #selector(leftBarButtonAction(_:)))
         nameLabel.text = name
@@ -50,6 +49,7 @@ class SelectCurrencyViewController: UIViewController {
     
     func addToolBar(textField: UITextField) {
         let toolBar = UIToolbar()
+        toolBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 55)
         toolBar.barStyle = .default
         toolBar.isTranslucent = true
         toolBar.tintColor = Crypto.toolBar.tintColor
@@ -58,14 +58,13 @@ class SelectCurrencyViewController: UIViewController {
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.setItems([spaceButton, doneButton, spaceButton], animated: false)
         toolBar.isUserInteractionEnabled = true
-        toolBar.sizeToFit()
         textField.delegate = self
         textField.inputAccessoryView = toolBar
     }
     
     @objc func donePressed() {
         navigationController?.popViewController(animated: true)
-        delegate?.showAlert(selectedCurrecny: code)
+        delegate?.showAlert(selectedCurrecny: code, changeTitle: navigationItem.title!)
     }
 }
 

@@ -110,15 +110,15 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3I-ME-0l6" customClass="ORDesignableView" customModule="Crypto" customModuleProvider="target">
-                                        <rect key="frame" x="209" y="9" width="146" height="25"/>
+                                        <rect key="frame" x="209" y="6" width="146" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMB-bA-jie">
-                                                <rect key="frame" x="73" y="0.0" width="73" height="25"/>
+                                                <rect key="frame" x="73" y="0.0" width="73" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="73" id="k7C-Z6-98O"/>
-                                                    <constraint firstAttribute="height" constant="25" id="v1h-YA-wFd"/>
+                                                    <constraint firstAttribute="height" constant="30" id="v1h-YA-wFd"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Common">
                                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -142,12 +142,12 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFU-dg-wla">
-                                                <rect key="frame" x="0.0" y="0.0" width="73" height="25"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="73" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="25" id="dKA-g9-bvq"/>
+                                                    <constraint firstAttribute="height" constant="30" id="dKA-g9-bvq"/>
                                                     <constraint firstAttribute="width" constant="73" id="maJ-FD-IZ5"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Crypto">
                                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -175,7 +175,7 @@
                                         <constraints>
                                             <constraint firstItem="kMB-bA-jie" firstAttribute="leading" secondItem="qFU-dg-wla" secondAttribute="trailing" id="DgU-uY-Kbg"/>
                                             <constraint firstItem="kMB-bA-jie" firstAttribute="top" secondItem="K3I-ME-0l6" secondAttribute="top" id="EKs-ky-e5Y"/>
-                                            <constraint firstAttribute="height" constant="25" id="HXD-kE-dMO"/>
+                                            <constraint firstAttribute="height" constant="30" id="HXD-kE-dMO"/>
                                             <constraint firstItem="qFU-dg-wla" firstAttribute="top" secondItem="K3I-ME-0l6" secondAttribute="top" id="dW0-Us-lEM"/>
                                             <constraint firstAttribute="trailing" secondItem="kMB-bA-jie" secondAttribute="trailing" id="s92-Ds-PWE"/>
                                             <constraint firstItem="qFU-dg-wla" firstAttribute="leading" secondItem="K3I-ME-0l6" secondAttribute="leading" id="uQa-Sm-ky0"/>
@@ -204,7 +204,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="K3I-ME-0l6" secondAttribute="trailing" constant="20" id="4gq-BU-5js"/>
-                                    <constraint firstItem="K3I-ME-0l6" firstAttribute="centerY" secondItem="PpP-g1-3w4" secondAttribute="centerY" constant="-0.5" id="KoT-G6-1oW"/>
+                                    <constraint firstItem="K3I-ME-0l6" firstAttribute="centerY" secondItem="PpP-g1-3w4" secondAttribute="centerY" constant="-1.5" id="KoT-G6-1oW"/>
                                     <constraint firstAttribute="height" constant="45" id="SNr-7K-ZB2"/>
                                     <constraint firstAttribute="bottom" secondItem="0Vw-da-b6f" secondAttribute="bottom" constant="2" id="bas-Ys-McS"/>
                                     <constraint firstItem="LNN-Hd-AvA" firstAttribute="centerY" secondItem="PpP-g1-3w4" secondAttribute="centerY" constant="-0.5" id="qWF-rw-Ybk"/>
@@ -215,12 +215,12 @@
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sb2-gm-VuR">
                                 <rect key="frame" x="0.0" y="597" width="375" height="70"/>
-                                <color key="backgroundColor" red="0.0" green="0.73725490196078436" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.31237009167671204" green="0.74209463596343994" blue="0.94653803110122681" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="1Sh-eD-yKm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
-                                <state key="normal" title="Confirm">
+                                <state key="normal" title="Convert!">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>

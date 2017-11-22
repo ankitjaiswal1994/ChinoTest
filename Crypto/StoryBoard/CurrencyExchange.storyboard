@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -121,11 +122,12 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRc-XD-1SC">
-                                <rect key="frame" x="0.0" y="438" width="320" height="65"/>
+                                <rect key="frame" x="0.0" y="428" width="320" height="75"/>
                                 <color key="backgroundColor" red="0.9585929513" green="0.70349055530000004" blue="0.1988602579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="90b-gL-mgk"/>
+                                    <constraint firstAttribute="height" constant="75" id="90b-gL-mgk"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Get Free BitCoin">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -134,12 +136,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbg-hg-QxS">
-                                <rect key="frame" x="0.0" y="503" width="320" height="65"/>
+                                <rect key="frame" x="0.0" y="493" width="320" height="75"/>
                                 <color key="backgroundColor" red="0.12275514749999999" green="0.1358371377" blue="0.20567861200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="VFl-Lp-h9f"/>
+                                    <constraint firstAttribute="height" constant="75" id="VFl-Lp-h9f"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Start Over">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -154,7 +156,7 @@
                             <constraint firstItem="Hbg-hg-QxS" firstAttribute="leading" secondItem="zZV-0J-W7I" secondAttribute="leading" id="3ZI-P1-mA8"/>
                             <constraint firstItem="oRc-XD-1SC" firstAttribute="leading" secondItem="zZV-0J-W7I" secondAttribute="leading" id="72e-HK-aYb"/>
                             <constraint firstItem="oRc-XD-1SC" firstAttribute="trailing" secondItem="zZV-0J-W7I" secondAttribute="trailing" id="8iL-uR-Ekj"/>
-                            <constraint firstItem="Hbg-hg-QxS" firstAttribute="top" secondItem="oRc-XD-1SC" secondAttribute="bottom" id="8j1-lS-lLY"/>
+                            <constraint firstItem="Hbg-hg-QxS" firstAttribute="top" secondItem="oRc-XD-1SC" secondAttribute="bottom" constant="-10" id="8j1-lS-lLY"/>
                             <constraint firstItem="Hbg-hg-QxS" firstAttribute="trailing" secondItem="zZV-0J-W7I" secondAttribute="trailing" id="kYe-6e-moz"/>
                             <constraint firstItem="6Q1-hb-mQD" firstAttribute="trailing" secondItem="zZV-0J-W7I" secondAttribute="trailing" id="vVJ-b9-QuZ"/>
                             <constraint firstItem="6Q1-hb-mQD" firstAttribute="leading" secondItem="zZV-0J-W7I" secondAttribute="leading" id="xoJ-l8-Arr"/>

@@ -19,6 +19,7 @@ enum Crypto {
     struct toolBar {
        static  let barTintColor = UIColor(red: 0/255.0, green: 240.0/255.0, blue: 200.0/255.0, alpha: 1.0)
         static let tintColor = UIColor.white
+        
     }
     
 }

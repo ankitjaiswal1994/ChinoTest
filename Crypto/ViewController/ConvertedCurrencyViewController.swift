@@ -22,6 +22,7 @@ class ConvertedCurrencyViewController: UIViewController {
     var items: [Item]?
     var keys =  [String]()
     var values = [Float]()
+    var currencyName = [String]()
     var flags = [CurrencyInfo]()
     var delegate: StatrOverDelegate?
     
@@ -133,6 +134,8 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
         
         if indexPath.row < self.flags.count {
             cell.currencyImageView.image = UIImage(named: flags[indexPath.row].icon)
+            print(flags[indexPath.row].name)
+            cell.currencyName.text = flags[indexPath.row].name
         }
         
         if indexPath.row < self.keys.count {
@@ -147,7 +150,6 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
             }
         }
         
-        cell.currencyName.text = ""
         return cell
     }
     
