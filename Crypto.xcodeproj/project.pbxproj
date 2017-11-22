@@ -636,14 +636,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Dreamville Apps Corp. (HXPKXW7RJY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dreamville Apps Corp. (HXPKXW7RJY)";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HXPKXW7RJY;
 				INFOPLIST_FILE = Crypto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.CryptoConverter.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "a17a1d09-8afe-497a-9260-5c8b36590920";
+				PROVISIONING_PROFILE_SPECIFIER = "CryptoConverter Distribution";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -653,7 +656,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Dreamville Apps Corp. (HXPKXW7RJY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dreamville Apps Corp. (HXPKXW7RJY)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = HXPKXW7RJY;
 				INFOPLIST_FILE = Crypto/Info.plist;
@@ -661,7 +665,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.CryptoConverter.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b1f5bb95-884a-4590-b95d-ba3d42040ee6";
+				PROVISIONING_PROFILE = "be892a1d-4e64-4a75-a06b-72d7a713350e";
 				PROVISIONING_PROFILE_SPECIFIER = "CryptoConverter Distribution";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
