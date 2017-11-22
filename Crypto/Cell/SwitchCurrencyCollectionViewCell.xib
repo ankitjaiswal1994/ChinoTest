@@ -33,7 +33,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IND" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Wm-Ep-J9f">
-                        <rect key="frame" x="13" y="53" width="53" height="20"/>
+                        <rect key="frame" x="10" y="53" width="60" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="UQ1-IZ-Wph"/>
                         </constraints>
@@ -57,13 +57,14 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="1Wm-Ep-J9f" secondAttribute="trailing" constant="14" id="3uO-6i-hww"/>
+                <constraint firstItem="zNV-SY-wHN" firstAttribute="leading" secondItem="cbT-Ht-Lzt" secondAttribute="trailing" constant="2.3300000000000001" id="Hbm-Ic-fEX"/>
                 <constraint firstAttribute="trailing" secondItem="zNV-SY-wHN" secondAttribute="trailing" id="MxV-bY-6Oy"/>
                 <constraint firstItem="cbT-Ht-Lzt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="PLg-e6-YQd"/>
                 <constraint firstItem="cbT-Ht-Lzt" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="-2.3333333333333357" id="Unh-YZ-yKm"/>
-                <constraint firstItem="1Wm-Ep-J9f" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="13" id="XY0-6Q-Ukt"/>
                 <constraint firstItem="zNV-SY-wHN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="bZV-wk-0Zd"/>
                 <constraint firstItem="1Wm-Ep-J9f" firstAttribute="top" secondItem="cbT-Ht-Lzt" secondAttribute="bottom" constant="8" id="iTJ-zv-Xiu"/>
+                <constraint firstAttribute="trailing" secondItem="1Wm-Ep-J9f" secondAttribute="trailing" constant="10" id="qBi-cy-ngp"/>
+                <constraint firstItem="1Wm-Ep-J9f" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="waX-jf-MAp"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>

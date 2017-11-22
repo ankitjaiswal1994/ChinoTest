@@ -53,10 +53,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDo-2w-C9K">
-                        <rect key="frame" x="162" y="42" width="150" height="20"/>
+                        <rect key="frame" x="74" y="44" width="228" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="150" id="TI6-xM-eEI"/>
-                            <constraint firstAttribute="height" constant="20" id="TnG-ty-sSN"/>
+                            <constraint firstAttribute="height" constant="15" id="TnG-ty-sSN"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.69013452529907227" green="0.69023555517196655" blue="0.6901124119758606" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -66,11 +65,12 @@
                 <constraints>
                     <constraint firstItem="INA-PE-ARF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-1.75" id="9cW-pa-dUW"/>
                     <constraint firstItem="Ofv-Nb-qyI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B8f-SI-L1p"/>
-                    <constraint firstItem="pDo-2w-C9K" firstAttribute="top" secondItem="INA-PE-ARF" secondAttribute="bottom" constant="1" id="BCf-Y7-foN"/>
+                    <constraint firstItem="pDo-2w-C9K" firstAttribute="top" secondItem="INA-PE-ARF" secondAttribute="bottom" constant="3" id="BCf-Y7-foN"/>
                     <constraint firstItem="v3i-Oa-7Ow" firstAttribute="leading" secondItem="Ofv-Nb-qyI" secondAttribute="trailing" constant="8" id="BEv-Qg-BLd"/>
-                    <constraint firstAttribute="trailing" secondItem="pDo-2w-C9K" secondAttribute="trailing" constant="8" id="cXE-pd-R12"/>
+                    <constraint firstAttribute="trailing" secondItem="pDo-2w-C9K" secondAttribute="trailing" constant="18" id="cXE-pd-R12"/>
                     <constraint firstItem="Ofv-Nb-qyI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="esu-QH-fMQ"/>
                     <constraint firstItem="v3i-Oa-7Ow" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="foh-1R-fCQ"/>
+                    <constraint firstItem="pDo-2w-C9K" firstAttribute="leading" secondItem="Ofv-Nb-qyI" secondAttribute="trailing" constant="8" id="gsk-nS-NHU"/>
                     <constraint firstItem="Ofv-Nb-qyI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="vbm-HL-Q37"/>
                     <constraint firstItem="INA-PE-ARF" firstAttribute="leading" secondItem="v3i-Oa-7Ow" secondAttribute="trailing" constant="10" id="wbD-VM-HzF"/>
                     <constraint firstAttribute="trailingMargin" secondItem="INA-PE-ARF" secondAttribute="trailing" constant="10" id="xsi-dC-G3e"/>

@@ -127,7 +127,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="90b-gL-mgk"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Get Free BitCoin">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -149,14 +149,24 @@
                                     <action selector="startOverButtonAction:" destination="ox3-IA-Shn" eventType="touchUpInside" id="5VP-Mb-UNC"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="p2t-WR-4fp">
+                                <rect key="frame" x="150" y="305" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Rvg-bD-chK"/>
+                                    <constraint firstAttribute="width" constant="20" id="dZJ-Sy-E6A"/>
+                                </constraints>
+                                <color key="color" red="0.60386711360000001" green="0.603956461" blue="0.6038475633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="6Q1-hb-mQD" firstAttribute="top" secondItem="QMu-6j-m8c" secondAttribute="top" constant="64" id="25b-5b-R6C"/>
+                            <constraint firstItem="p2t-WR-4fp" firstAttribute="centerX" secondItem="QMu-6j-m8c" secondAttribute="centerX" id="2n2-hG-e79"/>
                             <constraint firstItem="Hbg-hg-QxS" firstAttribute="leading" secondItem="zZV-0J-W7I" secondAttribute="leading" id="3ZI-P1-mA8"/>
                             <constraint firstItem="oRc-XD-1SC" firstAttribute="leading" secondItem="zZV-0J-W7I" secondAttribute="leading" id="72e-HK-aYb"/>
                             <constraint firstItem="oRc-XD-1SC" firstAttribute="trailing" secondItem="zZV-0J-W7I" secondAttribute="trailing" id="8iL-uR-Ekj"/>
                             <constraint firstItem="Hbg-hg-QxS" firstAttribute="top" secondItem="oRc-XD-1SC" secondAttribute="bottom" constant="-10" id="8j1-lS-lLY"/>
+                            <constraint firstItem="p2t-WR-4fp" firstAttribute="top" secondItem="6Q1-hb-mQD" secondAttribute="bottom" constant="1" id="PWN-KK-3H1"/>
                             <constraint firstItem="Hbg-hg-QxS" firstAttribute="trailing" secondItem="zZV-0J-W7I" secondAttribute="trailing" id="kYe-6e-moz"/>
                             <constraint firstItem="6Q1-hb-mQD" firstAttribute="trailing" secondItem="zZV-0J-W7I" secondAttribute="trailing" id="vVJ-b9-QuZ"/>
                             <constraint firstItem="6Q1-hb-mQD" firstAttribute="leading" secondItem="zZV-0J-W7I" secondAttribute="leading" id="xoJ-l8-Arr"/>
@@ -166,6 +176,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="kKC-ce-1sb"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="p2t-WR-4fp" id="xo9-xL-mEN"/>
                         <outlet property="tableView" destination="6Q1-hb-mQD" id="PTx-WZ-UbV"/>
                     </connections>
                 </viewController>

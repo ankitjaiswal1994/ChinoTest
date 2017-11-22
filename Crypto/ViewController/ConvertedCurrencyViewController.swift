@@ -14,6 +14,8 @@ protocol StatrOverDelegate: class {
 
 class ConvertedCurrencyViewController: UIViewController {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     struct Item {
         var name: String
         var value: Float
@@ -42,6 +44,7 @@ class ConvertedCurrencyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator.hidesWhenStopped = true
         if let title = UserDefaults.standard.value(forKey: "price") as? String {
             let value = title.components(separatedBy: " ")
             if let quantity = value.first, let doubleValue = Float(quantity) {
@@ -51,6 +54,7 @@ class ConvertedCurrencyViewController: UIViewController {
         }
         navigationController?.navigationBar.isHidden = false
         navigationItem.leftBarButtonItem = CryptoNavigationBar.backButton(self, action: #selector(leftBarButtonAction(_:)))
+        
         getCalculatedData()
     }
     
@@ -83,7 +87,9 @@ class ConvertedCurrencyViewController: UIViewController {
     }
     
     func getCalculatedData() {
-        
+        dispatch {
+            self.activityIndicator.startAnimating()
+        }
         let urlPath = "https://min-api.cryptocompare.com/data/price?fsym=\(currency)&tsyms=\(selectedArray)"
         guard let url = URL(string: urlPath) else { return }
         URLSession.shared.dataTask(with: url, completionHandler: {
@@ -98,8 +104,11 @@ class ConvertedCurrencyViewController: UIViewController {
                     }
                     dispatch {
                         self.tableView.reloadData()
+                        self.activityIndicator.stopAnimating()
                     }
+                    
                 } catch let error as NSError {
+                    self.activityIndicator.stopAnimating()
                     print(error)
                 }
             }
@@ -117,6 +126,7 @@ class ConvertedCurrencyViewController: UIViewController {
     }()
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        
         getCalculatedData()
         self.tableView.reloadData()
         refreshControl.endRefreshing()

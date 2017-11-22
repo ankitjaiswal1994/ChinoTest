@@ -114,11 +114,10 @@ class SwitchCurrencyViewController: UIViewController {
     }
     
     func filterForSearchText(_ searchText: String) {
-        serachArray = cryptoButton.isSelected ? cryptoCurrencyArray.filter {
-            $0.code.lowercased().contains(searchText.lowercased()) } :
-            countryCurrencyArray.filter {
-                $0.code.lowercased().contains(searchText.lowercased()) }
-        collectionView.reloadData()
+//        serachArray = cryptoButton.isSelected ? cryptoCurrencyArray.filter {
+//            $0.code.lowercased().contains(searchText.lowercased()) } : countryCurrencyArray.filter {
+//                $0.code.lowercased().contains(searchText.lowercased()) }
+//        collectionView.reloadData()
     }
 }
 

@@ -63,7 +63,14 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
     }
     
     @objc func donePressed() {
-        navigationController?.popViewController(animated: true)
+        view.endEditing(true)
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromRight
+        self.navigationController?.view.layer.add(transition, forKey: nil)
+        _ = self.navigationController?.popViewController(animated: true)
         delegate?.showAlert(selectedCurrecny: code, changeTitle: navigationItem.title!)
     }
 }
@@ -71,7 +78,7 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
 extension SelectCurrencyViewController: UITextFieldDelegate {
    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let text = textField.text ?? ""
-        UserDefaults.standard.set(text + " " + code + " " + "Equals", forKey: "price")
+        let text = textField.text ?? "1"
+            UserDefaults.standard.set(text + " " + code + " " + "Equals", forKey: "price")
     }
 }
