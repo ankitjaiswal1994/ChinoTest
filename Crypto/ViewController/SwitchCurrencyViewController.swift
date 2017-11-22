@@ -112,39 +112,33 @@ class SwitchCurrencyViewController: UIViewController {
     }
     
     func filterForSearchText(_ searchText: String) {
-//        serachArray = cryptoButton.isSelected ? cryptoCurrencyArray.filter {
-//            $0.code.lowercased().contains(searchText.lowercased()) } : countryCurrencyArray.filter {
-//                $0.code.lowercased().contains(searchText.lowercased()) }
-//        collectionView.reloadData()
+        if cryptoButton.isSelected {
+            serachArray = cryptoCurrencyArray.filter {
+                $0.code.lowercased().contains(searchText.lowercased()) }
+        } else {
+            serachArray = countryCurrencyArray.filter {
+                $0.continentName.lowercased().contains(searchText.lowercased()) }
+        }
+        collectionView.reloadData()
     }
 }
 
 extension SwitchCurrencyViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if !isCurrencySelect {
-            if search.isEmpty {
-                if cryptoButton.isSelected {
-                    pushToCurrencyExchange(indexPath, array: cryptoCurrencyArray)
-                } else {
-                    let country = countryCurrencyArray[indexPath.section]
-                    pushToCurrencyExchange(indexPath, array: country.counryArray)
-                }
-                
+            if cryptoButton.isSelected {
+                search.isEmpty ? pushToCurrencyExchange(indexPath, array: cryptoCurrencyArray) : pushToCurrencyExchange(indexPath, array: serachArray)
             } else {
-                pushToCurrencyExchange(indexPath, array: serachArray)
+                let country = search.isEmpty ? countryCurrencyArray[indexPath.section] : serachArray[indexPath.section]
+                pushToCurrencyExchange(indexPath, array: country.counryArray)
             }
         } else {
-            if search.isEmpty {
-                if cryptoButton.isSelected {
-                    refreshCurrency(indexPath, array: cryptoCurrencyArray)
-                } else {
-                    let country = countryCurrencyArray[indexPath.section]
-                    refreshCurrency(indexPath, array: country.counryArray)
-                }
+            if cryptoButton.isSelected {
+                search.isEmpty ? refreshCurrency(indexPath, array: cryptoCurrencyArray) : refreshCurrency(indexPath, array: serachArray)
             } else {
-                refreshCurrency(indexPath, array: serachArray)
+                let country = search.isEmpty ? countryCurrencyArray[indexPath.section] : serachArray[indexPath.section]
+                refreshCurrency(indexPath, array: country.counryArray)
             }
         }
     }
@@ -177,35 +171,29 @@ extension SwitchCurrencyViewController: UICollectionViewDelegateFlowLayout {
 extension SwitchCurrencyViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return cryptoButton.isSelected ? 1 : countryCurrencyArray.count
+        return cryptoButton.isSelected ? 1 : search.isEmpty ? countryCurrencyArray.count : serachArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if search.isEmpty {
-            if cryptoButton.isSelected {
-                return cryptoCurrencyArray.count
-            } else {
-                let country = countryCurrencyArray[section]
-                return country.counryArray.count
-            }
+        if cryptoButton.isSelected {
+            return  search.isEmpty ? cryptoCurrencyArray.count : serachArray.count
         } else {
-            return serachArray.count
+            let country = search.isEmpty ? countryCurrencyArray[section] : serachArray[section]
+            return country.counryArray.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: SwitchCurrencyCollectionViewCell.self)
         var obj = CurrencyInfo()
-        if search.isEmpty {
-            if cryptoButton.isSelected {
-                obj = cryptoCurrencyArray[indexPath.item]
-            } else {
-                let country = countryCurrencyArray[indexPath.section]
-                obj = country.counryArray[indexPath.item]
-            }
+        
+        if cryptoButton.isSelected {
+            obj = search.isEmpty ? cryptoCurrencyArray[indexPath.item] : serachArray[indexPath.item]
         } else {
-            obj = serachArray[indexPath.item]
+            let country = search.isEmpty ? countryCurrencyArray[indexPath.section] : serachArray[indexPath.section]
+            obj = country.counryArray[indexPath.item]
         }
+
         cell.currencyName.text = obj.code
         cell.currencyImage.image = UIImage(named: obj.icon)
         cell.currencyImage.contentMode = cryptoButton.isSelected ? .scaleAspectFit : .scaleAspectFill
