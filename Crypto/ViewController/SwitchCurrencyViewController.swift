@@ -21,13 +21,11 @@ class SwitchCurrencyViewController: UIViewController {
     @IBOutlet weak var cryptoButton: UIButton! {
         didSet {
             cryptoButton.backgroundColor = UIColor(red: 11.0/255.0, green: 106.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-            
-
             cryptoButton.isSelected = true
         }
     }
     
-    var search: String=""
+    var search: String = ""
     var cryptoCurrencyArray = [CurrencyInfo]()
     var countryCurrencyArray = [CurrencyInfo]()
     var selectedArray = [CurrencyInfo]()

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
+import SwiftyStoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearance.isTranslucent = true
         navigationBarAppearance.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.darkGray]
         
+        Fabric.with([Crashlytics.self])
+        
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases {
+                if purchase.transaction.transactionState == .purchased || purchase.transaction.transactionState == .restored {
+                    if purchase.needsFinishTransaction {
+                        // Deliver content from server, then:
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                    print("purchased: \(purchase)")
+                }
+            }
+        }
         return true
     }
 

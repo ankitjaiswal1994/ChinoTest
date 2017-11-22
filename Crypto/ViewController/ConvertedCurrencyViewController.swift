@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyStoreKit
 
 protocol StatrOverDelegate: class {
     func startOver()
@@ -62,8 +63,22 @@ class ConvertedCurrencyViewController: UIViewController {
         }
         appdelegate.count += 1
         
-        if appdelegate.count > 2 {
-            alert(message: "In App Purchase")
+        if appdelegate.count > 1 {
+            SwiftyStoreKit.retrieveProductsInfo(["11212017"]) { result in
+                if let product = result.retrievedProducts.first {
+                    let priceString = product.localizedPrice!
+                    print("Product: \(product.localizedDescription), price: \(priceString)")
+                }
+                else if let invalidProductId = result.invalidProductIDs.first {
+//                    return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
+                }
+                else {
+                    print("Error: \(result.error)")
+                }
+            }
+            self.perform(#selector(inAppPurchase), with: nil, afterDelay: 3.0)
+
+            appdelegate.count = 0
         }
     }
     
@@ -80,6 +95,27 @@ class ConvertedCurrencyViewController: UIViewController {
     
     @IBAction func getFreeBitCoinButtonAction(_ sender: UIButton) {
         UIApplication.shared.open(URL(string: "https://goo.gl/6yznGQ")!)
+    }
+    
+    @objc func inAppPurchase() {
+        SwiftyStoreKit.purchaseProduct("11212017", quantity: 1, atomically: true) { result in
+            switch result {
+            case .success(let purchase):
+                print("Purchase Success: \(purchase.productId)")
+            case .error(let error):
+                switch error.code {
+                case .unknown: print("Unknown error. Please contact support")
+                case .clientInvalid: print("Not allowed to make the payment")
+                case .paymentCancelled: break
+                case .paymentInvalid: print("The purchase identifier was invalid")
+                case .paymentNotAllowed: print("The device is not allowed to make the payment")
+                case .storeProductNotAvailable: print("The product is not available in the current storefront")
+                case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
+                case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
+                case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
+                }
+            }
+        }
     }
     
     func getCalculatedData() {
