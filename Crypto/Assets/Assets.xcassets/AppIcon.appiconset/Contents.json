@@ -49,16 +49,8 @@
       "scale" : "3x"
     },
     {
-      "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "image.png",
-      "scale" : "1x"
-    },
-    {
       "size" : "1024x1024",
-      "idiom" : "ios-marketing",
-      "filename" : "appIcon.png",
-      "unassigned" : true,
       "scale" : "1x"
     }
   ],

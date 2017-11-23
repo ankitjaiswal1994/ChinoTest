@@ -12,7 +12,7 @@ import UIKit
 enum Crypto {
     
     struct navigationTitle {
-        static let switchCurrency = "Switch Currency"
+        static let switchCurrency = "Collect Currency"
         static let selectCurrency = "Select Currency"
     }
     

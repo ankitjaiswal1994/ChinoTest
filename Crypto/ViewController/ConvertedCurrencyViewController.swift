@@ -68,7 +68,7 @@ class ConvertedCurrencyViewController: UIViewController {
         }
         appdelegate.count += 1
         
-        if appdelegate.count > 1 {
+        if appdelegate.count > 0 {
             SwiftyStoreKit.retrieveProductsInfo(["11212017"]) { result in
                 if let product = result.retrievedProducts.first {
                     AppEventsLogger.log("IAP prompt shown")
@@ -84,7 +84,7 @@ class ConvertedCurrencyViewController: UIViewController {
             }
             self.perform(#selector(inAppPurchase), with: nil, afterDelay: 3.0)
 
-            appdelegate.count = 0
+            appdelegate.count = -1
         }
     }
     
