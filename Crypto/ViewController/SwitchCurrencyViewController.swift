@@ -38,12 +38,17 @@ class SwitchCurrencyViewController: UIViewController {
     var currencyInfoObjectArray = [CurrencyInfo]()
     var imageUrl = String()
     
+    var isLoading = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getCalculatedData()
         confirmButton.isHidden = true
         currencyList()
         navigationItem.title = Crypto.navigationTitle.selectCurrency
+        
+        commonButtonTapped()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +69,13 @@ class SwitchCurrencyViewController: UIViewController {
         commonButton.backgroundColor = .clear
         searchTextField.text = nil
         collectionView.reloadData()
+        
+        
+        if isLoading {
+            LoaderView.showIndicator(view)
+        } else {
+            LoaderView.remove(view)
+        }
     }
     
     @IBAction func commonButtonAction(_ sender: UIButton) {
@@ -78,6 +90,26 @@ class SwitchCurrencyViewController: UIViewController {
         commonButton.backgroundColor = UIColor(red: 11.0/255.0, green: 106.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         searchTextField.text = nil
         collectionView.reloadData()
+        
+        if isLoading {
+            LoaderView.remove(view)
+        }
+    }
+    
+    
+    func commonButtonTapped() {
+        search = ""
+        cryptoButton.isSelected = false
+        commonButton.isSelected = true
+        cryptoButton.backgroundColor = .clear
+        commonButton.backgroundColor = UIColor(red: 11.0/255.0, green: 106.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        searchTextField.text = nil
+        collectionView.reloadData()
+        
+        if isLoading {
+            LoaderView.remove(view)
+        }
+
     }
     
     @IBAction func confirmButtonAction(_ sender: UIButton) {
@@ -107,6 +139,7 @@ class SwitchCurrencyViewController: UIViewController {
     
     func getCalculatedData() {
     
+        isLoading = true
         let urlPath = "https://www.cryptocompare.com/api/data/coinlist/"
         guard let url = URL(string: urlPath) else { return }
         LoaderView.showIndicator(view)
@@ -114,6 +147,7 @@ class SwitchCurrencyViewController: UIViewController {
             (data, response, error) in
             guard let _self = self else { return }
             LoaderView.remove(_self.view)
+            _self.isLoading = false
             if(error != nil){
                 print("error")
             } else {

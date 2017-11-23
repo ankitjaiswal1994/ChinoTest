@@ -603,11 +603,6 @@
                        "code": "RWF"
                        },
                        {
-                       "icon": "SH",
-                       "name": "Saint Helena pound",
-                       "code": ""
-                       },
-                       {
                        "icon": "ST",
                        "name": "Dobra",
                        "code": "STD"
@@ -631,11 +626,6 @@
                        "icon": "SO",
                        "name": "Somali shilling",
                        "code": "SOS"
-                       },
-                       {
-                       "icon": "SO",
-                       "name": "Somaliland shillinga ",
-                       "code": ""
                        },
                        {
                        "icon": "ZA",
