@@ -17,6 +17,11 @@ class CurrencyInfo {
     var continentName = ""
     var counryArray = [CurrencyInfo]()
     
+    var imageUrl = ""
+    var coinName = ""
+    var symbol = ""
+    var sortOrder = ""
+    
     class func parseCurrencyList(dict: NSDictionary) -> CurrencyInfo {
         let currencyObject = CurrencyInfo()
         currencyObject.icon = dict.value(forKey: "icon") as? String ?? ""
@@ -34,6 +39,17 @@ class CurrencyInfo {
                 currencyObject.counryArray.append(CurrencyInfo.parseCurrencyList(dict: country as NSDictionary))
             }
         }
+        
+        return currencyObject
+    }
+    
+    class func getCryptoCurrencyList(dict: NSDictionary) -> CurrencyInfo{
+        let currencyObject = CurrencyInfo()
+        currencyObject.imageUrl = dict.value(forKey: "ImageUrl") as? String ?? ""
+        currencyObject.coinName = dict.value(forKey: "CoinName") as? String ?? ""
+        currencyObject.code = dict.value(forKey: "Symbol") as? String ?? ""
+        currencyObject.sortOrder = dict.value(forKey: "SortOrder") as? String ?? ""
+
         
         return currencyObject
     }
