@@ -26,7 +26,6 @@ class SwitchCurrencyViewController: UIViewController {
     }
     
     var search: String = ""
-    var cryptoCurrencyArray = [CurrencyInfo]()
     var countryCurrencyArray = [CurrencyInfo]()
     var selectedArray = [CurrencyInfo]()
     var serachArray = [CurrencyInfo]()
@@ -34,12 +33,17 @@ class SwitchCurrencyViewController: UIViewController {
     var isCurrencySelect = false
     var selectedCurrency = ""
     
+    var keysArray = [Any]()
+    var valuesArray = [NSDictionary]()
+    var currencyInfoObjectArray = [CurrencyInfo]()
+    var imageUrl = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getCalculatedData()
         confirmButton.isHidden = true
         currencyList()
-        navigationItem.title = Crypto.navigationTitle.switchCurrency
+        navigationItem.title = Crypto.navigationTitle.selectCurrency
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,8 +90,6 @@ class SwitchCurrencyViewController: UIViewController {
         }).joined(separator: ",")
         vc.flags = selectedArray
         vc.currency = selectedCurrency
-        
-        
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -103,17 +105,49 @@ class SwitchCurrencyViewController: UIViewController {
             }
         }
         
-        if let response = JSONData.load(from: "cryptoIcon") {
-            cryptoCurrencyArray.removeAll()
-            for data in response {
-                cryptoCurrencyArray.append(CurrencyInfo.parseCurrencyList(dict: data as NSDictionary))
+//        if let response = JSONData.load(from: "cryptoIcon") {
+//            cryptoCurrencyArray.removeAll()
+//            for data in response {
+//                cryptoCurrencyArray.append(CurrencyInfo.parseCurrencyList(dict: data as NSDictionary))
+//            }
+//        }
+    }
+    
+    func getCalculatedData() {
+    
+        let urlPath = "https://www.cryptocompare.com/api/data/coinlist/"
+        guard let url = URL(string: urlPath) else { return }
+        URLSession.shared.dataTask(with: url, completionHandler: {
+            (data, response, error) in
+            if(error != nil){
+                print("error")
+            } else {
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? NSDictionary {
+                        if let response = json.value(forKey: "Response") {
+                            let baseImageUrl = json.value(forKey: "BaseImageUrl") as! String
+                            UserDefaults.standard.set(baseImageUrl, forKey: "BaseImageUrl")
+                            self.keysArray = (( json.value(forKey: "Data") as? NSDictionary)?.allKeys)!  
+                            self.valuesArray = (( json.value(forKey: "Data") as? NSDictionary)?.allValues)! as! [NSDictionary]
+                            for tempDict in self.valuesArray {
+                                self.currencyInfoObjectArray.append(CurrencyInfo.getCryptoCurrencyList(dict: tempDict as! NSDictionary))
+                            }
+                            dispatch {
+                                self.collectionView.reloadData()
+                            }
+                        }
+                    }
+     
+                } catch let error as NSError {
+                    print(error)
+                }
             }
-        }
+        }).resume()
     }
     
     func filterForSearchText(_ searchText: String) {
         if cryptoButton.isSelected {
-            serachArray = cryptoCurrencyArray.filter {
+            serachArray = currencyInfoObjectArray.filter {
                 $0.code.lowercased().contains(searchText.lowercased()) }
         } else {
             serachArray = countryCurrencyArray.filter {
@@ -121,6 +155,11 @@ class SwitchCurrencyViewController: UIViewController {
         }
         collectionView.reloadData()
     }
+    
+    //Download image
+    
+    
+    
 }
 
 extension SwitchCurrencyViewController: UICollectionViewDelegate {
@@ -128,14 +167,14 @@ extension SwitchCurrencyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !isCurrencySelect {
             if cryptoButton.isSelected {
-                search.isEmpty ? pushToCurrencyExchange(indexPath, array: cryptoCurrencyArray) : pushToCurrencyExchange(indexPath, array: serachArray)
+                search.isEmpty ? pushToCurrencyExchange(indexPath, array: currencyInfoObjectArray) : pushToCurrencyExchange(indexPath, array: serachArray)
             } else {
                 let country = search.isEmpty ? countryCurrencyArray[indexPath.section] : serachArray[indexPath.section]
                 pushToCurrencyExchange(indexPath, array: country.counryArray)
             }
         } else {
             if cryptoButton.isSelected {
-                search.isEmpty ? refreshCurrency(indexPath, array: cryptoCurrencyArray) : refreshCurrency(indexPath, array: serachArray)
+                search.isEmpty ? refreshCurrency(indexPath, array: currencyInfoObjectArray) : refreshCurrency(indexPath, array: serachArray)
             } else {
                 let country = search.isEmpty ? countryCurrencyArray[indexPath.section] : serachArray[indexPath.section]
                 refreshCurrency(indexPath, array: country.counryArray)
@@ -176,7 +215,7 @@ extension SwitchCurrencyViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if cryptoButton.isSelected {
-            return  search.isEmpty ? cryptoCurrencyArray.count : serachArray.count
+            return  search.isEmpty ? currencyInfoObjectArray.count : serachArray.count
         } else {
             let country = search.isEmpty ? countryCurrencyArray[section] : serachArray[section]
             return country.counryArray.count
@@ -188,14 +227,25 @@ extension SwitchCurrencyViewController: UICollectionViewDataSource {
         var obj = CurrencyInfo()
         
         if cryptoButton.isSelected {
-            obj = search.isEmpty ? cryptoCurrencyArray[indexPath.item] : serachArray[indexPath.item]
+            obj = search.isEmpty ? currencyInfoObjectArray[indexPath.item] : serachArray[indexPath.item]
         } else {
             let country = search.isEmpty ? countryCurrencyArray[indexPath.section] : serachArray[indexPath.section]
             obj = country.counryArray[indexPath.item]
         }
 
         cell.currencyName.text = obj.code
-        cell.currencyImage.image = UIImage(named: obj.icon)
+        
+        if cryptoButton.isSelected {
+            if let baseUrl = UserDefaults.standard.value(forKey: "BaseImageUrl") as? String {
+                imageUrl = baseUrl + obj.imageUrl
+                if let url = URL.init(string: imageUrl) {
+                    cell.currencyImage.downloadedFrom(url: url)
+                }
+            }
+        } else {
+             cell.currencyImage.image = UIImage(named: obj.icon)
+
+        }
         cell.currencyImage.contentMode = cryptoButton.isSelected ? .scaleAspectFit : .scaleAspectFill
         cell.selectionView.isHidden = !obj.isSelected
         return cell
@@ -266,4 +316,25 @@ extension SwitchCurrencyViewController: StatrOverDelegate {
         collectionView.reloadData()
     }
 }
+
+extension UIImageView {
+    func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+           // DispatchQueue.main.async() { () -> Void in
+                self.image = image
+         //   }
+            }.resume()
+    }
+    func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
+        guard let url = URL(string: link) else { return }
+        downloadedFrom(url: url, contentMode: mode)
+    }
+}
+
 

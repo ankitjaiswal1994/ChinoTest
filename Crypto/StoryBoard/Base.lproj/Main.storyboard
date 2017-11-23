@@ -49,7 +49,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S7H-1z-aGa">
-                                <rect key="frame" x="0.0" y="153" width="375" height="444"/>
+                                <rect key="frame" x="0.0" y="153" width="375" height="514"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="15" id="3OJ-vo-PIL">
                                     <size key="itemSize" width="71" height="80"/>
@@ -232,7 +232,7 @@
                             <constraint firstItem="bEv-tY-hR8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="23b-E0-H2E"/>
                             <constraint firstItem="S7H-1z-aGa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6ve-8m-m8f"/>
                             <constraint firstItem="S7H-1z-aGa" firstAttribute="top" secondItem="bEv-tY-hR8" secondAttribute="bottom" constant="45" id="7wp-sK-wOA"/>
-                            <constraint firstItem="S7H-1z-aGa" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-70" id="L0m-MB-15N"/>
+                            <constraint firstItem="S7H-1z-aGa" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="L0m-MB-15N"/>
                             <constraint firstItem="PpP-g1-3w4" firstAttribute="top" secondItem="bEv-tY-hR8" secondAttribute="bottom" id="NkB-nl-3zI"/>
                             <constraint firstItem="bEv-tY-hR8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="RLW-6E-87l"/>
                             <constraint firstItem="Sb2-gm-VuR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ROn-Yw-tr6"/>
