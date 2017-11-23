@@ -8,5 +8,6 @@ target 'Crypto' do
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'SwiftyStoreKit'
+pod 'FacebookCore'
 
 end

@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyStoreKit
+import FacebookCore
 
 protocol StatrOverDelegate: class {
     func startOver()
@@ -70,6 +71,7 @@ class ConvertedCurrencyViewController: UIViewController {
         if appdelegate.count > 1 {
             SwiftyStoreKit.retrieveProductsInfo(["11212017"]) { result in
                 if let product = result.retrievedProducts.first {
+                    AppEventsLogger.log("IAP prompt shown")
                     let priceString = product.localizedPrice!
                     print("Product: \(product.localizedDescription), price: \(priceString)")
                 }
@@ -95,9 +97,11 @@ class ConvertedCurrencyViewController: UIViewController {
         UserDefaults.standard.removeObject(forKey: "price")
         UserDefaults.standard.synchronize()
         delegate?.startOver()
+        AppEventsLogger.log("Start Over")
     }
     
     @IBAction func getFreeBitCoinButtonAction(_ sender: UIButton) {
+        AppEventsLogger.log("Get Free Bitcoin")
         UIApplication.shared.open(URL(string: "https://goo.gl/6yznGQ")!)
     }
     
