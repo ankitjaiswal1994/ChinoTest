@@ -183,10 +183,15 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConvertedCurrencyTableViewCell.self)
         
         if indexPath.row < self.flags.count {
-            if verifyUrl(urlString: flags[indexPath.row].icon) {
-                cell.currencyImageView.loadImageUsingCache(withUrl: flags[indexPath.row].icon)
-            } else {
+            if flags[indexPath.row].imageUrl.isEmpty {
                 cell.currencyImageView.image = UIImage(named: flags[indexPath.row].icon)
+            } else {
+                if let baseUrl = UserDefaults.standard.value(forKey: "BaseImageUrl") as? String {
+                    cell.currencyImageView.loadImageUsingCache(withUrl: baseUrl + flags[indexPath.row].imageUrl)
+                }
+            }
+            if verifyUrl(urlString: flags[indexPath.row].icon) {
+            } else {
             }
             print(flags[indexPath.row].name)
             cell.currencyName.text = flags[indexPath.row].name

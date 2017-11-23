@@ -245,7 +245,13 @@ extension SwitchCurrencyViewController: UICollectionViewDataSource {
         let obj = array[indexPath.item]
         vc.code = obj.code
         vc.name = obj.name
-        vc.icon = obj.icon
+        if cryptoButton.isSelected {
+            if let baseUrl = UserDefaults.standard.value(forKey: "BaseImageUrl") as? String {
+                vc.icon = baseUrl + obj.imageUrl
+            }
+        } else if commonButton.isSelected {
+            vc.icon = obj.icon
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     
