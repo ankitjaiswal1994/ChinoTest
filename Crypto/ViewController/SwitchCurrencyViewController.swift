@@ -61,7 +61,6 @@ class SwitchCurrencyViewController: UIViewController {
         cryptoButton.isSelected = true
         commonButton.isSelected = false
         cryptoButton.backgroundColor = UIColor(red: 11.0/255.0, green: 106.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-
         commonButton.backgroundColor = .clear
         searchTextField.text = nil
         collectionView.reloadData()
@@ -104,21 +103,17 @@ class SwitchCurrencyViewController: UIViewController {
                 countryCurrencyArray.append(CurrencyInfo.getContinentWithCountry(dict: data as NSDictionary))
             }
         }
-        
-//        if let response = JSONData.load(from: "cryptoIcon") {
-//            cryptoCurrencyArray.removeAll()
-//            for data in response {
-//                cryptoCurrencyArray.append(CurrencyInfo.parseCurrencyList(dict: data as NSDictionary))
-//            }
-//        }
     }
     
     func getCalculatedData() {
     
         let urlPath = "https://www.cryptocompare.com/api/data/coinlist/"
         guard let url = URL(string: urlPath) else { return }
-        URLSession.shared.dataTask(with: url, completionHandler: {
+        LoaderView.showIndicator(view)
+        URLSession.shared.dataTask(with: url, completionHandler: { [weak self]
             (data, response, error) in
+            guard let _self = self else { return }
+            LoaderView.remove(_self.view)
             if(error != nil){
                 print("error")
             } else {
@@ -127,13 +122,14 @@ class SwitchCurrencyViewController: UIViewController {
                         if let response = json.value(forKey: "Response") {
                             let baseImageUrl = json.value(forKey: "BaseImageUrl") as! String
                             UserDefaults.standard.set(baseImageUrl, forKey: "BaseImageUrl")
-                            self.keysArray = (( json.value(forKey: "Data") as? NSDictionary)?.allKeys)!  
-                            self.valuesArray = (( json.value(forKey: "Data") as? NSDictionary)?.allValues)! as! [NSDictionary]
-                            for tempDict in self.valuesArray {
-                                self.currencyInfoObjectArray.append(CurrencyInfo.getCryptoCurrencyList(dict: tempDict as! NSDictionary))
+                            _self.keysArray = (( json.value(forKey: "Data") as? NSDictionary)?.allKeys)!
+                            _self.valuesArray = (( json.value(forKey: "Data") as? NSDictionary)?.allValues)! as! [NSDictionary]
+                            for tempDict in _self.valuesArray {
+                                _self.currencyInfoObjectArray.append(CurrencyInfo.getCryptoCurrencyList(dict: tempDict as! NSDictionary))
+                                _self.currencyInfoObjectArray = _self.currencyInfoObjectArray.sorted(by: {$0.code < $1.code})
                             }
                             dispatch {
-                                self.collectionView.reloadData()
+                                _self.collectionView.reloadData()
                             }
                         }
                     }
@@ -155,11 +151,6 @@ class SwitchCurrencyViewController: UIViewController {
         }
         collectionView.reloadData()
     }
-    
-    //Download image
-    
-    
-    
 }
 
 extension SwitchCurrencyViewController: UICollectionViewDelegate {
@@ -237,14 +228,10 @@ extension SwitchCurrencyViewController: UICollectionViewDataSource {
         
         if cryptoButton.isSelected {
             if let baseUrl = UserDefaults.standard.value(forKey: "BaseImageUrl") as? String {
-                imageUrl = baseUrl + obj.imageUrl
-                if let url = URL.init(string: imageUrl) {
-                    cell.currencyImage.downloadedFrom(url: url)
-                }
+                cell.currencyImage.loadImageUsingCache(withUrl: baseUrl + obj.imageUrl)
             }
-        } else {
+        } else if commonButton.isSelected {
              cell.currencyImage.image = UIImage(named: obj.icon)
-
         }
         cell.currencyImage.contentMode = cryptoButton.isSelected ? .scaleAspectFit : .scaleAspectFill
         cell.selectionView.isHidden = !obj.isSelected
@@ -326,9 +313,7 @@ extension UIImageView {
                 let data = data, error == nil,
                 let image = UIImage(data: data)
                 else { return }
-           // DispatchQueue.main.async() { () -> Void in
                 self.image = image
-         //   }
             }.resume()
     }
     func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {

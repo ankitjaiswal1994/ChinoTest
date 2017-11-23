@@ -39,17 +39,17 @@ class CurrencyInfo {
                 currencyObject.counryArray.append(CurrencyInfo.parseCurrencyList(dict: country as NSDictionary))
             }
         }
+        currencyObject.counryArray = currencyObject.counryArray.sorted(by: {$0.code < $1.code})
         
         return currencyObject
     }
     
-    class func getCryptoCurrencyList(dict: NSDictionary) -> CurrencyInfo{
+    class func getCryptoCurrencyList(dict: NSDictionary) -> CurrencyInfo {
         let currencyObject = CurrencyInfo()
         currencyObject.imageUrl = dict.value(forKey: "ImageUrl") as? String ?? ""
         currencyObject.coinName = dict.value(forKey: "CoinName") as? String ?? ""
         currencyObject.code = dict.value(forKey: "Symbol") as? String ?? ""
         currencyObject.sortOrder = dict.value(forKey: "SortOrder") as? String ?? ""
-
         
         return currencyObject
     }

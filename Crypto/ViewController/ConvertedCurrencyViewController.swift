@@ -183,7 +183,11 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConvertedCurrencyTableViewCell.self)
         
         if indexPath.row < self.flags.count {
-            cell.currencyImageView.image = UIImage(named: flags[indexPath.row].icon)
+            if verifyUrl(urlString: flags[indexPath.row].icon) {
+                cell.currencyImageView.loadImageUsingCache(withUrl: flags[indexPath.row].icon)
+            } else {
+                cell.currencyImageView.image = UIImage(named: flags[indexPath.row].icon)
+            }
             print(flags[indexPath.row].name)
             cell.currencyName.text = flags[indexPath.row].name
         }
@@ -205,6 +209,14 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return SwifterSwift.isPhone ? 65 : 80
+    }
+    
+    func verifyUrl (urlString: String?) -> Bool {
+        if let urlString = urlString, let url = NSURL(string: urlString) {
+            return UIApplication.shared.canOpenURL(url as URL)
+        }
+        
+        return false
     }
 }
 
