@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
+import SwiftyStoreKit
+import FacebookCore
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var count = 0
 
    var navigationBarAppearance = UINavigationBar.appearance()
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -20,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearance.barTintColor = .white
         navigationBarAppearance.isTranslucent = true
         navigationBarAppearance.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.darkGray]
+        
+        Fabric.with([Crashlytics.self])
         
         return true
     }
@@ -39,7 +47,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        AppEventsLogger.activate(application)
+        if UserDefaults.standard.integer(forKey: "launchCount") < 5 {
+            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "launchCount") + 1, forKey: "launchCount")
+            let lastString = (UserDefaults.standard.integer(forKey: "launchCount") == 1) ? "" : "es"
+            let countString = "\(UserDefaults.standard.integer(forKey: "launchCount"))" + " App Launch" + lastString
+            AppEventsLogger.log(countString)
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

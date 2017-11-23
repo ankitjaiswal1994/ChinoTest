@@ -1,15 +1,13 @@
 //
 //  HeaderView.swift
-//  Demo Project
+//  Crypto
 //
-//  Created by Crownstack on 15/11/17.
+//  Created by Crownstack on 21/11/17.
 //  Copyright © 2017 Crownstack. All rights reserved.
 //
 
 import UIKit
 
 class HeaderView: UICollectionReusableView {
-        
-    @IBOutlet weak var currencyName: UILabel!
-    @IBOutlet var currencyCount: UILabel!
+    @IBOutlet weak var sectionLabel: UILabel!
 }

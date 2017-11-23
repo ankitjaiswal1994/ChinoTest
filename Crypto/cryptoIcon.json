@@ -1,0 +1,62 @@
+[
+ {
+ "icon": "bitcoin",
+ "name": "Bitcoin",
+ "code": "BTC"
+ },
+ {
+ "icon": "ether",
+ "name": "Ethereum",
+ "code": "ETH"
+ },
+ {
+ "icon": "bitcoin",
+ "name": "Bitcoin Cash",
+ "code": "BCH"
+ },
+ {
+ "icon": "ripple",
+ "name": "Ripple",
+ "code": "XRP"
+ },
+ {
+ "icon": "litecoin",
+ "name": "Litecoin",
+ "code": "LTC"
+ },
+ {
+ "icon": "dash",
+ "name": "Dash",
+ "code": "DASH"
+ },
+ {
+ "icon": "iota",
+ "name": "MIOTA",
+ "code": "IOTA"
+ },
+ {
+ "icon": "neo",
+ "name": "NEO",
+ "code": "NEO"
+ },
+ {
+ "icon": "ethereumclassic",
+ "name": "Ethereum Classic",
+ "code": "ETC"
+ },
+ {
+ "icon": "monero",
+ "name": "Monero",
+ "code": "XMR"
+ },
+ {
+ "icon": "nem",
+ "name": "NEM",
+ "code": "XEM"
+ },
+ {
+ "icon": "lisk",
+ "name": "Lisk",
+ "code": "LSK"
+ }
+]
