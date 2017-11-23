@@ -304,6 +304,10 @@ extension SwitchCurrencyViewController: UICollectionViewDataSource {
         confirmButton.isHidden = selectedArray.count >= 1 ? false: true
         collectionView.reloadItems(at: [IndexPath(item: indexPath.item, section: indexPath.section)])
     }
+    
+    func indexTitles(for collectionView: UICollectionView) -> [String]? {
+        return ["A", "B", "C", "Z"]
+    }
 }
 
 extension SwitchCurrencyViewController: UITextFieldDelegate {
