@@ -33,13 +33,17 @@ class CurrencyInfo {
     
     class func getContinentWithCountry(dict: NSDictionary) -> CurrencyInfo {
         let currencyObject = CurrencyInfo()
-        currencyObject.continentName = dict.value(forKey: "continentName") as? String ?? ""
+        let continentName = dict.value(forKey: "continentName") as? String ?? ""
+        currencyObject.continentName = continentName
         if let countryArray = dict.value(forKey: "continentCountrys") as? Array<Dictionary<String, Any>> {
             for country in countryArray {
                 currencyObject.counryArray.append(CurrencyInfo.parseCurrencyList(dict: country as NSDictionary))
             }
         }
-        currencyObject.counryArray = currencyObject.counryArray.sorted(by: {$0.code < $1.code})
+        
+        if continentName != "Common Currencies" {
+            currencyObject.counryArray = currencyObject.counryArray.sorted(by: {$0.code < $1.code})
+        }
         
         return currencyObject
     }

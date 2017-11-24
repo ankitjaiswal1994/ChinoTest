@@ -82,7 +82,7 @@ class ConvertedCurrencyViewController: UIViewController {
                     print("Error: \(result.error)")
                 }
             }
-            self.perform(#selector(inAppPurchase), with: nil, afterDelay: 3.0)
+            self.perform(#selector(inAppPurchase), with: nil, afterDelay: 2.0)
             
             appdelegate.count = -1
         }

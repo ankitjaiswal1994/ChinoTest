@@ -14,7 +14,11 @@ protocol SelectCurrencyDelegate: class {
 
 class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
 
-    @IBOutlet weak var currencyTextField: UITextField!
+    @IBOutlet weak var currencyTextField: UITextField!{
+        didSet {
+            currencyTextField.becomeFirstResponder()
+        }
+    }
     @IBOutlet weak var iconImageview: UIImageView!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -64,20 +68,24 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
     }
     
     @objc func leftBarButtonAction(_ sender: Any) {
-        view.endEditing(true)
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func confirmButtonAction(_ sender: UIButton) {
-        view.endEditing(true)
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromRight
-        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
-        _ = self.navigationController?.popViewController(animated: true)
-        delegate?.showAlert(selectedCurrecny: code, changeTitle: navigationItem.title!)
+        if let text = currencyTextField.text {
+            if !text.isEmpty {
+                let transition = CATransition()
+                transition.duration = 0.5
+                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+                transition.type = kCATransitionPush
+                transition.subtype = kCATransitionFromRight
+                self.navigationController?.view.layer.add(transition, forKey: kCATransition)
+                _ = self.navigationController?.popViewController(animated: true)
+                delegate?.showAlert(selectedCurrecny: code, changeTitle: navigationItem.title!)
+            } else {
+                alert(message: "Please enter some value.")
+            }
+        }
     }
 }
 

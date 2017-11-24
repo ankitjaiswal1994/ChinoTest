@@ -226,7 +226,7 @@ extension SwitchCurrencyViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width/3 - 40, height:90 )
+        return CGSize(width: view.frame.size.width/3 - 35, height:90 )
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -325,7 +325,6 @@ extension SwitchCurrencyViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
-        
         return true
     }
 }
