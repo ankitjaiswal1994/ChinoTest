@@ -16,8 +16,6 @@ protocol StatrOverDelegate: class {
 
 class ConvertedCurrencyViewController: UIViewController {
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     struct Item {
         var name: String
         var value: Float
@@ -30,6 +28,7 @@ class ConvertedCurrencyViewController: UIViewController {
     var flags = [CurrencyInfo]()
     var delegate: StatrOverDelegate?
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.register(cellType: ConvertedCurrencyTableViewCell.self)
@@ -47,7 +46,7 @@ class ConvertedCurrencyViewController: UIViewController {
         super.viewDidLoad()
         
         activityIndicator.hidesWhenStopped = true
-        if let title = UserDefaults.standard.value(forKey: "price") as? String {
+        if let title = UserDefaults.standard.value(forKey: Crypto.apiKeys.price) as? String {
             let value = title.components(separatedBy: " ")
             if let quantity = value.first, let doubleValue = Float(quantity) {
                 valueForCalculation = doubleValue
@@ -166,7 +165,6 @@ class ConvertedCurrencyViewController: UIViewController {
     }()
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        
         getCalculatedData()
         self.tableView.reloadData()
         refreshControl.endRefreshing()
@@ -186,7 +184,7 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
             if flags[indexPath.row].imageUrl.isEmpty {
                 cell.currencyImageView.image = UIImage(named: flags[indexPath.row].icon)
             } else {
-                if let baseUrl = UserDefaults.standard.value(forKey: "BaseImageUrl") as? String {
+                if let baseUrl = UserDefaults.standard.value(forKey: Crypto.apiKeys.baseImageUrl) as? String {
                     cell.currencyImageView.loadImageUsingCache(withUrl: baseUrl + flags[indexPath.row].imageUrl)
                 }
             }

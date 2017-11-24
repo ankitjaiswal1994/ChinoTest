@@ -66,7 +66,7 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
         toolBar.isTranslucent = true
         toolBar.tintColor = Crypto.toolBar.tintColor
         toolBar.barTintColor = Crypto.toolBar.barTintColor
-        let doneButton = UIBarButtonItem(title: "Confirm Quantity", style: .done, target: self, action: #selector(donePressed))
+        let doneButton = UIBarButtonItem(title: Crypto.title.toolBarButtonTitle, style: .done, target: self, action: #selector(donePressed))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.setItems([spaceButton, doneButton, spaceButton], animated: false)
         toolBar.isUserInteractionEnabled = true

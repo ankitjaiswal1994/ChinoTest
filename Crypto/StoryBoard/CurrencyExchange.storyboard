@@ -128,7 +128,7 @@
                                     <constraint firstAttribute="height" constant="75" id="90b-gL-mgk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Get Free BitCoin">
+                                <state key="normal" title="Get Free Bitcoin">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
