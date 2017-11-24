@@ -9,5 +9,6 @@ pod 'Fabric'
 pod 'Crashlytics'
 pod 'SwiftyStoreKit'
 pod 'FacebookCore'
+pod 'AlamofireImage'
 
 end

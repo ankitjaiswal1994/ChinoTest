@@ -18,6 +18,8 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
     @IBOutlet weak var iconImageview: UIImageView!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var bottomSpacingConstraint: NSLayoutConstraint!
+
 
     var code = ""
     var name = ""
@@ -27,7 +29,6 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        addToolBar(textField: currencyTextField)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +45,14 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
         } else {
             iconImageview.image = UIImage(named: icon)
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func verifyUrl (urlString: String?) -> Bool {
@@ -59,31 +68,34 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
         navigationController?.popViewController(animated: true)
     }
     
-    func addToolBar(textField: UITextField) {
-        let toolBar = UIToolbar()
-        toolBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 55)
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = Crypto.toolBar.tintColor
-        toolBar.barTintColor = Crypto.toolBar.barTintColor
-        let doneButton = UIBarButtonItem(title: "Confirm Quantity", style: .done, target: self, action: #selector(donePressed))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolBar.setItems([spaceButton, doneButton, spaceButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        textField.delegate = self
-        textField.inputAccessoryView = toolBar
-    }
-    
-    @objc func donePressed() {
+    @IBAction func confirmButtonAction(_ sender: UIButton) {
         view.endEditing(true)
         let transition = CATransition()
         transition.duration = 0.5
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromRight
-        self.navigationController?.view.layer.add(transition, forKey: nil)
+        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
         _ = self.navigationController?.popViewController(animated: true)
         delegate?.showAlert(selectedCurrecny: code, changeTitle: navigationItem.title!)
+    }
+}
+
+extension SelectCurrencyViewController {
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+            self.bottomSpacingConstraint.constant = 216
+            UIView.animate(withDuration: ( notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval), animations: {
+                self.view.layoutIfNeeded()
+            })
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        
+        self.bottomSpacingConstraint.constant = 0
+        UIView.animate(withDuration: ( notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval), animations: {
+            self.view.layoutIfNeeded()
+        })
     }
 }
 
@@ -93,4 +105,9 @@ extension SelectCurrencyViewController: UITextFieldDelegate {
         let text = textField.text ?? "1"
             UserDefaults.standard.set(text + " " + code + " " + "Equals", forKey: "price")
     }
+    
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            return true
+        }
 }

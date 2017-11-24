@@ -76,14 +76,14 @@ class ConvertedCurrencyViewController: UIViewController {
                     print("Product: \(product.localizedDescription), price: \(priceString)")
                 }
                 else if let invalidProductId = result.invalidProductIDs.first {
-//                    return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
+                    //                    return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
                 }
                 else {
                     print("Error: \(result.error)")
                 }
             }
             self.perform(#selector(inAppPurchase), with: nil, afterDelay: 3.0)
-
+            
             appdelegate.count = -1
         }
     }
@@ -228,7 +228,7 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return SwifterSwift.isPhone ? 65 : 80
+        return 95
     }
     
     func verifyUrl (urlString: String?) -> Bool {

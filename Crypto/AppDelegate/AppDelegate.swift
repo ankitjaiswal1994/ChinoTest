@@ -22,10 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    var navigationBarAppearance = UINavigationBar.appearance()
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       
+       window?.backgroundColor = .white
        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         navigationBarAppearance.barTintColor = .white
         navigationBarAppearance.isTranslucent = true
-        navigationBarAppearance.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.darkGray]
+        navigationBarAppearance.titleTextAttributes = [
+                NSAttributedStringKey.foregroundColor: UIColor.black,
+                NSAttributedStringKey.font: UIFont(name: "Avenir-Medium", size: 16)!]
         
         Fabric.with([Crashlytics.self])
         
