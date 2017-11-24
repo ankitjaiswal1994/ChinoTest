@@ -162,8 +162,9 @@ class SwitchCurrencyViewController: UIViewController {
                             _self.valuesArray = (( json.value(forKey: "Data") as? NSDictionary)?.allValues)! as! [NSDictionary]
                             for tempDict in _self.valuesArray {
                                 _self.currencyInfoObjectArray.append(CurrencyInfo.getCryptoCurrencyList(dict: tempDict))
+                                _self.currencyInfoObjectArray = _self.currencyInfoObjectArray.sorted(by: {$0.code < $1.code})
                             }
-                            
+
                             dispatch {
                                 _self.collectionView.reloadData()
                             }
@@ -325,6 +326,12 @@ extension SwitchCurrencyViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        search = ""
+        filterForSearchText(search)
         return true
     }
 }
