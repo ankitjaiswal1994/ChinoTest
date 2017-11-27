@@ -16,7 +16,8 @@ class CurrencyInfo {
     var isSelected = false
     var continentName = ""
     var counryArray = [CurrencyInfo]()
-    
+    var filterArray = [CurrencyInfo]()
+
     var imageUrl = ""
     var coinName = ""
     var symbol = ""
@@ -51,7 +52,7 @@ class CurrencyInfo {
     class func getCryptoCurrencyList(dict: NSDictionary) -> CurrencyInfo {
         let currencyObject = CurrencyInfo()
         currencyObject.imageUrl = dict.value(forKey: "ImageUrl") as? String ?? ""
-        currencyObject.name = dict.value(forKey: "CoinName") as? String ?? ""
+        currencyObject.name = dict.value(forKey: "FullName") as? String ?? ""
         currencyObject.code = dict.value(forKey: "Symbol") as? String ?? ""
         currencyObject.sortOrder = dict.value(forKey: "SortOrder") as? String ?? ""
         
