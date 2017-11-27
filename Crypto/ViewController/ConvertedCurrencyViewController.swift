@@ -9,14 +9,13 @@
 import UIKit
 import SwiftyStoreKit
 import FacebookCore
+import Alamofire
 
 protocol StatrOverDelegate: class {
     func startOver()
 }
 
 class ConvertedCurrencyViewController: UIViewController {
-    
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     struct Item {
         var name: String
@@ -30,6 +29,7 @@ class ConvertedCurrencyViewController: UIViewController {
     var flags = [CurrencyInfo]()
     var delegate: StatrOverDelegate?
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.register(cellType: ConvertedCurrencyTableViewCell.self)
@@ -76,14 +76,14 @@ class ConvertedCurrencyViewController: UIViewController {
                     print("Product: \(product.localizedDescription), price: \(priceString)")
                 }
                 else if let invalidProductId = result.invalidProductIDs.first {
-//                    return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
+                    //                    return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
                 }
                 else {
                     print("Error: \(result.error)")
                 }
             }
-            self.perform(#selector(inAppPurchase), with: nil, afterDelay: 3.0)
-
+            self.perform(#selector(inAppPurchase), with: nil, afterDelay: 2.0)
+            
             appdelegate.count = -1
         }
     }
@@ -142,32 +142,50 @@ class ConvertedCurrencyViewController: UIViewController {
     }
     
     func getCalculatedData() {
+        if let internet = NetworkReachabilityManager(), internet.isReachable {
+
         dispatch {
             self.activityIndicator.startAnimating()
+            LoaderView.remove(self.view)
         }
         let urlPath = "https://min-api.cryptocompare.com/data/price?fsym=\(currency)&tsyms=\(selectedArray)"
         guard let url = URL(string: urlPath) else { return }
         URLSession.shared.dataTask(with: url, completionHandler: {
             (data, response, error) in
+            LoaderView.remove(self.view)
             if(error != nil){
                 print("error")
+                //loadView(view)
             } else {
                 do {
                     if let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? NSDictionary {
                         self.keys = json.allKeys as? [String] ?? []
                         self.values = json.allValues as? [Float] ?? []
+                    } else {
+                        self.alert(message: "No Data Found", title: "Error!", OKAction: nil)
+                        LoaderView.showMessage("No Data Found", onView: self.view, isSearch: false, completion: { [weak self] in
+                            guard let _self = self else { return }
+                            _self.getCalculatedData()
+                        })
                     }
                     dispatch {
                         self.tableView.reloadData()
                         self.activityIndicator.stopAnimating()
                     }
-                    
                 } catch let error as NSError {
-                    self.activityIndicator.stopAnimating()
-                    print(error)
+                    LoaderView.showMessage("\(error)", onView: self.view, isSearch: false, completion: { [weak self] in
+                        guard let _self = self else { return }
+                        _self.getCalculatedData()
+                    })
                 }
             }
-        }).resume()
+        }).resume()}
+        else {
+            LoaderView.showMessage("No Internet Connection.", onView: view, isSearch: false, completion: { [weak self] in
+                guard let _self = self else { return }
+                _self.getCalculatedData()
+            })
+        }
     }
     
     lazy var refreshControl: UIRefreshControl = {
@@ -191,7 +209,11 @@ class ConvertedCurrencyViewController: UIViewController {
 extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return keys.count
+        if (keys.count > 0){
+            return keys.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -228,7 +250,7 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return SwifterSwift.isPhone ? 65 : 80
+        return 95
     }
     
     func verifyUrl (urlString: String?) -> Bool {

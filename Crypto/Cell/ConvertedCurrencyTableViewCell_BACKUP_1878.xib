@@ -72,8 +72,14 @@
                 <constraints>
                     <constraint firstItem="INA-PE-ARF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-5.75" id="9cW-pa-dUW"/>
                     <constraint firstItem="Ofv-Nb-qyI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B8f-SI-L1p"/>
+<<<<<<< HEAD
                     <constraint firstItem="v3i-Oa-7Ow" firstAttribute="leading" secondItem="Ofv-Nb-qyI" secondAttribute="trailing" constant="10" id="BEv-Qg-BLd"/>
                     <constraint firstItem="pDo-2w-C9K" firstAttribute="top" secondItem="v3i-Oa-7Ow" secondAttribute="bottom" constant="2" id="WST-wW-00b"/>
+=======
+                    <constraint firstItem="pDo-2w-C9K" firstAttribute="top" secondItem="INA-PE-ARF" secondAttribute="bottom" constant="3" id="BCf-Y7-foN"/>
+                    <constraint firstItem="v3i-Oa-7Ow" firstAttribute="leading" secondItem="Ofv-Nb-qyI" secondAttribute="trailing" constant="8" id="BEv-Qg-BLd"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="pDo-2w-C9K" secondAttribute="trailing" constant="10" id="CNS-US-6Ro"/>
+>>>>>>> refactor/code
                     <constraint firstAttribute="trailing" secondItem="pDo-2w-C9K" secondAttribute="trailing" constant="18" id="cXE-pd-R12"/>
                     <constraint firstItem="v3i-Oa-7Ow" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="foh-1R-fCQ"/>
                     <constraint firstItem="pDo-2w-C9K" firstAttribute="leading" secondItem="Ofv-Nb-qyI" secondAttribute="trailing" constant="8" id="gsk-nS-NHU"/>

@@ -16,7 +16,8 @@ class CurrencyInfo {
     var isSelected = false
     var continentName = ""
     var counryArray = [CurrencyInfo]()
-    
+    var filterArray = [CurrencyInfo]()
+
     var imageUrl = ""
     var coinName = ""
     var symbol = ""
@@ -33,13 +34,17 @@ class CurrencyInfo {
     
     class func getContinentWithCountry(dict: NSDictionary) -> CurrencyInfo {
         let currencyObject = CurrencyInfo()
-        currencyObject.continentName = dict.value(forKey: "continentName") as? String ?? ""
+        let continentName = dict.value(forKey: "continentName") as? String ?? ""
+        currencyObject.continentName = continentName
         if let countryArray = dict.value(forKey: "continentCountrys") as? Array<Dictionary<String, Any>> {
             for country in countryArray {
                 currencyObject.counryArray.append(CurrencyInfo.parseCurrencyList(dict: country as NSDictionary))
             }
         }
-        currencyObject.counryArray = currencyObject.counryArray.sorted(by: {$0.code < $1.code})
+        
+        if continentName != "Common Currencies" {
+            currencyObject.counryArray = currencyObject.counryArray.sorted(by: {$0.code < $1.code})
+        }
         
         return currencyObject
     }
@@ -47,7 +52,7 @@ class CurrencyInfo {
     class func getCryptoCurrencyList(dict: NSDictionary) -> CurrencyInfo {
         let currencyObject = CurrencyInfo()
         currencyObject.imageUrl = dict.value(forKey: "ImageUrl") as? String ?? ""
-        currencyObject.coinName = dict.value(forKey: "CoinName") as? String ?? ""
+        currencyObject.name = dict.value(forKey: "FullName") as? String ?? ""
         currencyObject.code = dict.value(forKey: "Symbol") as? String ?? ""
         currencyObject.sortOrder = dict.value(forKey: "SortOrder") as? String ?? ""
         

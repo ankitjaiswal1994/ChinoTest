@@ -50,6 +50,7 @@
 		60F21E3C1FBDFB99005D10BB /* CurrencyExchange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60F21E3B1FBDFB99005D10BB /* CurrencyExchange.storyboard */; };
 		60F21E451FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F21E431FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.swift */; };
 		60F21E461FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60F21E441FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.xib */; };
+		60F8971E1FC8268100120371 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8971D1FC8268100120371 /* Crypto.swift */; };
 		60F8B2DA1FBD9E8800C4D849 /* Crypto+Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8B2D91FBD9E8800C4D849 /* Crypto+Constant.swift */; };
 		60F8B2DC1FBDC9A000C4D849 /* SelectCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8B2DB1FBDC9A000C4D849 /* SelectCurrencyViewController.swift */; };
 		60F8B2DE1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8B2DD1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift */; };
@@ -121,6 +122,7 @@
 		60F21E3B1FBDFB99005D10BB /* CurrencyExchange.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CurrencyExchange.storyboard; sourceTree = "<group>"; };
 		60F21E431FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedCurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		60F21E441FBDFD5C005D10BB /* ConvertedCurrencyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConvertedCurrencyTableViewCell.xib; sourceTree = "<group>"; };
+		60F8971D1FC8268100120371 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		60F8B2D91FBD9E8800C4D849 /* Crypto+Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Crypto+Constant.swift"; sourceTree = "<group>"; };
 		60F8B2DB1FBDC9A000C4D849 /* SelectCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrencyViewController.swift; sourceTree = "<group>"; };
 		60F8B2DD1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedCurrencyViewController.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			children = (
 				60F8B2D91FBD9E8800C4D849 /* Crypto+Constant.swift */,
 				609988AD1FBF181400735256 /* Crypto+NavigationBar.swift */,
+				60F8971D1FC8268100120371 /* Crypto.swift */,
 			);
 			path = "Crypto+Theme";
 			sourceTree = "<group>";
@@ -515,6 +518,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Crypto/Pods-Crypto-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
@@ -522,6 +527,8 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
@@ -547,7 +554,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -569,6 +576,7 @@
 				60DE90601FBD915C0093A322 /* String+CoreFoundation.swift in Sources */,
 				60F8B2DA1FBD9E8800C4D849 /* Crypto+Constant.swift in Sources */,
 				609988A71FBEBE5000735256 /* File+JSON.swift in Sources */,
+				60F8971E1FC8268100120371 /* Crypto.swift in Sources */,
 				60DE90611FBD915C0093A322 /* String+Empty.swift in Sources */,
 				60DE90621FBD915C0093A322 /* String+Regex.swift in Sources */,
 				60DE90631FBD915C0093A322 /* String+Validation.swift in Sources */,

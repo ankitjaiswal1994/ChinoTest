@@ -31,10 +31,10 @@ public extension UIViewController {
         alert(message: AlertMessages.noInternetConnection)
     }
     
-//    func noInternetMessage()  {
-//        LoaderView.showMessage("Not connected to the internet please tap to open settings.", onView: view, isSearch: false) {
-//            guard let urlString = URL(string:UIApplicationOpenSettingsURLString) else {return}
-//            UIApplication.shared.openURL(urlString)
-//        }
-//    }
+    func noInternetMessage()  {
+        LoaderView.showMessage("Not connected to the internet please tap to open settings.", onView: view, isSearch: false) {
+            guard let urlString = URL(string:UIApplicationOpenSettingsURLString) else {return}
+            UIApplication.shared.openURL(urlString)
+        }
+    }
 }

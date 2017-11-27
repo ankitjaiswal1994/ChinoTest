@@ -1,952 +1,599 @@
-[
- {
- "continentName": "Common Currencies",
- "continentCountrys": [
-                       {
-                       "icon": "usa",
-                       "name": "U.S. Dollar $",
-                       "code": "USD"
-                       },
-                       {
-                       "icon": "india",
-                       "name": "Indian Rupees ₹",
-                       "code": "INR"
-                       },
-                       {
-                       "icon": "eur",
-                       "name": "Euro €",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "canada",
-                       "name": "Canadian Dollar $",
-                       "code": "CAD"
-                       },
-                       {
-                       "icon": "aus",
-                       "name": "Australian Dollar $",
-                       "code": "AUD"
-                       },
-                       {
-                       "icon": "uk",
-                       "name": "United Kingdom Pound £",
-                       "code": "GBP"
-                       },
-                       {
-                       "icon": "china",
-                       "name": "China Yuan ¥",
-                       "code": "CNY"
-                       },
-                       {
-                       "icon": "japan",
-                       "name": "Japanese Yen ¥",
-                       "code": "JPY"
-                       },
-                       {
-                       "icon": "hongkong",
-                       "name": "Hong Kong Dollar $",
-                       "code": "HKD"
-                       },
-                       {
-                       "icon": "newzealand",
-                       "name": "New Zealand Dollar $",
-                       "code": "NZD"
-                       },
-                       {
-                       "icon": "singapore",
-                       "name": "Singapore Dollar $",
-                       "code": "SGD"
-                       },
-                       {
-                       "icon": "russia",
-                       "name": "Russian Ruble ₽",
-                       "code": "RUB"
-                       }
-                       ]
- },
- {
- "continentName": "Europe",
- "continentCountrys": [
-                       {
-                       "icon": "AX",
-                       "name": "  Euro  ",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "AL",
-                       "name": "  Lek  ",
-                       "code": "ALL"
-                       },
-                       {
-                       "icon": "AD",
-                       "name": "   Euro ",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "AT",
-                       "name": "   Euro ",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "BY",
-                       "name": "Belarusian ruble",
-                       "code": "BYR"
-                       },
-                       {
-                       "icon": "BE",
-                       "name": "   Euro ",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "BA",
-                       "name": "Convertible mark",
-                       "code": "BAM"
-                       },
-                       {
-                       "icon": "BG",
-                       "name": "  Lev  ",
-                       "code": "BGN"
-                       },
-                       {
-                       "icon": "HR",
-                       "name": " Kuna   ",
-                       "code": "HRK"
-                       },
-                       {
-                       "icon": "CZ",
-                       "name": " Czech koruna   ",
-                       "code": "CZK"
-                       },
-                       {
-                       "icon": "DK",
-                       "name": "Danish krone",
-                       "code": "DKK"
-                       },
-                       {
-                       "icon": "EE",
-                       "name": " Euro   ",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "FO",
-                       "name": "Faroese króna ",
-                       "code": "DKK"
-                       },
-                       {
-                       "icon": "FI",
-                       "name": "Euro",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "FR",
-                       "name": "  Euro  ",
-                       "code": "EUR"
-                       }
-                       ]
- },
- {
- "continentName": "South America",
- "continentCountrys": [
-                       {
-                       "icon": "AR",
-                       "name": " Peso   ",
-                       "code": "ARS"
-                       },
-                       {
-                       "icon": "BO",
-                       "name": "   Boliviano  ",
-                       "code": "BOB"
-                       },
-                       {
-                       "icon": "BR",
-                       "name": "   Real ",
-                       "code": "BRL"
-                       },
-                       {
-                       "icon": "CL",
-                       "name": " Peso   ",
-                       "code": "CLP"
-                       },
-                       {
-                       "icon": "CO",
-                       "name": " Peso   ",
-                       "code": "COP"
-                       },
-                       {
-                       "icon": "EC",
-                       "name": "   United States dollar ",
-                       "code": "USD"
-                       },
-                       {
-                       "icon": "FK",
-                       "name": "Falklands pound",
-                       "code": "FKP"
-                       },
-                       {
-                       "icon": "GF",
-                       "name": "   Euro ",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "GY",
-                       "name": "  Guyanese dollar  ",
-                       "code": "GYD"
-                       },
-                       {
-                       "icon": "PY",
-                       "name": "  Guaraní  ",
-                       "code": "PYG"
-                       },
-                       {
-                       "icon": "PE",
-                       "name": " Nuevo sol   ",
-                       "code": "PEN"
-                       },
-                       {
-                       "icon": "SR",
-                       "name": "Surinamese dollar",
-                       "code": "SRD"
-                       },
-                       {
-                       "icon": "UY",
-                       "name": "Uruguayan peso",
-                       "code": "UYU"
-                       },
-                       {
-                       "icon": "VE",
-                       "name": "Bolívar fuerte ",
-                       "code": "VEF"
-                       }
-                       ]
- },
- {
- "continentName": "North America",
- "continentCountrys": [
-                       {
-                       "icon": "AI",
-                       "name": "East Caribbean dollar    ",
-                       "code": "XCD"
-                       },
-                       {
-                       "icon": "AG",
-                       "name": "East Caribbean dollar    ",
-                       "code": "XCD"
-                       },
-                       {
-                       "icon": "AW",
-                       "name": "Aruban florin    ",
-                       "code": "AWG"
-                       },
-                       {
-                       "icon": "BS",
-                       "name": "Bahamian dollar    ",
-                       "code": "BSD"
-                       },
-                       {
-                       "icon": "BB",
-                       "name": "Barbadian dollar    ",
-                       "code": "BBD"
-                       },
-                       {
-                       "icon": "BZ",
-                       "name": "Belize dollar    ",
-                       "code": "BZD"
-                       },
-                       {
-                       "icon": "BM",
-                       "name": "Bermudian dollar    ",
-                       "code": "BMD"
-                       },
-                       {
-                       "icon": "VG",
-                       "name": "United States dollar    ",
-                       "code": "USD"
-                       },
-                       {
-                       "icon": "CA",
-                       "name": "Canadian dollar    ",
-                       "code": "CAD"
-                       },
-                       {
-                       "icon": "NL",
-                       "name": "United States dollar    ",
-                       "code": "USD"
-                       },
-                       {
-                       "icon": "KY",
-                       "name": "Cayman Islands dollar    ",
-                       "code": "KYD"
-                       },
-                       {
-                       "icon": "CR",
-                       "name": "Costa Rican colon    ",
-                       "code": "CRC"
-                       },
-                       {
-                       "icon": "CU",
-                       "name": "Cuban peso    ",
-                       "code": "CUP"
-                       },
-                       {
-                       "icon": "DO",
-                       "name": "Dominican peso    ",
-                       "code": "DOP"
-                       },
-                       {
-                       "icon": "SV",
-                       "name": "United States dollar    ",
-                       "code": "USD"
-                       },
-                       {
-                       "icon": "GL",
-                       "name": "Danish krone    ",
-                       "code": "DKK"
-                       },
-                       {
-                       "icon": "GP",
-                       "name": "European euro    ",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "GT",
-                       "name": "Guatemalan quetzal    ",
-                       "code": "GTQ"
-                       },
-                       {
-                       "icon": "HT",
-                       "name": "Haitian gourde    ",
-                       "code": "HTG"
-                       },
-                       {
-                       "icon": "HN",
-                       "name": "Honduran lempira    ",
-                       "code": "HNL"
-                       },
-                       {
-                       "icon": "JM",
-                       "name": "Jamaican dollar    ",
-                       "code": "JMD"
-                       },
-                       {
-                       "icon": "MQ",
-                       "name": "European euro    ",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "MX",
-                       "name": "Mexican peso    ",
-                       "code": "MXN"
-                       },
-                       {
-                       "icon": "NI",
-                       "name": "Nicaraguan cordoba    ",
-                       "code": "NIO"
-                       },
-                       {
-                       "icon": "PA",
-                       "name": "United States dollar    ",
-                       "code": "USD"
-                       },
-                       {
-                       "icon": "PR",
-                       "name": "United States dollar    ",
-                       "code": "USD"
-                       },
-                       {
-                       "icon": "KN",
-                       "name": "East Caribbean dollar    ",
-                       "code": "XCD"
-                       },
-                       {
-                       "icon": "LC",
-                       "name": "East Caribbean dollar    ",
-                       "code": "XCD"
-                       },
-                       {
-                       "icon": "PM",
-                       "name": "European euro    ",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "VC",
-                       "name": "East Caribbean dollar    ",
-                       "code": "XCD"
-                       },
-                       {
-                       "icon": "TT",
-                       "name": "Trinidad and Tobago dollar    ",
-                       "code": "TTD"
-                       },
-                       {
-                       "icon": "TC",
-                       "name": "United States dollar    ",
-                       "code": "USD"
-                       },
-                       {
-                       "icon": "US",
-                       "name": "United States dollar    ",
-                       "code": "USD"
-                       },
-                       {
-                       "icon": "VG",
-                       "name": "United States dollar    ",
-                       "code": "USD"
-                       }
-                       ]
- },
- {
- "continentName": "Africa",
- "continentCountrys": [
-                       {
-                       "icon": "DZ",
-                       "name": "Algerian dinar ",
-                       "code": "DZD"
-                       },
-                       {
-                       "icon": "AO",
-                       "name": "Kwanza",
-                       "code": "AOA"
-                       },
-                       {
-                       "icon": "BJ",
-                       "name": "West African CFA",
-                       "code": "XOF"
-                       },
-                       {
-                       "icon": "BW",
-                       "name": "Pula",
-                       "code": "BWP"
-                       },
-                       {
-                       "icon": "BF",
-                       "name": "West African CFA ",
-                       "code": "XOF"
-                       },
-                       {
-                       "icon": "BI",
-                       "name": "Burundian franc",
-                       "code": "BIF"
-                       },
-                       {
-                       "icon": "CM",
-                       "name": "Central AfricanCFA ",
-                       "code": "XAF"
-                       },
-                       {
-                       "icon": "CV",
-                       "name": "Cape Verdean escudo",
-                       "code": "CVE"
-                       },
-                       {
-                       "icon": "CF",
-                       "name": "Central African CFA ",
-                       "code": "XAF"
-                       },
-                       {
-                       "icon": "TD",
-                       "name": "Central African CFA ",
-                       "code": "XAF"
-                       },
-                       {
-                       "icon": "KM",
-                       "name": "Comorian franc",
-                       "code": "KMF"
-                       },
-                       {
-                       "icon": "CG",
-                       "name": "Central African CFA ",
-                       "code": "XAF"
-                       },
-                       {
-                       "icon": "CI",
-                       "name": "West African CFA ",
-                       "code": "XOF"
-                       },
-                       {
-                       "icon": "CD",
-                       "name": "Congolese franc",
-                       "code": "CDF"
-                       },
-                       {
-                       "icon": "DJ",
-                       "name": "Djiboutian franc",
-                       "code": "DJF"
-                       },
-                       {
-                       "icon": "EG",
-                       "name": "Egyptian pound",
-                       "code": "EGP"
-                       },
-                       {
-                       "icon": "GQ",
-                       "name": "Central African CFA franc ",
-                       "code": "XAF"
-                       },
-                       {
-                       "icon": "ER",
-                       "name": "Eritrean nakfa ",
-                       "code": "ERN"
-                       },
-                       {
-                       "icon": "ET",
-                       "name": "Ethiopian birr ",
-                       "code": "ETB"
-                       },
-                       {
-                       "icon": "GA",
-                       "name": "Central African CFA franc",
-                       "code": "XAF"
-                       },
-                       {
-                       "icon": "GM",
-                       "name": "Gambian dalasi",
-                       "code": "GMD"
-                       },
-                       {
-                       "icon": "GH",
-                       "name": "Ghana cedi ",
-                       "code": "GHS"
-                       },
-                       {
-                       "icon": "GN",
-                       "name": "Guinean franc",
-                       "code": "GNF"
-                       },
-                       {
-                       "icon": "GW",
-                       "name": "West African CFA franc",
-                       "code": "XOF"
-                       },
-                       {
-                       "icon": "KE",
-                       "name": "Kenyan shilling",
-                       "code": "KES"
-                       },
-                       {
-                       "icon": "LS",
-                       "name": "Lesotho loti",
-                       "code": "LSL"
-                       },
-                       {
-                       "icon": "LR",
-                       "name": "Liberian dollara",
-                       "code": "LRD"
-                       },
-                       {
-                       "icon": "LY",
-                       "name": "Libyan dinar ",
-                       "code": "LYD"
-                       },
-                       {
-                       "icon": "MG",
-                       "name": "Malagasy ariary",
-                       "code": "MGA"
-                       },
-                       {
-                       "icon": "MW",
-                       "name": "Kwacha",
-                       "code": "MWK"
-                       },
-                       {
-                       "icon": "ML",
-                       "name": "West African CFA franc ",
-                       "code": "XOF"
-                       },
-                       {
-                       "icon": "MR",
-                       "name": "Ouguiya",
-                       "code": "MRO"
-                       },
-                       {
-                       "icon": "MU",
-                       "name": "Mauritian rupee",
-                       "code": "MUR"
-                       },
-                       {
-                       "icon": "YT",
-                       "name": "Euro ",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "MA",
-                       "name": "Moroccan dirham",
-                       "code": "MAD"
-                       },
-                       {
-                       "icon": "MZ",
-                       "name": "Mozambican metical",
-                       "code": "MZN"
-                       },
-                       {
-                       "icon": "NA",
-                       "name": "Namibian dollar",
-                       "code": "NAD"
-                       },
-                       {
-                       "icon": "NE",
-                       "name": "West African CFA franc",
-                       "code": "XOF"
-                       },
-                       {
-                       "icon": "NG",
-                       "name": "Naira",
-                       "code": "NGN"
-                       },
-                       {
-                       "icon": "RE",
-                       "name": "Euro",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "RW",
-                       "name": "Rwandan franc",
-                       "code": "RWF"
-                       },
-                       {
-                       "icon": "ST",
-                       "name": "Dobra",
-                       "code": "STD"
-                       },
-                       {
-                       "icon": "SN",
-                       "name": "CFA franc",
-                       "code": "XOF"
-                       },
-                       {
-                       "icon": "SC",
-                       "name": "Seychellois rupee",
-                       "code": "SCR"
-                       },
-                       {
-                       "icon": "SL",
-                       "name": "Leone",
-                       "code": "SLL"
-                       },
-                       {
-                       "icon": "SO",
-                       "name": "Somali shilling",
-                       "code": "SOS"
-                       },
-                       {
-                       "icon": "ZA",
-                       "name": "South African rand",
-                       "code": "ZAR"
-                       },
-                       {
-                       "icon": "SZ",
-                       "name": "South African randSwazi lilangeni",
-                       "code": "SZL"
-                       },
-                       {
-                       "icon": "TZ",
-                       "name": "Tanzanian shilling",
-                       "code": "TZS"
-                       },
-                       {
-                       "icon": "TG",
-                       "name": "CFA franc",
-                       "code": "XOF"
-                       },
-                       {
-                       "icon": "TN",
-                       "name": "Tunisian dinar",
-                       "code": "TND"
-                       },
-                       {
-                       "icon": "UG",
-                       "name": "Ugandan shilling",
-                       "code": "UGX"
-                       },
-                       {
-                       "icon": "ZM",
-                       "name": "Zambian kwacha",
-                       "code": "ZMW"
-                       },
-                       {
-                       "icon": "ZW",
-                       "name": "United States Dollar",
-                       "code": "USD"
-                       }
-                       ]
- },
- {
- "continentName": "Asia",
- "continentCountrys": [
-                       {
-                       "icon": "GE",
-                       "name": "Russian Ruble руб",
-                       "code": "RUB"
-                       },
-                       {
-                       "icon": "AF",
-                       "name": "Afghani ",
-                       "code": "AFN"
-                       },
-                       {
-                       "icon": "CY",
-                       "name": "Euro",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "AM",
-                       "name": "Dram",
-                       "code": "AMD"
-                       },
-                       {
-                       "icon": "AZ",
-                       "name": "Manat",
-                       "code": "AZN"
-                       },
-                       {
-                       "icon": "BH",
-                       "name": "Bahraini dinar ",
-                       "code": "BHD"
-                       },
-                       {
-                       "icon": "BD",
-                       "name": "Bangladesh",
-                       "code": "BDT"
-                       },
-                       {
-                       "icon": "BT",
-                       "name": "Bhutanese ngultrumb",
-                       "code": "BTN"
-                       },
-                       {
-                       "icon": "IO",
-                       "name": "UK pound",
-                       "code": "GBP"
-                       },
-                       {
-                       "icon": "BN",
-                       "name": "Brunei dollar ",
-                       "code": "BND"
-                       },
-                       {
-                       "icon": "KH",
-                       "name": "Riela",
-                       "code": "KHR"
-                       },
-                       {
-                       "icon": "CN",
-                       "name": "Renminbi",
-                       "code": "CNY"
-                       },
-                       {
-                       "icon": "CX",
-                       "name": "Australian dollar ",
-                       "code": "AUD"
-                       },
-                       {
-                       "icon": "CC",
-                       "name": "Australian dollar ",
-                       "code": "AUD"
-                       },
-                       {
-                       "icon": "CY",
-                       "name": "Euro",
-                       "code": "EUR"
-                       },
-                       {
-                       "icon": "GE",
-                       "name": "Lari",
-                       "code": "GEL"
-                       },
-                       {
-                       "icon": "HK",
-                       "name": "Hong Kong Dollar",
-                       "code": "HKD"
-                       },
-                       {
-                       "icon": "IO",
-                       "name": "Indian rupee",
-                       "code": "INR"
-                       },
-                       {
-                       "icon": "ID",
-                       "name": "Indonesian rupiah ",
-                       "code": "IDR"
-                       },
-                       {
-                       "icon": "IR",
-                       "name": "Rial",
-                       "code": "IRR"
-                       },
-                       {
-                       "icon": "IQ",
-                       "name": "Iraqi dinar",
-                       "code": "IQD"
-                       },
-                       {
-                       "icon": "IL",
-                       "name": "Israeli new shekel ",
-                       "code": "ILS"
-                       },
-                       {
-                       "icon": "JP",
-                       "name": "Yen",
-                       "code": "JPY"
-                       },
-                       {
-                       "icon": "JO",
-                       "name": "Jordanian dinar ",
-                       "code": "JOD"
-                       },
-                       {
-                       "icon": "KZ",
-                       "name": "Tenge",
-                       "code": "KZT"
-                       },
-                       {
-                       "icon": "KW",
-                       "name": "Kuwaiti dinar ",
-                       "code": "KWD"
-                       },
-                       {
-                       "icon": "KG",
-                       "name": "Som",
-                       "code": "KGS"
-                       },
-                       {
-                       "icon": "LB",
-                       "name": "Lebanese pound ",
-                       "code": "LBP"
-                       },
-                       {
-                       "icon": "MO",
-                       "name": "Macanese pataca",
-                       "code": "MOP"
-                       },
-                       {
-                       "icon": "MY",
-                       "name": "Ringgit",
-                       "code": "MYR"
-                       },
-                       {
-                       "icon": "MV",
-                       "name": "Maldivian rufiyaa",
-                       "code": "MVR"
-                       },
-                       {
-                       "icon": "MN",
-                       "name": "Tögrög",
-                       "code": "MNT"
-                       },
-                       {
-                       "icon": "MM",
-                       "name": "Kyat",
-                       "code": "MMK"
-                       },
-                       {
-                       "icon": "NP",
-                       "name": "Nepalese rupee ",
-                       "code": "NPR"
-                       },
-                       {
-                       "icon": "CY",
-                       "name": "Turkish lira",
-                       "code": "TRY"
-                       },
-                       {
-                       "icon": "KR",
-                       "name": "North Korean won ",
-                       "code": "KPW"
-                       },
-                       {
-                       "icon": "OM",
-                       "name": "Rial",
-                       "code": "OMR"
-                       },
-                       {
-                       "icon": "PK",
-                       "name": "Pakistani rupee ",
-                       "code": "PKR"
-                       },
-                       {
-                       "icon": "PS",
-                       "name": "Egyptian pound ",
-                       "code": "EGP"
-                       },
-                       {
-                       "icon": "PH",
-                       "name": "Philippine Peso ",
-                       "code": "PHP"
-                       },
-                       {
-                       "icon": "QA",
-                       "name": "Riyal",
-                       "code": "QAR"
-                       },
-                       {
-                       "icon": "SA",
-                       "name": "Saudi riyal",
-                       "code": "SAR"
-                       },
-                       {
-                       "icon": "SG",
-                       "name": "Singapore dollar ",
-                       "code": "SGD"
-                       },
-                       {
-                       "icon": "KR",
-                       "name": "South Korean won",
-                       "code": "KRW"
-                       },
-                       {
-                       "icon": "LK",
-                       "name": "Sri Lankan rupee ",
-                       "code": "LKR"
-                       },
-                       {
-                       "icon": "SY",
-                       "name": "Syrian pound ",
-                       "code": "SYP"
-                       },
-                       {
-                       "icon": "TW",
-                       "name": "New Taiwan dollar",
-                       "code": "TWD"
-                       },
-                       {
-                       "icon": "TJ",
-                       "name": "Somoni",
-                       "code": "TJS"
-                       },
-                       {
-                       "icon": "TH",
-                       "name": "Baht",
-                       "code": "THB"
-                       },
-                       {
-                       "icon": "TR",
-                       "name": "Turkish lira",
-                       "code": "TRY"
-                       },
-                       {
-                       "icon": "TM",
-                       "name": "Turkmen new manat",
-                       "code": "TMT"
-                       },
-                       {
-                       "icon": "AE",
-                       "name": "UAE dirham",
-                       "code": "AED"
-                       },
-                       {
-                       "icon": "UZ",
-                       "name": "Uzbekistan som",
-                       "code": "UZS"
-                       },
-                       {
-                       "icon": "VN",
-                       "name": "đồng",
-                       "code": "VND"
-                       },
-                       {
-                       "icon": "YE",
-                       "name": "Yemeni rial",
-                       "code": "YER"
-                       }
-                       ]
- }
- ]
+ [
+  {
+  "continentName": "Common Currencies",
+  "continentCountrys": [
+                        {
+                        "icon": "usa",
+                        "name": "U.S. Dollar $",
+                        "code": "USD"
+                        },
+                        {
+                        "icon": "india",
+                        "name": "Indian Rupees ₹",
+                        "code": "INR"
+                        },
+                        {
+                        "icon": "eur",
+                        "name": "Euro €",
+                        "code": "EUR"
+                        },
+                        {
+                        "icon": "canada",
+                        "name": "Canadian Dollar $",
+                        "code": "CAD"
+                        },
+                        {
+                        "icon": "aus",
+                        "name": "Australian Dollar $",
+                        "code": "AUD"
+                        },
+                        {
+                        "icon": "uk",
+                        "name": "U K Pound £",
+                        "code": "GBP"
+                        },
+                        {
+                        "icon": "china",
+                        "name": "China Yuan ¥",
+                        "code": "CNY"
+                        },
+                        {
+                        "icon": "japan",
+                        "name": "Japanese Yen ¥",
+                        "code": "JPY"
+                        },
+                        {
+                        "icon": "hongkong",
+                        "name": "Hong Kong Dollar $",
+                        "code": "HKD"
+                        },
+                        {
+                        "icon": "newzealand",
+                        "name": "New Zealand Dollar $",
+                        "code": "NZD"
+                        },
+                        {
+                        "icon": "singapore",
+                        "name": "Singapore Dollar $",
+                        "code": "SGD"
+                        },
+                        {
+                        "icon": "russia",
+                        "name": "Russian Ruble ₽",
+                        "code": "RUB"
+                        }
+                        ]
+  },
+  {
+  "continentName": "Europe",
+  "continentCountrys": [
+                        {
+                        "icon": "AL",
+                        "name": "Lek",
+                        "code": "ALL"
+                        },
+                        {
+                        "icon": "BY",
+                        "name": "Belarusian ruble",
+                        "code": "BYR"
+                        },
+                        {
+                        "icon": "BA",
+                        "name": "Convertible mark",
+                        "code": "BAM"
+                        },
+                        {
+                        "icon": "BG",
+                        "name": "Lev",
+                        "code": "BGN"
+                        },
+                        {
+                        "icon": "HR",
+                        "name": "Kuna",
+                        "code": "HRK"
+                        },
+                        {
+                        "icon": "CZ",
+                        "name": "Czech koruna",
+                        "code": "CZK"
+                        },
+                        {
+                        "icon": "DK",
+                        "name": "Danish krone",
+                        "code": "DKK"
+                        },
+                        {
+                        "icon": "FO",
+                        "name": "Faroese króna",
+                        "code": "DKK"
+                        }
+                        ]
+  },
+  {
+  "continentName": "South America",
+  "continentCountrys": [
+                        {
+                        "icon": "AR",
+                        "name": "Peso",
+                        "code": "ARS"
+                        },
+                        {
+                        "icon": "BO",
+                        "name": "Boliviano",
+                        "code": "BOB"
+                        },
+                        {
+                        "icon": "BR",
+                        "name": "Real",
+                        "code": "BRL"
+                        },
+                        {
+                        "icon": "CL",
+                        "name": " Peso",
+                        "code": "CLP"
+                        },
+                        {
+                        "icon": "CO",
+                        "name": " Peso   ",
+                        "code": "COP"
+                        },
+                        {
+                        "icon": "PY",
+                        "name": "Guaraní",
+                        "code": "PYG"
+                        },
+                        {
+                        "icon": "PE",
+                        "name": "Nuevo sol",
+                        "code": "PEN"
+                        },
+                        {
+                        "icon": "UY",
+                        "name": "Uruguayan peso",
+                        "code": "UYU"
+                        },
+                        {
+                        "icon": "VE",
+                        "name": "Bolívar fuerte",
+                        "code": "VEF"
+                        }
+                        ]
+  },
+  {
+  "continentName": "North America",
+  "continentCountrys": [
+                        {
+                        "icon": "BS",
+                        "name": "Bahamian dollar",
+                        "code": "BSD"
+                        },
+                        {
+                        "icon": "BB",
+                        "name": "Barbadian dollar",
+                        "code": "BBD"
+                        },
+                        {
+                        "icon": "CA",
+                        "name": "Canadian dollar",
+                        "code": "CAD"
+                        },
+                        {
+                        "icon": "CR",
+                        "name": "Costa Rican colon",
+                        "code": "CRC"
+                        },
+                        {
+                        "icon": "DO",
+                        "name": "Dominican peso",
+                        "code": "DOP"
+                        },
+                        
+                        {
+                        "icon": "GL",
+                        "name": "Danish krone",
+                        "code": "DKK"
+                        },
+                        {
+                        "icon": "GT",
+                        "name": "Guatemalan quetzal",
+                        "code": "GTQ"
+                        },
+                        {
+                        "icon": "HN",
+                        "name": "Honduran lempira",
+                        "code": "HNL"
+                        },
+                        {
+                        "icon": "JM",
+                        "name": "Jamaican dollar",
+                        "code": "JMD"
+                        },
+                        {
+                        "icon": "MX",
+                        "name": "Mexican peso",
+                        "code": "MXN"
+                        },
+                        {
+                        "icon": "NI",
+                        "name": "Nicaraguan cordoba",
+                        "code": "NIO"
+                        },
+                        {
+                        "icon": "TT",
+                        "name": "Trinidad and Tobago dollar",
+                        "code": "TTD"
+                        },
+                        {
+                        "icon": "US",
+                        "name": "United States dollar",
+                        "code": "USD"
+                        }
+                        ]
+  },
+  {
+  "continentName": "Africa",
+  "continentCountrys": [
+                        {
+                        "icon": "DZ",
+                        "name": "Algerian dinar",
+                        "code": "DZD"
+                        },
+                        {
+                        "icon": "AO",
+                        "name": "Kwanza",
+                        "code": "AOA"
+                        },
+                        {
+                        "icon": "BJ",
+                        "name": "West African CFA",
+                        "code": "XOF"
+                        },
+                        {
+                        "icon": "BW",
+                        "name": "Pula",
+                        "code": "BWP"
+                        },
+                        {
+                        "icon": "BF",
+                        "name": "West African CFA",
+                        "code": "XOF"
+                        },
+                        {
+                        "icon": "BI",
+                        "name": "Burundian franc",
+                        "code": "BIF"
+                        },
+                        {
+                        "icon": "CM",
+                        "name": "Central AfricanCFA",
+                        "code": "XAF"
+                        },
+                        {
+                        "icon": "CI",
+                        "name": "West African CFA",
+                        "code": "XOF"
+                        },
+                        {
+                        "icon": "EG",
+                        "name": "Egyptian pound",
+                        "code": "EGP"
+                        },
+                        {
+                        "icon": "ET",
+                        "name": "Ethiopian birr",
+                        "code": "ETB"
+                        },
+                        {
+                        "icon": "GH",
+                        "name": "Ghana cedi",
+                        "code": "GHS"
+                        },
+                        {
+                        "icon": "GW",
+                        "name": "West African CFA franc",
+                        "code": "XOF"
+                        },
+                        {
+                        "icon": "KE",
+                        "name": "Kenyan shilling",
+                        "code": "KES"
+                        },
+                        {
+                        "icon": "LS",
+                        "name": "Lesotho loti",
+                        "code": "LSL"
+                        },
+                        {
+                        "icon": "MW",
+                        "name": "Kwacha",
+                        "code": "MWK"
+                        },
+                        {
+                        "icon": "ML",
+                        "name": "West African CFA franc",
+                        "code": "XOF"
+                        },
+                        {
+                        "icon": "MU",
+                        "name": "Mauritian rupee",
+                        "code": "MUR"
+                        },
+                        {
+                        "icon": "MA",
+                        "name": "Moroccan dirham",
+                        "code": "MAD"
+                        },
+                        {
+                        "icon": "NA",
+                        "name": "Namibian dollar",
+                        "code": "NAD"
+                        },
+                        {
+                        "icon": "NE",
+                        "name": "West African CFA franc",
+                        "code": "XOF"
+                        },
+                        {
+                        "icon": "NG",
+                        "name": "Naira",
+                        "code": "NGN"
+                        },
+                        {
+                        "icon": "RW",
+                        "name": "Rwandan franc",
+                        "code": "RWF"
+                        },
+                        {
+                        "icon": "SN",
+                        "name": "CFA franc",
+                        "code": "XOF"
+                        },
+                        {
+                        "icon": "TG",
+                        "name": "CFA franc",
+                        "code": "XOF"
+                        },
+                        {
+                        "icon": "TN",
+                        "name": "Tunisian dinar",
+                        "code": "TND"
+                        },
+                        {
+                        "icon": "UG",
+                        "name": "Ugandan shilling",
+                        "code": "UGX"
+                        },
+                        {
+                        "icon": "ZM",
+                        "name": "Zambian kwacha",
+                        "code": "ZMW"
+                        }
+                        ]
+  },
+  {
+  "continentName": "Asia",
+  "continentCountrys": [
+                        {
+                        "icon": "GE",
+                        "name": "Russian Ruble руб",
+                        "code": "RUB"
+                        },
+                        {
+                        "icon": "AF",
+                        "name": "Afghani ",
+                        "code": "AFN"
+                        },
+                        {
+                        "icon": "AZ",
+                        "name": "Manat",
+                        "code": "AZN"
+                        },
+                        {
+                        "icon": "BH",
+                        "name": "Bahraini dinar",
+                        "code": "BHD"
+                        },
+                        {
+                        "icon": "BD",
+                        "name": "Bangladesh",
+                        "code": "BDT"
+                        },
+                        {
+                        "icon": "BT",
+                        "name": "Bhutanese ngultrumb",
+                        "code": "BTN"
+                        },
+                        {
+                        "icon": "IO",
+                        "name": "UK pound",
+                        "code": "GBP"
+                        },
+                        {
+                        "icon": "BN",
+                        "name": "Brunei dollar",
+                        "code": "BND"
+                        },
+                        {
+                        "icon": "KH",
+                        "name": "Riela",
+                        "code": "KHR"
+                        },
+                        {
+                        "icon": "CN",
+                        "name": "Renminbi",
+                        "code": "CNY"
+                        },
+                        {
+                        "icon": "GE",
+                        "name": "Lari",
+                        "code": "GEL"
+                        },
+                        {
+                        "icon": "HK",
+                        "name": "Hong Kong Dollar",
+                        "code": "HKD"
+                        },
+                        {
+                        "icon": "india",
+                        "name": "Indian rupee",
+                        "code": "INR"
+                        },
+                        {
+                        "icon": "ID",
+                        "name": "Indonesian rupiah",
+                        "code": "IDR"
+                        },
+                        {
+                        "icon": "IR",
+                        "name": "Rial",
+                        "code": "IRR"
+                        },
+                        {
+                        "icon": "IQ",
+                        "name": "Iraqi dinar",
+                        "code": "IQD"
+                        },
+                        {
+                        "icon": "IL",
+                        "name": "Israeli new shekel",
+                        "code": "ILS"
+                        },
+                        {
+                        "icon": "JP",
+                        "name": "Yen",
+                        "code": "JPY"
+                        },
+                        {
+                        "icon": "JO",
+                        "name": "Jordanian dinar",
+                        "code": "JOD"
+                        },
+                        {
+                        "icon": "KZ",
+                        "name": "Tenge",
+                        "code": "KZT"
+                        },
+                        {
+                        "icon": "KW",
+                        "name": "Kuwaiti dinar",
+                        "code": "KWD"
+                        },
+                        {
+                        "icon": "KG",
+                        "name": "Som",
+                        "code": "KGS"
+                        },
+                        {
+                        "icon": "LB",
+                        "name": "Lebanese pound",
+                        "code": "LBP"
+                        },
+                        {
+                        "icon": "MY",
+                        "name": "Ringgit",
+                        "code": "MYR"
+                        },
+                        {
+                        "icon": "MV",
+                        "name": "Maldivian rufiyaa",
+                        "code": "MVR"
+                        },
+                        {
+                        "icon": "MM",
+                        "name": "Kyat",
+                        "code": "MMK"
+                        },
+                        {
+                        "icon": "NP",
+                        "name": "Nepalese rupee",
+                        "code": "NPR"
+                        },
+                        {
+                        "icon": "CY",
+                        "name": "Turkish lira",
+                        "code": "TRY"
+                        },
+                        {
+                        "icon": "OM",
+                        "name": "Rial",
+                        "code": "OMR"
+                        },
+                        {
+                        "icon": "PK",
+                        "name": "Pakistani rupee",
+                        "code": "PKR"
+                        },
+                        {
+                        "icon": "PS",
+                        "name": "Egyptian pound",
+                        "code": "EGP"
+                        },
+                        {
+                        "icon": "PH",
+                        "name": "Philippine Peso",
+                        "code": "PHP"
+                        },
+                        {
+                        "icon": "QA",
+                        "name": "Riyal",
+                        "code": "QAR"
+                        },
+                        {
+                        "icon": "SA",
+                        "name": "Saudi riyal",
+                        "code": "SAR"
+                        },
+                        {
+                        "icon": "SG",
+                        "name": "Singapore dollar",
+                        "code": "SGD"
+                        },
+                        {
+                        "icon": "KR",
+                        "name": "South Korean won",
+                        "code": "KRW"
+                        },
+                        {
+                        "icon": "LK",
+                        "name": "Sri Lankan rupee",
+                        "code": "LKR"
+                        },
+                        {
+                        "icon": "SY",
+                        "name": "Syrian pound",
+                        "code": "SYP"
+                        },
+                        {
+                        "icon": "TW",
+                        "name": "New Taiwan dollar",
+                        "code": "TWD"
+                        },
+                        {
+                        "icon": "TH",
+                        "name": "Baht",
+                        "code": "THB"
+                        },
+                        {
+                        "icon": "TR",
+                        "name": "Turkish lira",
+                        "code": "TRY"
+                        },
+                        {
+                        "icon": "AE",
+                        "name": "UAE dirham",
+                        "code": "AED"
+                        },
+                        {
+                        "icon": "UZ",
+                        "name": "Uzbekistan som",
+                        "code": "UZS"
+                        },
+                        {
+                        "icon": "VN",
+                        "name": "đồng",
+                        "code": "VND"
+                        }
+                        ]
+  }
+  ]
+
