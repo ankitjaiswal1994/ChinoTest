@@ -26,6 +26,14 @@ class SwitchCurrencyViewController: UIViewController {
             collectionView.register(cellType: SwitchCurrencyCollectionViewCell.self)
         }
     }
+    var flowLayout: UICollectionViewFlowLayout? {
+     didSet {
+        flowLayout = UICollectionViewFlowLayout()
+        flowLayout?.itemSize = CGSize(width: 320, height: 320)
+        }
+    }
+    var indexView: BDKCollectionIndexView?
+    var sections = [Any]()
     
     var search: String = ""
     var countryCurrencyArray = [CurrencyInfo]()
@@ -39,9 +47,40 @@ class SwitchCurrencyViewController: UIViewController {
     var imageUrl = String()
     var isLoading = false
     
+    @objc func indexViewValueChanged(_ sender: BDKCollectionIndexView) {
+        let path = IndexPath(item: 0, section: Int(sender.currentIndex))
+        
+        collectionView?.scrollToItem(at: path, at: .top, animated: false)
+        let yOffset: CGFloat? = collectionView?.contentOffset.y
+        collectionView?.contentOffset = CGPoint(x: collectionView?.contentOffset.x ?? 0.0, y: yOffset ?? 0.0)
+    }
+
+    override func viewWillLayoutSubviews() {
+        let indexWidth: CGFloat = 28.0
+        let views = ["iv": indexView]
+        view.addConstraint(NSLayoutConstraint(item: indexView, attribute: .top, relatedBy: .equal, toItem: topLayoutGuide, attribute: .bottom, multiplier: 1.0, constant: 0.0))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[iv]-0-|", options: [], metrics: nil, views: views as? [String : Any] ?? [String : Any]()))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[iv(w)]-0-|", options: [], metrics: ["w": indexWidth], views: views as? [String : Any] ?? [String : Any]()))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+      //  collectionView.setCollectionViewLayout(self.flowLayout!, animated: true)
+        indexView = BDKCollectionIndexView(frame: CGRect.zero, indexTitles: [])
+        indexView?.translatesAutoresizingMaskIntoConstraints = false
+        // auto layout
+        indexView?.addTarget(self, action: #selector(self.indexViewValueChanged), for: .valueChanged)
+
+        view.addSubview(indexView!)
+
+        var sectionss = [AnyHashable]()
+        for char in "abcdefghijklmnopqrstuvwxyz".characters {
+            sectionss.append(String(char))
+        }
+        sections = sectionss
+        indexView?.indexTitles = sections
+
         confirmButton.isHidden = true
         navigationItem.title = CryptoConstant.navigationTitle.switchCurrency
         searchTextField.text = ""
@@ -53,7 +92,6 @@ class SwitchCurrencyViewController: UIViewController {
         
         setUpView()
     }
-    
     
     @IBAction func cryptoButtonAction(_ sender: UIButton) {
         view.endEditing(true)
@@ -114,7 +152,6 @@ class SwitchCurrencyViewController: UIViewController {
                 countryCurrencyArray.append(CurrencyInfo.getContinentWithCountry(dict: data as NSDictionary))
             }
         }
-        
     }
     
     func getCalculatedData() {
@@ -229,7 +266,6 @@ extension SwitchCurrencyViewController: UICollectionViewDelegateFlowLayout {
         
         return section == 0 ? CGSize(width: 0, height: 0): CGSize(width: collectionView.frame.size.width, height: 50)
     }
-    
 }
 
 extension SwitchCurrencyViewController: UICollectionViewDataSource {
