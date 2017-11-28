@@ -39,6 +39,7 @@ class SwitchCurrencyViewController: UIViewController {
     var countryCurrencyArray = [CurrencyInfo]()
     var selectedArray = [CurrencyInfo]()
     var serachArray = [CurrencyInfo]()
+    var matchedArray = [CurrencyInfo]()
     var isCurrencySelect = false
     var selectedCurrency = ""
     var keysArray = [Any]()
@@ -46,17 +47,19 @@ class SwitchCurrencyViewController: UIViewController {
     var currencyInfoObjectArray = [CurrencyInfo]()
     var imageUrl = String()
     var isLoading = false
+    var indexArray = [Int]()
+    var indexDictionary = NSMutableDictionary()
     
     @objc func indexViewValueChanged(_ sender: BDKCollectionIndexView) {
-        let path = IndexPath(item: 0, section: Int(sender.currentIndex))
-        
-        collectionView?.scrollToItem(at: path, at: .top, animated: false)
-        let yOffset: CGFloat? = collectionView?.contentOffset.y
-        collectionView?.contentOffset = CGPoint(x: collectionView?.contentOffset.x ?? 0.0, y: yOffset ?? 0.0)
+        let index = indexDictionary.object(forKey: sender.currentIndexTitle)
+        if index != nil {
+        let indexPath = IndexPath(row: index as! Int, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+        }
     }
 
     override func viewWillLayoutSubviews() {
-        let indexWidth: CGFloat = 28.0
+        let indexWidth: CGFloat = 20.0
         let views = ["iv": indexView]
         view.addConstraint(NSLayoutConstraint(item: indexView, attribute: .top, relatedBy: .equal, toItem: topLayoutGuide, attribute: .bottom, multiplier: 1.0, constant: 0.0))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[iv]-0-|", options: [], metrics: nil, views: views as? [String : Any] ?? [String : Any]()))
@@ -75,7 +78,7 @@ class SwitchCurrencyViewController: UIViewController {
         view.addSubview(indexView!)
 
         var sectionss = [AnyHashable]()
-        for char in "abcdefghijklmnopqrstuvwxyz".characters {
+        for char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".characters {
             sectionss.append(String(char))
         }
         sections = sectionss
@@ -100,6 +103,8 @@ class SwitchCurrencyViewController: UIViewController {
         }
         if (currencyInfoObjectArray.count == 0) {
             getCalculatedData()
+        } else {
+            indexView?.isHidden = false
         }
         search = ""
         cryptoButton.isSelected = true
@@ -108,6 +113,7 @@ class SwitchCurrencyViewController: UIViewController {
         commonButton.backgroundColor = .clear
         searchTextField.text = nil
         collectionView.reloadData()
+
     }
     
     @IBAction func commonButtonAction(_ sender: UIButton) {
@@ -126,6 +132,7 @@ class SwitchCurrencyViewController: UIViewController {
         cryptoButton.backgroundColor = .clear
         commonButton.backgroundColor = UIColor(red: 11.0/255.0, green: 106.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         searchTextField.text = nil
+        indexView?.isHidden = true
         collectionView.reloadData()
     }
     
@@ -179,9 +186,18 @@ class SwitchCurrencyViewController: UIViewController {
                                     _self.currencyInfoObjectArray.append(CurrencyInfo.getCryptoCurrencyList(dict: tempDict))
                                     _self.currencyInfoObjectArray = _self.currencyInfoObjectArray.sorted(by: {$0.code < $1.code})
                                 }
-                                
                                 dispatch {
+                                    LoaderView.remove(_self.view)
+                                    self?.indexView?.isHidden = false
                                     _self.collectionView.reloadData()
+                                }
+                                 for char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".characters {
+                                innerLoop:for (index, element) in (self?.currencyInfoObjectArray.enumerated())! {
+                                        if element.code.uppercased().hasPrefix(String(char)) {
+                                            self?.indexDictionary.setObject(index as NSCopying, forKey: String(char) as NSCopying)
+                                            break innerLoop
+                                        }
+                                    }
                                 }
                             }  else {
                                 _self.alert(message: "No Data Found", title: "Error!", OKAction: nil)
@@ -205,7 +221,11 @@ class SwitchCurrencyViewController: UIViewController {
                 _self.getCalculatedData()
             })
         }
-        
+    }
+    
+    func moveToIndex(currentIndexTitle: String) ->  CurrencyInfo {
+      let matchedArray = currencyInfoObjectArray.filter {$0.code.lowercased().hasPrefix(currentIndexTitle)}
+        return matchedArray[0]
     }
     
     func filterForSearchText(_ searchText: String) {
@@ -349,8 +369,19 @@ extension SwitchCurrencyViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
         let text = textField.text ?? ""
+        
+        if (range.location == 0 && string.length == 0)
+        {
+            dispatch {
+                self.indexView?.isHidden = false
+            }
+        } else {
+            indexView?.isHidden = true
+
+        }
         search = string.isEmpty ? String(search.dropLast()) : text + string
         filterForSearchText(search)
+        indexView?.isHidden = true
         return true
     }
     
@@ -362,6 +393,7 @@ extension SwitchCurrencyViewController: UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         search = ""
         filterForSearchText(search)
+        indexView?.isHidden = false
         return true
     }
 }

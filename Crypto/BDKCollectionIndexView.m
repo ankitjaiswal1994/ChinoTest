@@ -91,7 +91,7 @@
     _currentIndex = 0;
     _touchStatusViewAlpha = 0.25;
     _touchStatusBackgroundColor = [UIColor blackColor];
-    self.tintColor = [UIColor blackColor];
+    self.tintColor = [UIColor colorWithRed:52/255.0f green:189/255.0f blue:241/255.0f alpha:1];
     self.backgroundColor = [UIColor clearColor];
     
     SEL handleGestureSelector = @selector(handleGesture:);
@@ -275,7 +275,7 @@
         tag = tag + 1;
         label.font = self.font;
         label.backgroundColor = self.backgroundColor;
-        label.textColor = self.tintColor;
+        label.textColor = [UIColor colorWithRed:52/255.0f green:189/255.0f blue:241/255.0f alpha:1];
         label.textAlignment = NSTextAlignmentCenter;
         label.isAccessibilityElement = NO;
         [self addSubview:label];
@@ -333,7 +333,7 @@
 
 - (void)setBackgroundVisibility:(BOOL)flag {
     CGFloat alpha = flag ? self.touchStatusViewAlpha : 0;
-    self.touchStatusView.backgroundColor = [self.touchStatusBackgroundColor colorWithAlphaComponent:alpha];
+    self.touchStatusView.backgroundColor = [self.touchStatusBackgroundColor colorWithAlphaComponent:0];
 }
 
 #pragma mark - Gestures
