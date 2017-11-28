@@ -143,45 +143,45 @@ class ConvertedCurrencyViewController: UIViewController {
     
     func getCalculatedData() {
         if let internet = NetworkReachabilityManager(), internet.isReachable {
-
-        dispatch {
-            self.activityIndicator.startAnimating()
-            LoaderView.remove(self.view)
-        }
-        let urlPath = "https://min-api.cryptocompare.com/data/price?fsym=\(currency)&tsyms=\(selectedArray)"
-        guard let url = URL(string: urlPath) else { return }
-        URLSession.shared.dataTask(with: url, completionHandler: {
-            (data, response, error) in
-            LoaderView.remove(self.view)
-            if(error != nil){
-                print("error")
-                //loadView(view)
-            } else {
-                do {
-                    if let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? NSDictionary {
-                        self.keys = json.allKeys as? [String] ?? []
-                        self.values = json.allValues as? [Float] ?? []
-                    } else {
-                        self.alert(message: "No Data Found", title: "Error!", OKAction: nil)
-                        LoaderView.showMessage("No Data Found", onView: self.view, isSearch: false, completion: { [weak self] in
+            
+            dispatch {
+                self.activityIndicator.startAnimating()
+                LoaderView.remove(self.view)
+            }
+            let urlPath = "https://min-api.cryptocompare.com/data/price?fsym=\(currency)&tsyms=\(selectedArray)"
+            guard let url = URL(string: urlPath) else { return }
+            URLSession.shared.dataTask(with: url, completionHandler: {
+                (data, response, error) in
+                LoaderView.remove(self.view)
+                if(error != nil){
+                    print("error")
+                    //loadView(view)
+                } else {
+                    do {
+                        if let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? NSDictionary {
+                            self.keys = json.allKeys as? [String] ?? []
+                            self.values = json.allValues as? [Float] ?? []
+                        } else {
+                            self.alert(message: CryptoConstant.alertMessages.noDataFound, title: CryptoConstant.alertTitle.error, OKAction: nil)
+                            LoaderView.showMessage(CryptoConstant.alertMessages.noDataFound, onView: self.view, isSearch: false, completion: { [weak self] in
+                                guard let _self = self else { return }
+                                _self.getCalculatedData()
+                            })
+                        }
+                        dispatch {
+                            self.tableView.reloadData()
+                            self.activityIndicator.stopAnimating()
+                        }
+                    } catch let error as NSError {
+                        LoaderView.showMessage("\(error)", onView: self.view, isSearch: false, completion: { [weak self] in
                             guard let _self = self else { return }
                             _self.getCalculatedData()
                         })
                     }
-                    dispatch {
-                        self.tableView.reloadData()
-                        self.activityIndicator.stopAnimating()
-                    }
-                } catch let error as NSError {
-                    LoaderView.showMessage("\(error)", onView: self.view, isSearch: false, completion: { [weak self] in
-                        guard let _self = self else { return }
-                        _self.getCalculatedData()
-                    })
                 }
-            }
-        }).resume()}
+            }).resume()}
         else {
-            LoaderView.showMessage("No Internet Connection.", onView: view, isSearch: false, completion: { [weak self] in
+            LoaderView.showMessage(CryptoConstant.alertMessages.noInternetconnection, onView: view, isSearch: false, completion: { [weak self] in
                 guard let _self = self else { return }
                 _self.getCalculatedData()
             })
@@ -199,7 +199,6 @@ class ConvertedCurrencyViewController: UIViewController {
     }()
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        
         getCalculatedData()
         self.tableView.reloadData()
         refreshControl.endRefreshing()
@@ -209,14 +208,8 @@ class ConvertedCurrencyViewController: UIViewController {
 extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return keys.count > 0 ? keys.count: 0
-//        if (keys.count > 0){
-//
-//            return keys.count
-//        } else {
-//
-//            return 0
-//        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -252,11 +245,13 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return 95
     }
     
     func verifyUrl (urlString: String?) -> Bool {
         if let urlString = urlString, let url = NSURL(string: urlString) {
+            
             return UIApplication.shared.canOpenURL(url as URL)
         }
         

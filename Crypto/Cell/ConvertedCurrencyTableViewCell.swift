@@ -9,7 +9,7 @@
 import UIKit
 
 class ConvertedCurrencyTableViewCell: UITableViewCell,NibReusable {
-
+    
     @IBOutlet weak var currencyImageView: UIImageView!
     @IBOutlet weak var currencyType: UILabel!
     @IBOutlet weak var currencyValue: UILabel!
