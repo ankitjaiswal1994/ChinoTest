@@ -36,7 +36,7 @@ class SwitchCurrencyViewController: UIViewController {
     var imageUrl = String()
     var isCurrencySelect = false
     var isLoading = false
-    var search: String = ""
+    var search = ""
     var selectedCurrency = ""
     
     override func viewDidLoad() {
@@ -127,6 +127,7 @@ class SwitchCurrencyViewController: UIViewController {
                 _self.isLoading = false
                 if(error != nil){
                     print("error")
+                    _self.alert(message: error?.localizedDescription ?? "Error occured", title: CryptoConstant.alertTitle.error, OKAction: nil)
                 } else {
                     do {
                         if let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? NSDictionary {
@@ -313,19 +314,19 @@ extension SwitchCurrencyViewController {
     
     func pushToCurrencyExchange(_ indexPath: IndexPath, array: [CurrencyInfo]) {
         let storyboard = UIStoryboard(name: CryptoConstant.storyBoardName.currencyExchange, bundle: nil)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: CryptoConstant.identifiers.selectCurrencyViewController) as? SelectCurrencyViewController else { return }
-        vc.delegate = self
+        guard let selectCurrencyViewController = storyboard.instantiateViewController(withIdentifier: CryptoConstant.identifiers.selectCurrencyViewController) as? SelectCurrencyViewController else { return }
+        selectCurrencyViewController.delegate = self
         let obj = array[indexPath.item]
-        vc.code = obj.code
-        vc.name = obj.name
+        selectCurrencyViewController.code = obj.code
+        selectCurrencyViewController.name = obj.name
         if cryptoButton.isSelected {
             if let baseUrl = UserDefaults.standard.value(forKey: CryptoConstant.keys.baseImageUrl) as? String {
-                vc.icon = baseUrl + obj.imageUrl
+                selectCurrencyViewController.icon = baseUrl + obj.imageUrl
             }
         } else if commonButton.isSelected {
-            vc.icon = obj.icon
+            selectCurrencyViewController.icon = obj.icon
         }
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(selectCurrencyViewController, animated: true)
     }
     
     func refreshCurrency(_ indexPath: IndexPath, array: [CurrencyInfo])  {
@@ -340,7 +341,7 @@ extension SwitchCurrencyViewController {
         } else {
             currencyModal.isSelected = !currencyModal.isSelected
         }
-        confirmButton.isHidden = selectedArray.count >= 1 ? false: true
+        confirmButton.isHidden = !(selectedArray.count >= 1)
         collectionView.reloadItems(at: [IndexPath(item: indexPath.item, section: indexPath.section)])
     }
 }
