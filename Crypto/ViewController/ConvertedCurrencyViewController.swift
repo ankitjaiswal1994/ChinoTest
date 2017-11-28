@@ -41,13 +41,13 @@ class ConvertedCurrencyViewController: UIViewController {
     var currencyInfo = [CurrencyInfo]()
     var valueForCalculation: Float = 1e+07
     var currency: String = ""
-    var selectedArray: String = "" // this contains comma separated values
+    var selectedArray: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         activityIndicator.hidesWhenStopped = true
-        if let title = UserDefaults.standard.value(forKey: "price") as? String {
+        if let title = UserDefaults.standard.value(forKey: CryptoConstant.keys.price) as? String {
             let value = title.components(separatedBy: " ")
             if let quantity = value.first, let doubleValue = Float(quantity) {
                 valueForCalculation = doubleValue
@@ -94,7 +94,7 @@ class ConvertedCurrencyViewController: UIViewController {
     
     @IBAction func startOverButtonAction(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
-        UserDefaults.standard.removeObject(forKey: "price")
+        UserDefaults.standard.removeObject(forKey: CryptoConstant.keys.price)
         UserDefaults.standard.synchronize()
         delegate?.startOver()
         AppEventsLogger.log("Start Over")
@@ -209,11 +209,14 @@ class ConvertedCurrencyViewController: UIViewController {
 extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (keys.count > 0){
-            return keys.count
-        } else {
-            return 0
-        }
+        return keys.count > 0 ? keys.count: 0
+//        if (keys.count > 0){
+//
+//            return keys.count
+//        } else {
+//
+//            return 0
+//        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -223,14 +226,13 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
             if flags[indexPath.row].imageUrl.isEmpty {
                 cell.currencyImageView.image = UIImage(named: flags[indexPath.row].icon)
             } else {
-                if let baseUrl = UserDefaults.standard.value(forKey: "BaseImageUrl") as? String {
+                if let baseUrl = UserDefaults.standard.value(forKey: CryptoConstant.keys.baseImageUrl) as? String {
                     cell.currencyImageView.loadImageUsingCache(withUrl: baseUrl + flags[indexPath.row].imageUrl)
                 }
             }
             if verifyUrl(urlString: flags[indexPath.row].icon) {
             } else {
             }
-            print(flags[indexPath.row].name)
             cell.currencyName.text = flags[indexPath.row].name
         }
         

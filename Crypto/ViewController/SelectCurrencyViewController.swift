@@ -83,7 +83,7 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
                 _ = self.navigationController?.popViewController(animated: true)
                 delegate?.showAlert(selectedCurrecny: code, changeTitle: navigationItem.title!)
             } else {
-                alert(message: "Please enter some value.")
+                alert(message: CryptoConstant.alertMessages.enterSomeValue)
             }
         }
     }
@@ -111,7 +111,7 @@ extension SelectCurrencyViewController: UITextFieldDelegate {
    
     func textFieldDidEndEditing(_ textField: UITextField) {
         let text = textField.text ?? "1"
-            UserDefaults.standard.set(text + " " + code + " " + "Equals", forKey: "price")
+            UserDefaults.standard.set(text + " " + code + " " + "Equals", forKey: CryptoConstant.keys.price)
     }
     
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
