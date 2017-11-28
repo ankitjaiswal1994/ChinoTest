@@ -41,13 +41,13 @@ class ConvertedCurrencyViewController: UIViewController {
     var currencyInfo = [CurrencyInfo]()
     var valueForCalculation: Float = 1e+07
     var currency: String = ""
-    var selectedArray: String = "" // this contains comma separated values
+    var selectedArray: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         activityIndicator.hidesWhenStopped = true
-        if let title = UserDefaults.standard.value(forKey: "price") as? String {
+        if let title = UserDefaults.standard.value(forKey: CryptoConstant.keys.price) as? String {
             let value = title.components(separatedBy: " ")
             if let quantity = value.first, let doubleValue = Float(quantity) {
                 valueForCalculation = doubleValue
@@ -94,7 +94,7 @@ class ConvertedCurrencyViewController: UIViewController {
     
     @IBAction func startOverButtonAction(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
-        UserDefaults.standard.removeObject(forKey: "price")
+        UserDefaults.standard.removeObject(forKey: CryptoConstant.keys.price)
         UserDefaults.standard.synchronize()
         delegate?.startOver()
         AppEventsLogger.log("Start Over")
@@ -143,45 +143,45 @@ class ConvertedCurrencyViewController: UIViewController {
     
     func getCalculatedData() {
         if let internet = NetworkReachabilityManager(), internet.isReachable {
-
-        dispatch {
-            self.activityIndicator.startAnimating()
-            LoaderView.remove(self.view)
-        }
-        let urlPath = "https://min-api.cryptocompare.com/data/price?fsym=\(currency)&tsyms=\(selectedArray)"
-        guard let url = URL(string: urlPath) else { return }
-        URLSession.shared.dataTask(with: url, completionHandler: {
-            (data, response, error) in
-            LoaderView.remove(self.view)
-            if(error != nil){
-                print("error")
-                //loadView(view)
-            } else {
-                do {
-                    if let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? NSDictionary {
-                        self.keys = json.allKeys as? [String] ?? []
-                        self.values = json.allValues as? [Float] ?? []
-                    } else {
-                        self.alert(message: "No Data Found", title: "Error!", OKAction: nil)
-                        LoaderView.showMessage("No Data Found", onView: self.view, isSearch: false, completion: { [weak self] in
+            
+            dispatch {
+                self.activityIndicator.startAnimating()
+                LoaderView.remove(self.view)
+            }
+            let urlPath = "https://min-api.cryptocompare.com/data/price?fsym=\(currency)&tsyms=\(selectedArray)"
+            guard let url = URL(string: urlPath) else { return }
+            URLSession.shared.dataTask(with: url, completionHandler: {
+                (data, response, error) in
+                LoaderView.remove(self.view)
+                if(error != nil){
+                    print("error")
+                    //loadView(view)
+                } else {
+                    do {
+                        if let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? NSDictionary {
+                            self.keys = json.allKeys as? [String] ?? []
+                            self.values = json.allValues as? [Float] ?? []
+                        } else {
+                            self.alert(message: CryptoConstant.alertMessages.noDataFound, title: CryptoConstant.alertTitle.error, OKAction: nil)
+                            LoaderView.showMessage(CryptoConstant.alertMessages.noDataFound, onView: self.view, isSearch: false, completion: { [weak self] in
+                                guard let _self = self else { return }
+                                _self.getCalculatedData()
+                            })
+                        }
+                        dispatch {
+                            self.tableView.reloadData()
+                            self.activityIndicator.stopAnimating()
+                        }
+                    } catch let error as NSError {
+                        LoaderView.showMessage("\(error)", onView: self.view, isSearch: false, completion: { [weak self] in
                             guard let _self = self else { return }
                             _self.getCalculatedData()
                         })
                     }
-                    dispatch {
-                        self.tableView.reloadData()
-                        self.activityIndicator.stopAnimating()
-                    }
-                } catch let error as NSError {
-                    LoaderView.showMessage("\(error)", onView: self.view, isSearch: false, completion: { [weak self] in
-                        guard let _self = self else { return }
-                        _self.getCalculatedData()
-                    })
                 }
-            }
-        }).resume()}
+            }).resume()}
         else {
-            LoaderView.showMessage("No Internet Connection.", onView: view, isSearch: false, completion: { [weak self] in
+            LoaderView.showMessage(CryptoConstant.alertMessages.noInternetconnection, onView: view, isSearch: false, completion: { [weak self] in
                 guard let _self = self else { return }
                 _self.getCalculatedData()
             })
@@ -199,7 +199,6 @@ class ConvertedCurrencyViewController: UIViewController {
     }()
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        
         getCalculatedData()
         self.tableView.reloadData()
         refreshControl.endRefreshing()
@@ -209,11 +208,8 @@ class ConvertedCurrencyViewController: UIViewController {
 extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (keys.count > 0){
-            return keys.count
-        } else {
-            return 0
-        }
+        
+        return keys.count > 0 ? keys.count: 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -223,14 +219,13 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
             if flags[indexPath.row].imageUrl.isEmpty {
                 cell.currencyImageView.image = UIImage(named: flags[indexPath.row].icon)
             } else {
-                if let baseUrl = UserDefaults.standard.value(forKey: "BaseImageUrl") as? String {
+                if let baseUrl = UserDefaults.standard.value(forKey: CryptoConstant.keys.baseImageUrl) as? String {
                     cell.currencyImageView.loadImageUsingCache(withUrl: baseUrl + flags[indexPath.row].imageUrl)
                 }
             }
             if verifyUrl(urlString: flags[indexPath.row].icon) {
             } else {
             }
-            print(flags[indexPath.row].name)
             cell.currencyName.text = flags[indexPath.row].name
         }
         
@@ -250,11 +245,13 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return 95
     }
     
     func verifyUrl (urlString: String?) -> Bool {
         if let urlString = urlString, let url = NSURL(string: urlString) {
+            
             return UIApplication.shared.canOpenURL(url as URL)
         }
         

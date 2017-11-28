@@ -13,7 +13,7 @@ protocol SelectCurrencyDelegate: class {
 }
 
 class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
-
+    
     @IBOutlet weak var currencyTextField: UITextField!{
         didSet {
             currencyTextField.becomeFirstResponder()
@@ -23,17 +23,11 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var bottomSpacingConstraint: NSLayoutConstraint!
-
-
+    
     var code = ""
     var name = ""
     var icon = ""
     var delegate: SelectCurrencyDelegate?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -83,7 +77,7 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
                 _ = self.navigationController?.popViewController(animated: true)
                 delegate?.showAlert(selectedCurrecny: code, changeTitle: navigationItem.title!)
             } else {
-                alert(message: "Please enter some value.")
+                alert(message: CryptoConstant.alertMessages.enterSomeValue)
             }
         }
     }
@@ -92,10 +86,10 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
 extension SelectCurrencyViewController {
     
     @objc func keyboardWillShow(notification: NSNotification) {
-            self.bottomSpacingConstraint.constant = 216
-            UIView.animate(withDuration: ( notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval), animations: {
-                self.view.layoutIfNeeded()
-            })
+        self.bottomSpacingConstraint.constant = 216
+        UIView.animate(withDuration: ( notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval), animations: {
+            self.view.layoutIfNeeded()
+        })
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -108,14 +102,14 @@ extension SelectCurrencyViewController {
 }
 
 extension SelectCurrencyViewController: UITextFieldDelegate {
-   
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         let text = textField.text ?? "1"
-            UserDefaults.standard.set(text + " " + code + " " + "Equals", forKey: "price")
+        UserDefaults.standard.set(text + " " + code + " " + "Equals", forKey: CryptoConstant.keys.price)
     }
     
-        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            textField.resignFirstResponder()
-            return true
-        }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
