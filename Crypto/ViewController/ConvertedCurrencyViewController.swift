@@ -23,8 +23,6 @@ class ConvertedCurrencyViewController: UIViewController {
     }
     
     var items: [Item]?
-    var keys =  [String]()
-    var values = [Float]()
     var currencyName = [String]()
     var flags = [CurrencyInfo]()
     var delegate: StatrOverDelegate?
@@ -41,7 +39,6 @@ class ConvertedCurrencyViewController: UIViewController {
     var currencyInfo = [CurrencyInfo]()
     var valueForCalculation: Float = 1e+07
     var currency: String = ""
-    var selectedArray: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,19 +145,26 @@ class ConvertedCurrencyViewController: UIViewController {
                 self.activityIndicator.startAnimating()
                 LoaderView.remove(self.view)
             }
-            let urlPath = "https://min-api.cryptocompare.com/data/price?fsym=\(currency)&tsyms=\(selectedArray)"
+            let codeArray = flags.map({ (cuurency) -> String in
+                return cuurency.code
+            }).joined(separator: ",")
+            let urlPath = "https://min-api.cryptocompare.com/data/price?fsym=\(currency)&tsyms=\(codeArray)"
             guard let url = URL(string: urlPath) else { return }
             URLSession.shared.dataTask(with: url, completionHandler: {
                 (data, response, error) in
                 LoaderView.remove(self.view)
                 if(error != nil){
                     print("error")
-                    //loadView(view)
                 } else {
                     do {
                         if let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? NSDictionary {
-                            self.keys = json.allKeys as? [String] ?? []
-                            self.values = json.allValues as? [Float] ?? []
+                            for dict in json {
+                                let currencyObject = self.flags.first(where: { $0.code == dict.key as? String })
+                                currencyObject?.isSuccess = true
+                                if let value = dict.value as? Float {
+                                    currencyObject?.values = value
+                                }
+                            }
                         } else {
                             self.alert(message: CryptoConstant.alertMessages.noDataFound, title: CryptoConstant.alertTitle.error, OKAction: nil)
                             LoaderView.showMessage(CryptoConstant.alertMessages.noDataFound, onView: self.view, isSearch: false, completion: { [weak self] in
@@ -209,7 +213,7 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return keys.count > 0 ? keys.count: 0
+        return flags.count > 0 ? flags.count: 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -229,16 +233,21 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
             cell.currencyName.text = flags[indexPath.row].name
         }
         
-        if indexPath.row < self.keys.count {
-            cell.currencyType.text = self.keys[indexPath.row]
+        if indexPath.row < flags.count {
+            cell.currencyType.text = flags[indexPath.row].code
         }
         
-        if indexPath.row < self.values.count {
-            if self.values[indexPath.row] >= 1 {
-                cell.currencyValue.text = String(format: "%.2f", self.values[indexPath.row] * valueForCalculation)
+        if indexPath.row < flags.count {
+            if flags[indexPath.row].isSuccess {
+                if flags[indexPath.row].values >= 1 {
+                    cell.currencyValue.text = String(format: "%.2f", flags[indexPath.row].values * valueForCalculation)
+                } else {
+                    cell.currencyValue.text = String(format: "%.8f", flags[indexPath.row].values * valueForCalculation)
+                }
             } else {
-                cell.currencyValue.text = String(format: "%.8f", self.values[indexPath.row] * valueForCalculation)
+                cell.currencyValue.text = CryptoConstant.alertMessages.noDataFound
             }
+            
         }
         
         return cell

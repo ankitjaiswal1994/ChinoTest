@@ -12,7 +12,16 @@ import Alamofire
 
 class SwitchCurrencyViewController: UIViewController {
     
-    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var searchTextField: UITextField! {
+        didSet {
+            if searchTextField.text == "" {
+                indexView?.isHidden = false
+            } else {
+                indexView?.isHidden = true
+            }
+        }
+    }
+    
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var commonButton: UIButton!
     @IBOutlet weak var cryptoButton: UIButton! {
@@ -68,12 +77,9 @@ class SwitchCurrencyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      //  collectionView.setCollectionViewLayout(self.flowLayout!, animated: true)
         indexView = BDKCollectionIndexView(frame: CGRect.zero, indexTitles: [])
         indexView?.translatesAutoresizingMaskIntoConstraints = false
-        // auto layout
         indexView?.addTarget(self, action: #selector(self.indexViewValueChanged), for: .valueChanged)
-
         view.addSubview(indexView!)
 
         var sectionss = [AnyHashable]()
@@ -82,7 +88,6 @@ class SwitchCurrencyViewController: UIViewController {
         }
         sections = sectionss
         indexView?.indexTitles = sections
-
         confirmButton.isHidden = true
         navigationItem.title = CryptoConstant.navigationTitle.collectCurrency
         searchTextField.text = ""
@@ -93,6 +98,7 @@ class SwitchCurrencyViewController: UIViewController {
         super.viewWillAppear(animated)
         
         setUpView()
+        searchTextField.text = ""
     }
     
     @IBAction func cryptoButtonAction(_ sender: UIButton) {
@@ -137,9 +143,6 @@ class SwitchCurrencyViewController: UIViewController {
         let storyboard = UIStoryboard(name: CryptoConstant.storyBoardName.currencyExchange, bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: CryptoConstant.identifiers.convertedCurrencyViewController) as? ConvertedCurrencyViewController else { return }
         vc.delegate = self
-        vc.selectedArray = selectedArray.map({ (cuurency) -> String in
-            return cuurency.code
-        }).joined(separator: ",")
         vc.flags = selectedArray
         vc.currency = selectedCurrency
         navigationController?.pushViewController(vc, animated: true)
@@ -161,6 +164,7 @@ class SwitchCurrencyViewController: UIViewController {
     func getCalculatedData() {
         
         LoaderView.showIndicator(view)
+
         if let internet = NetworkReachabilityManager(), internet.isReachable {
             let urlPath = CryptoConstant.urls.getCryptoCoinApiUrl
             guard let url = URL(string: urlPath) else { return }
@@ -176,6 +180,7 @@ class SwitchCurrencyViewController: UIViewController {
                     do {
                         if let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? NSDictionary {
                             if json.value(forKey: CryptoConstant.keys.response) as? String == CryptoConstant.jsonText.success {
+
                                 let baseImageUrl = json.value(forKey: CryptoConstant.keys.baseImageUrl) as! String
                                 UserDefaults.standard.set(baseImageUrl, forKey: CryptoConstant.keys.baseImageUrl)
                                 _self.keysArray = (( json.value(forKey: CryptoConstant.keys.data) as? NSDictionary)?.allKeys)!
@@ -186,8 +191,12 @@ class SwitchCurrencyViewController: UIViewController {
                                 }
                                 dispatch {
                                     LoaderView.remove(_self.view)
-                                    self?.indexView?.isHidden = false
-                                    _self.collectionView.reloadData()
+                                    if (self?.searchTextField.text?.isEmpty)! {
+                                        _self.collectionView.reloadData()
+                                        self?.indexView?.isHidden = false
+                                    } else {
+                                        self?.filterForSearchText((self?.searchTextField.text!)!)
+                                    }
                                 }
                                  for char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".characters {
                                 innerLoop:for (index, element) in (self?.currencyInfoObjectArray.enumerated())! {
@@ -222,6 +231,10 @@ class SwitchCurrencyViewController: UIViewController {
     }
     
     func filterForSearchText(_ searchText: String) {
+        if currencyInfoObjectArray.count == 0 {
+            indexView?.isHidden = true
+            return
+        }
         if cryptoButton.isSelected {
             serachArray = currencyInfoObjectArray.filter {
                 $0.name.lowercased().contains(searchText.lowercased()) || $0.code.lowercased().contains(searchText.lowercased())}
@@ -229,7 +242,7 @@ class SwitchCurrencyViewController: UIViewController {
             let array = countryCurrencyArray
             for index in array {
                 index.filterArray = index.counryArray.filter{
-                    $0.name.lowercased().contains(searchText.lowercased()) || $0.code.lowercased().contains(searchText.lowercased()) }
+                    $0.name.lowercased().contains(searchText.lowercased()) || $0.code.lowercased().contains(searchText.lowercased())  }
             }
             countryCurrencyArray = array
         }
