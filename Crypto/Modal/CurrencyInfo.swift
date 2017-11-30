@@ -23,6 +23,9 @@ class CurrencyInfo {
     var symbol = ""
     var sortOrder = ""
     
+    var isSuccess = Bool()
+    var values = Float()
+    
     class func parseCurrencyList(dict: NSDictionary) -> CurrencyInfo {
         let currencyObject = CurrencyInfo()
         currencyObject.icon = dict.value(forKey: "icon") as? String ?? ""

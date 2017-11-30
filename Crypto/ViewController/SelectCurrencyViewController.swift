@@ -38,6 +38,7 @@ class SelectCurrencyViewController: UIViewController,UIToolbarDelegate {
         navigationItem.leftBarButtonItem = CryptoNavigationBar.backButton(self, action: #selector(leftBarButtonAction(_:)))
         nameLabel.text = name
         codeLabel.text = code
+        print(icon)
         if verifyUrl(urlString: icon) {
             iconImageview.loadImageUsingCache(withUrl: icon)
         } else {
