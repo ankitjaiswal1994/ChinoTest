@@ -18,7 +18,7 @@ open class CryptoNavigationBar {
     }
 
     class func leftBarCustomButton(_ controller: Any, normalImage: UIImage, selectedImage: UIImage, action: Selector) -> UIBarButtonItem {
-        let customView = ORDesignableView.init(frame: CGRect(x: 0, y: 0, width: 60.0, height: 25.0))
+        let customView = ORDesignableView.init(frame: CGRect(x: 0, y: 0, width: 40.0, height: 25.0))
         customView.backgroundColor = .black
         customView.cornerRadius = 2
         
@@ -29,6 +29,32 @@ open class CryptoNavigationBar {
         
         customView.addSubview(mapListButton)
         let barButtonItem = UIBarButtonItem(customView: customView)
+        
+        return barButtonItem
+    }
+    
+    class func rightBarButtonWithTitle(_ controller: Any, buttonTitle: String, action: Selector) -> UIBarButtonItem {
+        let barButton = UIButton(type: .custom)
+        barButton.frame = CGRect(x: 0, y: 0, width: 70.0, height: 30.0)
+        barButton.setTitle(buttonTitle, for: .normal)
+        barButton.contentHorizontalAlignment = .right
+        barButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        barButton.setTitleColor(.black, for: .normal)
+        barButton.addTarget(controller, action: action, for: .touchUpInside)
+        let barButtonItem = UIBarButtonItem(customView: barButton)
+        
+        return barButtonItem
+    }
+    
+    class func leftBarButtonWithTitle(_ controller: Any, buttonTitle: String, action: Selector) -> UIBarButtonItem {
+        let barButton = UIButton(type: .custom)
+        barButton.frame = CGRect(x: 0, y: 0, width: 50.0, height: 30.0)
+        barButton.setTitle(buttonTitle, for: .normal)
+        barButton.contentHorizontalAlignment = .left
+        barButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        barButton.setTitleColor(.black, for: .normal)
+        barButton.addTarget(controller, action: action, for: .touchUpInside)
+        let barButtonItem = UIBarButtonItem(customView: barButton)
         
         return barButtonItem
     }

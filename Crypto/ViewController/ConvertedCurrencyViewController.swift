@@ -52,8 +52,9 @@ class ConvertedCurrencyViewController: UIViewController {
             navigationItem.title = title
         }
         navigationController?.navigationBar.isHidden = false
-        navigationItem.leftBarButtonItem = CryptoNavigationBar.backButton(self, action: #selector(leftBarButtonAction(_:)))
-        
+        navigationItem.leftBarButtonItems = [CryptoNavigationBar.backButton(self, action: #selector(leftBarButtonAction(_:))), CryptoNavigationBar.leftBarButtonWithTitle(self, buttonTitle: "Terms", action: #selector(leftBarButtonTitleAction(_:)))]
+        navigationItem.rightBarButtonItem = CryptoNavigationBar.rightBarButtonWithTitle(self, buttonTitle: "Restore", action: #selector(rightBarButtonTitleAction(_:)))
+
         getCalculatedData()
     }
     
@@ -87,6 +88,15 @@ class ConvertedCurrencyViewController: UIViewController {
     
     @objc func leftBarButtonAction(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func rightBarButtonTitleAction(_ sender: Any) {
+       
+    }
+    
+    @objc func leftBarButtonTitleAction(_ sender: Any) {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "TermsViewController") as? TermsViewController else { return }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func startOverButtonAction(_ sender: UIButton) {
