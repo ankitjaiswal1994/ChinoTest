@@ -11,6 +11,8 @@
 		48316BF11FC7075900CCAC14 /* UIImageView+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48316BF01FC7075800CCAC14 /* UIImageView+Async.swift */; };
 		48316BF41FC70A7700CCAC14 /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48316BF21FC70A7700CCAC14 /* LoaderView.xib */; };
 		48316BF51FC70A7700CCAC14 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48316BF31FC70A7700CCAC14 /* LoaderView.swift */; };
+		4858215F1FDE6EF2002B50DD /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858215E1FDE6EF2002B50DD /* TermsViewController.swift */; };
+		485821611FDEAB2D002B50DD /* MoneyUnlimitedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485821601FDEAB2D002B50DD /* MoneyUnlimitedViewController.swift */; };
 		4FDB381845911CF20BD73C62 /* Pods_Crypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C6C4E5E1A9C5793E1F1C4A /* Pods_Crypto.framework */; };
 		60044F481FC40D9F005B51CD /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60044F471FC40D9F005B51CD /* HeaderView.swift */; };
 		609988A31FBEA89600735256 /* CountryList.json in Resources */ = {isa = PBXBuildFile; fileRef = 609988A21FBEA89600735256 /* CountryList.json */; };
@@ -79,6 +81,8 @@
 		48316BF01FC7075800CCAC14 /* UIImageView+Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Async.swift"; sourceTree = "<group>"; };
 		48316BF21FC70A7700CCAC14 /* LoaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
 		48316BF31FC70A7700CCAC14 /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
+		4858215E1FDE6EF2002B50DD /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		485821601FDEAB2D002B50DD /* MoneyUnlimitedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyUnlimitedViewController.swift; sourceTree = "<group>"; };
 		60044F471FC40D9F005B51CD /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		609988A21FBEA89600735256 /* CountryList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CountryList.json; sourceTree = "<group>"; };
 		609988A41FBEBB9700735256 /* cryptoIcon.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cryptoIcon.json; sourceTree = "<group>"; };
@@ -298,6 +302,8 @@
 				60F8B2DB1FBDC9A000C4D849 /* SelectCurrencyViewController.swift */,
 				60F8B2DD1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift */,
 				60044F471FC40D9F005B51CD /* HeaderView.swift */,
+				4858215E1FDE6EF2002B50DD /* TermsViewController.swift */,
+				485821601FDEAB2D002B50DD /* MoneyUnlimitedViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -561,7 +567,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -574,6 +580,7 @@
 				60DE906C1FBD91690093A322 /* SwitchCurrencyCollectionViewCell.swift in Sources */,
 				60DE906D1FBD91690093A322 /* SwitchCurrencyCollectionViewCell.xib in Sources */,
 				60DE90591FBD915C0093A322 /* AppStoryboard.swift in Sources */,
+				485821611FDEAB2D002B50DD /* MoneyUnlimitedViewController.swift in Sources */,
 				60DE905A1FBD915C0093A322 /* CustomizedNavigation.swift in Sources */,
 				60DE905B1FBD915C0093A322 /* DatePicker.swift in Sources */,
 				60DE905C1FBD915C0093A322 /* GCD.swift in Sources */,
@@ -605,6 +612,7 @@
 				60DE90301FBD8C330093A322 /* SwitchCurrencyViewController.swift in Sources */,
 				60F8B2DE1FBDD86300C4D849 /* ConvertedCurrencyViewController.swift in Sources */,
 				48316BF51FC70A7700CCAC14 /* LoaderView.swift in Sources */,
+				4858215F1FDE6EF2002B50DD /* TermsViewController.swift in Sources */,
 				60F8B2DC1FBDC9A000C4D849 /* SelectCurrencyViewController.swift in Sources */,
 				60DE90021FBD8BCB0093A322 /* AppDelegate.swift in Sources */,
 			);
