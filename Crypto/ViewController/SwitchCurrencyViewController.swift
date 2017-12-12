@@ -226,7 +226,7 @@ class SwitchCurrencyViewController: UIViewController {
     }
     
     func filterForSearchText(_ searchText: String) {
-        if currencyInfoObjectArray.count == 0 {
+        if currencyInfoObjectArray.count == 0 && cryptoButton.isSelected {
             indexView?.isHidden = true
             return
         }
@@ -248,6 +248,7 @@ class SwitchCurrencyViewController: UIViewController {
 extension SwitchCurrencyViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        view.endEditing(true)
         if !isCurrencySelect {
             if cryptoButton.isSelected {
                 search.isEmpty ? pushToCurrencyExchange(indexPath, array: currencyInfoObjectArray) : pushToCurrencyExchange(indexPath, array: serachArray)
@@ -338,13 +339,15 @@ extension SwitchCurrencyViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let text = textField.text ?? ""
         
-        if (range.location == 0 && string.length == 0)
-        {
-            dispatch {
-                self.indexView?.isHidden = false
+        if cryptoButton.isSelected {
+            if (range.location == 0 && string.length == 0)
+            {
+                dispatch {
+                    self.indexView?.isHidden = false
+                }
+            } else {
+                indexView?.isHidden = true
             }
-        } else {
-            indexView?.isHidden = true
         }
         search = string.isEmpty ? String(search.dropLast()) : text + string
         filterForSearchText(search)
