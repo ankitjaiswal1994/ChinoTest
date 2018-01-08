@@ -74,20 +74,7 @@ class ConvertedCurrencyViewController: UIViewController {
     }
     
     func restoreInApp() {
-        SwiftyStoreKit.retrieveProductsInfo(["11212017"]) { result in
-            if let product = result.retrievedProducts.first {
-                AppEventsLogger.log("IAP prompt shown")
-                let priceString = product.localizedPrice!
-                print("Product: \(product.localizedDescription), price: \(priceString)")
-            }
-            else if let invalidProductId = result.invalidProductIDs.first {
-                //                    return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
-            }
-            else {
-                print("Error: \(result.error)")
-            }
-        }
-        self.perform(#selector(inAppPurchase), with: nil, afterDelay: 2.0)
+        self.perform(#selector(inAppPurchase), with: nil, afterDelay: 0.0)
     }
     
     @objc func leftBarButtonAction(_ sender: Any) {
@@ -95,20 +82,12 @@ class ConvertedCurrencyViewController: UIViewController {
     }
     
     @objc func rightBarButtonTitleAction(_ sender: Any) {
-        SwiftyStoreKit.retrieveProductsInfo(["11212017"]) { result in
-            if let product = result.retrievedProducts.first {
-                AppEventsLogger.log("IAP prompt shown")
-                let priceString = product.localizedPrice!
-                print("Product: \(product.localizedDescription), price: \(priceString)")
-            }
-            else if let invalidProductId = result.invalidProductIDs.first {
-                //                    return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
-            }
-            else {
-                print("Error: \(result.error)")
-            }
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
         }
-        self.perform(#selector(inAppPurchase), with: nil, afterDelay: 2.0)
+        appdelegate.count = -1
+
+        self.perform(#selector(inAppPurchase), with: nil, afterDelay: 0.0)
     }
     
     @objc func leftBarButtonTitleAction(_ sender: Any) {
@@ -130,7 +109,10 @@ class ConvertedCurrencyViewController: UIViewController {
     }
     
     @objc func inAppPurchase() {
-        inAppPurchaseAlert()
+      //  inAppPurchaseAlert()
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "MoneyUnlimitedViewController") as? MoneyUnlimitedViewController else { return }
+        navigationController?.pushViewController(vc, animated: false)
+        
 //        let message = """
 //    UPGRADE
 //    - Unlimted cryptocurrency-to-cryptocurrency converstions
