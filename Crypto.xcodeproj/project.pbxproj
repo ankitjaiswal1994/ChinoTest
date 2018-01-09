@@ -793,7 +793,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.CryptoConverter.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "080dd787-6729-455c-80f4-f6a72af84446";
+				PROVISIONING_PROFILE = "6f3a78ef-64bc-4cfd-a53a-baf1fde7de22";
 				PROVISIONING_PROFILE_SPECIFIER = "CryptoConverter Distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = "Crypto/Crypto-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -818,7 +818,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.CryptoConverter.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "413913f1-4e82-4d58-b2ad-1bd753e1b63b";
+				PROVISIONING_PROFILE = "6f3a78ef-64bc-4cfd-a53a-baf1fde7de22";
 				PROVISIONING_PROFILE_SPECIFIER = "CryptoConverter Distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = "Crypto/Crypto-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
