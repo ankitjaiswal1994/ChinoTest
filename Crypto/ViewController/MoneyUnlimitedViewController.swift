@@ -10,17 +10,24 @@ import UIKit
 import SwiftyStoreKit
 import FacebookCore
 
+protocol IAPDelegate: class {
+    func showiTuneLogin()
+}
+
 class MoneyUnlimitedViewController: UIViewController {
     @IBOutlet weak var moneyTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var hyperlinkLabel: UILabel!
-    
+    var delegate: IAPDelegate?
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(onClicLabel(sender:)))
         hyperlinkLabel.isUserInteractionEnabled = true
         hyperlinkLabel.addGestureRecognizer(tap)
-        
+    }
+    
+    func retrieveProductIAP() {
         SwiftyStoreKit.retrieveProductsInfo(["11212017"]) { result in
             if let product = result.retrievedProducts.first {
                 AppEventsLogger.log("IAP prompt shown")
@@ -56,12 +63,8 @@ class MoneyUnlimitedViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func crossButtonAction(_ sender: Any) {
+        delegate?.showiTuneLogin()
         navigationController?.popViewController(animated: false)
     }
 
@@ -70,24 +73,8 @@ class MoneyUnlimitedViewController: UIViewController {
     }
     
     @objc func inAppPurchase() {
-        SwiftyStoreKit.purchaseProduct("11212017", quantity: 1, atomically: true) { result in
-            switch result {
-            case .success(let purchase):
-                print("Purchase Success: \(purchase.productId)")
-            case .error(let error):
-                switch error.code {
-                case .unknown: print("Unknown error. Please contact support")
-                case .clientInvalid: print("Not allowed to make the payment")
-                case .paymentCancelled: break
-                case .paymentInvalid: print("The purchase identifier was invalid")
-                case .paymentNotAllowed: print("The device is not allowed to make the payment")
-                case .storeProductNotAvailable: print("The product is not available in the current storefront")
-                case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
-                case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
-                case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
-                }
-            }
-        }
+        delegate?.showiTuneLogin()
+        navigationController?.popViewController(animated: false)
     }
   }
 

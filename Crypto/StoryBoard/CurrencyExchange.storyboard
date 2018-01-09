@@ -194,7 +194,7 @@ Unlimited.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISR-gk-YHj">
-                                <rect key="frame" x="16" y="159" width="288" height="268"/>
+                                <rect key="frame" x="16" y="159" width="288" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="diH-51-3MZ"/>
                                 </constraints>
@@ -209,12 +209,12 @@ UPGRADE:
  
 ✅  100% Free Peace of Mind 
 </string>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFq-fP-qfm">
-                                <rect key="frame" x="16" y="427" width="288" height="123"/>
+                                <rect key="frame" x="16" y="409" width="288" height="98.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="fNW-4K-BTQ"/>
                                 </constraints>
@@ -223,14 +223,14 @@ UPGRADE:
                                         <string key="content">30-day free trial. $39.99 yearly auto-renewing subscription after your trial ends (unless turned off at least 24-hours before the end of the current period). Payment will be charged to iTunes Account at confirmation of purchase. Cancel or manage subscription anytime, in account settings. Cost &amp; protection of renewal is equal to initial subscription. Any unused portion of a free trial period will be forfeited if you purchase a subscription. Go to </string>
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="10" name="Avenir-Book"/>
+                                            <font key="NSFont" size="9" name="Avenir-Book"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="https://goo.gl/VHB1Tq">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="10" name="Avenir-Heavy"/>
+                                            <font key="NSFont" size="9" name="Avenir-Book"/>
                                             <font key="NSOriginalFont" size="10" name="Avenir-Heavy"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             <integer key="NSUnderline" value="1"/>
@@ -239,14 +239,14 @@ UPGRADE:
                                     <fragment content=" for Terms and">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="10" name="Avenir-Book"/>
+                                            <font key="NSFont" size="9" name="Avenir-Book"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content=" https://goo.gl/VHB1Tq">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="10" name="Avenir-Heavy"/>
+                                            <font key="NSFont" size="9" name="Avenir-Book"/>
                                             <font key="NSOriginalFont" size="10" name="Avenir-Heavy"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             <integer key="NSUnderline" value="1"/>
@@ -255,7 +255,7 @@ UPGRADE:
                                     <fragment content=" for Privacy Policy.">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="10" name="Avenir-Book"/>
+                                            <font key="NSFont" size="9" name="Avenir-Book"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -263,7 +263,7 @@ UPGRADE:
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0UO-av-n4O">
-                                <rect key="frame" x="16" y="557.5" width="288" height="40"/>
+                                <rect key="frame" x="16" y="515" width="288" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="PyM-Ml-6Gc"/>

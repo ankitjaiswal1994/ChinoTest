@@ -15,7 +15,7 @@ protocol StatrOverDelegate: class {
     func startOver()
 }
 
-class ConvertedCurrencyViewController: UIViewController {
+class ConvertedCurrencyViewController: UIViewController, IAPDelegate {
     
     struct Item {
         var name: String
@@ -26,13 +26,22 @@ class ConvertedCurrencyViewController: UIViewController {
     var currencyName = [String]()
     var flags = [CurrencyInfo]()
     var delegate: StatrOverDelegate?
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(ConvertedCurrencyViewController.handleRefresh(_:)),
+                                 for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor.lightGray
+        
+        return refreshControl
+    }()
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.register(cellType: ConvertedCurrencyTableViewCell.self)
             tableView.tableFooterView = UIView()
-            tableView.addSubview(self.refreshControl)
+            tableView.addSubview(refreshControl)
         }
     }
     
@@ -43,45 +52,17 @@ class ConvertedCurrencyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        activityIndicator.hidesWhenStopped = true
-        if let title = UserDefaults.standard.value(forKey: CryptoConstant.keys.price) as? String {
-            let value = title.components(separatedBy: " ")
-            if let quantity = value.first, let doubleValue = Float(quantity) {
-                valueForCalculation = doubleValue
-            }
-            navigationItem.title = title
-        }
-        navigationController?.navigationBar.isHidden = false
-        navigationItem.leftBarButtonItems = [CryptoNavigationBar.backButton(self, action: #selector(leftBarButtonAction(_:))), CryptoNavigationBar.leftBarButtonWithTitle(self, buttonTitle: "Terms", action: #selector(leftBarButtonTitleAction(_:)))]
-        navigationItem.rightBarButtonItem = CryptoNavigationBar.rightBarButtonWithTitle(self, buttonTitle: "Restore", action: #selector(rightBarButtonTitleAction(_:)))
-
         getCalculatedData()
+        viewSetUp()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        appdelegate.count += 1
-        
-        if appdelegate.count > 0 {
-            restoreInApp()
-
-            appdelegate.count = -1
-        }
+        retrieveProductIAP()
     }
     
-    func restoreInApp() {
-        self.perform(#selector(moveToPreTextController), with: nil, afterDelay: 0.0)
-    }
-    
-    @objc func leftBarButtonAction(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func rightBarButtonTitleAction(_ sender: Any) {
+    func retrieveProductIAP() {
         SwiftyStoreKit.retrieveProductsInfo(["11212017"]) { result in
             if let product = result.retrievedProducts.first {
                 AppEventsLogger.log("IAP prompt shown")
@@ -95,7 +76,48 @@ class ConvertedCurrencyViewController: UIViewController {
                 self.alert(message: (result.error?.localizedDescription)!)
             }
         }
-        self.perform(#selector(inAppPurchase), with: nil, afterDelay: 0.0)
+    }
+    
+    func viewSetUp() {
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.count += 1
+        
+        if appdelegate.count > 0 {
+            restoreInApp()
+            
+            appdelegate.count = -1
+        }
+        
+        activityIndicator.hidesWhenStopped = true
+        if let title = UserDefaults.standard.value(forKey: CryptoConstant.keys.price) as? String {
+            let value = title.components(separatedBy: " ")
+            if let quantity = value.first, let doubleValue = Float(quantity) {
+                valueForCalculation = doubleValue
+            }
+            navigationItem.title = title
+        }
+        
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.leftBarButtonItems = [CryptoNavigationBar.backButton(self, action: #selector(leftBarButtonAction(_:))), CryptoNavigationBar.leftBarButtonWithTitle(self, buttonTitle: "Terms", action: #selector(leftBarButtonTitleAction(_:)))]
+        navigationItem.rightBarButtonItem = CryptoNavigationBar.rightBarButtonWithTitle(self, buttonTitle: "Restore", action: #selector(rightBarButtonTitleAction(_:)))
+    }
+    
+    func showiTuneLogin() {
+        inAppPurchase()
+    }
+    
+    func restoreInApp() {
+        perform(#selector(moveToPreTextController), with: nil)
+    }
+    
+    @objc func leftBarButtonAction(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func rightBarButtonTitleAction(_ sender: Any) {
+        perform(#selector(inAppPurchase), with: nil)
     }
     
     @objc func leftBarButtonTitleAction(_ sender: Any) {
@@ -139,6 +161,7 @@ class ConvertedCurrencyViewController: UIViewController {
     
     @objc func moveToPreTextController() {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "MoneyUnlimitedViewController") as? MoneyUnlimitedViewController else { return }
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: false)
     }
     
@@ -196,16 +219,6 @@ class ConvertedCurrencyViewController: UIViewController {
         }
     }
     
-    lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action:
-            #selector(ConvertedCurrencyViewController.handleRefresh(_:)),
-                                 for: UIControlEvents.valueChanged)
-        refreshControl.tintColor = UIColor.lightGray
-        
-        return refreshControl
-    }()
-    
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         getCalculatedData()
         self.tableView.reloadData()
@@ -223,7 +236,7 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConvertedCurrencyTableViewCell.self)
         
-        if indexPath.row < self.flags.count {
+        if indexPath.row < flags.count {
             if flags[indexPath.row].imageUrl.isEmpty {
                 cell.currencyImageView.image = UIImage(named: flags[indexPath.row].icon)
             } else {
@@ -271,4 +284,3 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
         return false
     }
 }
-
