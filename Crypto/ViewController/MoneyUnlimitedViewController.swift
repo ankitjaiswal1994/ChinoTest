@@ -16,6 +16,7 @@ protocol IAPDelegate: class {
 
 class MoneyUnlimitedViewController: UIViewController {
     @IBOutlet weak var moneyTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var unlimitedLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var hyperlinkLabel: UILabel!
     var delegate: IAPDelegate?
    
@@ -55,7 +56,9 @@ class MoneyUnlimitedViewController: UIViewController {
             moneyTopConstraint.constant = 40
         } else {
             moneyTopConstraint.constant = -40
+            unlimitedLabelHeightConstraint.constant = 210
         }
+ 
     }
     
     override func viewWillDisappear(_ animated: Bool) {

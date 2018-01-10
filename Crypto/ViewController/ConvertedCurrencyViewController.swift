@@ -54,6 +54,9 @@ class ConvertedCurrencyViewController: UIViewController, IAPDelegate {
         
         getCalculatedData()
         viewSetUp()
+        delay(3.0) {
+            self.restoreInApp()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,17 +82,7 @@ class ConvertedCurrencyViewController: UIViewController, IAPDelegate {
     }
     
     func viewSetUp() {
-        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        appdelegate.count += 1
-        
-        if appdelegate.count > 0 {
-            restoreInApp()
-            
-            appdelegate.count = -1
-        }
-        
+
         activityIndicator.hidesWhenStopped = true
         if let title = UserDefaults.standard.value(forKey: CryptoConstant.keys.price) as? String {
             let value = title.components(separatedBy: " ")

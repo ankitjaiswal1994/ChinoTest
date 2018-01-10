@@ -183,9 +183,9 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwB-yz-fyB">
-                                <rect key="frame" x="16" y="60" width="288" height="99"/>
+                                <rect key="frame" x="16" y="60" width="288" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="99" id="Ccw-7M-h40"/>
+                                    <constraint firstAttribute="height" constant="100" id="Ccw-7M-h40"/>
                                 </constraints>
                                 <string key="text">Money. 
 Unlimited.</string>
@@ -194,9 +194,9 @@ Unlimited.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISR-gk-YHj">
-                                <rect key="frame" x="16" y="159" width="288" height="250"/>
+                                <rect key="frame" x="16" y="160" width="288" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="diH-51-3MZ"/>
+                                    <constraint firstAttribute="height" constant="250" id="diH-51-3MZ"/>
                                 </constraints>
                                 <string key="text">Free: Limited use.   
 
@@ -214,7 +214,7 @@ UPGRADE:
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFq-fP-qfm">
-                                <rect key="frame" x="16" y="409" width="288" height="98.5"/>
+                                <rect key="frame" x="16" y="410" width="288" height="98.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="fNW-4K-BTQ"/>
                                 </constraints>
@@ -263,7 +263,7 @@ UPGRADE:
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0UO-av-n4O">
-                                <rect key="frame" x="16" y="515" width="288" height="40"/>
+                                <rect key="frame" x="16" y="516" width="288" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="PyM-Ml-6Gc"/>
@@ -304,6 +304,7 @@ UPGRADE:
                     <connections>
                         <outlet property="hyperlinkLabel" destination="gFq-fP-qfm" id="dc5-ap-QWJ"/>
                         <outlet property="moneyTopConstraint" destination="ikU-92-aIa" id="NGQ-LA-seW"/>
+                        <outlet property="unlimitedLabelHeightConstraint" destination="diH-51-3MZ" id="spa-sX-BVO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bBf-xo-3U0" userLabel="First Responder" sceneMemberID="firstResponder"/>
