@@ -9,8 +9,9 @@
 import UIKit
 import AlamofireImage
 import Alamofire
+import SwiftyStoreKit
 
-class SwitchCurrencyViewController: UIViewController {
+class SwitchCurrencyViewController: UIViewController, IAPDelegate {
     
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var commonButton: UIButton!
@@ -80,7 +81,7 @@ class SwitchCurrencyViewController: UIViewController {
         view.addSubview(indexView!)
         
         var sectionss = [AnyHashable]()
-        for char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".characters {
+        for char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" {
             sectionss.append(String(char))
         }
         sections = sectionss
@@ -88,6 +89,9 @@ class SwitchCurrencyViewController: UIViewController {
         confirmButton.isHidden = true
         navigationItem.title = CryptoConstant.navigationTitle.collectCurrency
         commonButtonAction(UIButton())
+        delay(1.0) {
+            self.moveToPreTextController()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +99,34 @@ class SwitchCurrencyViewController: UIViewController {
         
         setUpView()
         searchTextField.text = ""
+    }
+    
+    func moveToPreTextController() {
+        let storyboard = UIStoryboard(name: "CurrencyExchange", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "MoneyUnlimitedViewController") as? MoneyUnlimitedViewController else { return }
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    func showiTuneLogin() {
+        SwiftyStoreKit.purchaseProduct("11212017", quantity: 1, atomically: true) { result in
+            switch result {
+            case .success(let purchase):
+                print("Purchase Success: \(purchase.productId)")
+            case .error(let error):
+                switch error.code {
+                case .unknown: print("Unknown error. Please contact support")
+                case .clientInvalid: print("Not allowed to make the payment")
+                case .paymentCancelled: break
+                case .paymentInvalid: print("The purchase identifier was invalid")
+                case .paymentNotAllowed: print("The device is not allowed to make the payment")
+                case .storeProductNotAvailable: print("The product is not available in the current storefront")
+                case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
+                case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
+                case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
+                }
+            }
+        }
     }
     
     @IBAction func cryptoButtonAction(_ sender: UIButton) {
@@ -193,7 +225,7 @@ class SwitchCurrencyViewController: UIViewController {
                                         self?.filterForSearchText((self?.searchTextField.text!)!)
                                     }
                                 }
-                                for char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".characters {
+                                for char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" {
                                     innerLoop:for (index, element) in (self?.currencyInfoObjectArray.enumerated())! {
                                         if element.code.uppercased().hasPrefix(String(char)) {
                                             self?.indexDictionary.setObject(index as NSCopying, forKey: String(char) as NSCopying)

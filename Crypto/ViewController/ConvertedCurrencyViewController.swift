@@ -15,7 +15,7 @@ protocol StatrOverDelegate: class {
     func startOver()
 }
 
-class ConvertedCurrencyViewController: UIViewController {
+class ConvertedCurrencyViewController: UIViewController, IAPDelegate {
     
     struct Item {
         var name: String
@@ -26,13 +26,22 @@ class ConvertedCurrencyViewController: UIViewController {
     var currencyName = [String]()
     var flags = [CurrencyInfo]()
     var delegate: StatrOverDelegate?
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(ConvertedCurrencyViewController.handleRefresh(_:)),
+                                 for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor.lightGray
+        
+        return refreshControl
+    }()
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.register(cellType: ConvertedCurrencyTableViewCell.self)
             tableView.tableFooterView = UIView()
-            tableView.addSubview(self.refreshControl)
+            tableView.addSubview(refreshControl)
         }
     }
     
@@ -43,6 +52,37 @@ class ConvertedCurrencyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getCalculatedData()
+        viewSetUp()
+        delay(3.0) {
+            self.restoreInApp()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        retrieveProductIAP()
+    }
+    
+    func retrieveProductIAP() {
+        SwiftyStoreKit.retrieveProductsInfo(["11212017"]) { result in
+            if let product = result.retrievedProducts.first {
+                AppEventsLogger.log("IAP prompt shown")
+                let priceString = product.localizedPrice!
+                print("Product: \(product.localizedDescription), price: \(priceString)")
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+                self.alert(message: invalidProductId)
+            }
+            else {
+                self.alert(message: (result.error?.localizedDescription)!)
+            }
+        }
+    }
+    
+    func viewSetUp() {
+
         activityIndicator.hidesWhenStopped = true
         if let title = UserDefaults.standard.value(forKey: CryptoConstant.keys.price) as? String {
             let value = title.components(separatedBy: " ")
@@ -51,43 +91,18 @@ class ConvertedCurrencyViewController: UIViewController {
             }
             navigationItem.title = title
         }
+        
         navigationController?.navigationBar.isHidden = false
         navigationItem.leftBarButtonItems = [CryptoNavigationBar.backButton(self, action: #selector(leftBarButtonAction(_:))), CryptoNavigationBar.leftBarButtonWithTitle(self, buttonTitle: "Terms", action: #selector(leftBarButtonTitleAction(_:)))]
         navigationItem.rightBarButtonItem = CryptoNavigationBar.rightBarButtonWithTitle(self, buttonTitle: "Restore", action: #selector(rightBarButtonTitleAction(_:)))
-
-        getCalculatedData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        appdelegate.count += 1
-        
-        if appdelegate.count > 0 {
-            restoreInApp()
-
-            appdelegate.count = -1
-        }
+    func showiTuneLogin() {
+        inAppPurchase()
     }
     
     func restoreInApp() {
-        SwiftyStoreKit.retrieveProductsInfo(["11212017"]) { result in
-            if let product = result.retrievedProducts.first {
-                AppEventsLogger.log("IAP prompt shown")
-                let priceString = product.localizedPrice!
-                print("Product: \(product.localizedDescription), price: \(priceString)")
-            }
-            else if let invalidProductId = result.invalidProductIDs.first {
-                //                    return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
-            }
-            else {
-                print("Error: \(result.error)")
-            }
-        }
-        self.perform(#selector(inAppPurchase), with: nil, afterDelay: 2.0)
+        perform(#selector(moveToPreTextController), with: nil)
     }
     
     @objc func leftBarButtonAction(_ sender: Any) {
@@ -95,25 +110,12 @@ class ConvertedCurrencyViewController: UIViewController {
     }
     
     @objc func rightBarButtonTitleAction(_ sender: Any) {
-        SwiftyStoreKit.retrieveProductsInfo(["11212017"]) { result in
-            if let product = result.retrievedProducts.first {
-                AppEventsLogger.log("IAP prompt shown")
-                let priceString = product.localizedPrice!
-                print("Product: \(product.localizedDescription), price: \(priceString)")
-            }
-            else if let invalidProductId = result.invalidProductIDs.first {
-                //                    return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
-            }
-            else {
-                print("Error: \(result.error)")
-            }
-        }
-        self.perform(#selector(inAppPurchase), with: nil, afterDelay: 2.0)
+        perform(#selector(inAppPurchase), with: nil)
     }
     
     @objc func leftBarButtonTitleAction(_ sender: Any) {
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "MoneyUnlimitedViewController") as? MoneyUnlimitedViewController else { return }
-        navigationController?.pushViewController(vc, animated: false)
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "TermsViewController") as? TermsViewController else { return }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func startOverButtonAction(_ sender: UIButton) {
@@ -130,39 +132,30 @@ class ConvertedCurrencyViewController: UIViewController {
     }
     
     @objc func inAppPurchase() {
-        inAppPurchaseAlert()
-//        let message = """
-//    UPGRADE
-//    - Unlimted cryptocurrency-to-cryptocurrency converstions
-//    - Unlimted common currency-to-common currency converstions
-//    - Unlimted common currency to cryptocurrency converstions
-//
-//    100% Free Peace of Mind
-//
-//    30-day free trial.
-//    $39.99 yearly auto-renewing subsciption after your trial unless turned off, cancel anytime in account settings. Cost & protection of renewal is equal to initial subsciption. Go to bit.ly/dvapp for full details
-//    """
-//
-//        alertWithTwoAction(message: message, title: "UNLIMITED CONVERSIONS", OkButtonTitle: "Turn On", cancelButtonTitle: "Disable") { (action) in
-//            SwiftyStoreKit.purchaseProduct("11212017", quantity: 1, atomically: true) { result in
-//                switch result {
-//                case .success(let purchase):
-//                    print("Purchase Success: \(purchase.productId)")
-//                case .error(let error):
-//                    switch error.code {
-//                    case .unknown: print("Unknown error. Please contact support")
-//                    case .clientInvalid: print("Not allowed to make the payment")
-//                    case .paymentCancelled: break
-//                    case .paymentInvalid: print("The purchase identifier was invalid")
-//                    case .paymentNotAllowed: print("The device is not allowed to make the payment")
-//                    case .storeProductNotAvailable: print("The product is not available in the current storefront")
-//                    case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
-//                    case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
-//                    case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
-//                    }
-//                }
-//            }
-//        }
+        SwiftyStoreKit.purchaseProduct("11212017", quantity: 1, atomically: true) { result in
+            switch result {
+            case .success(let purchase):
+                print("Purchase Success: \(purchase.productId)")
+            case .error(let error):
+                switch error.code {
+                case .unknown: print("Unknown error. Please contact support")
+                case .clientInvalid: print("Not allowed to make the payment")
+                case .paymentCancelled: break
+                case .paymentInvalid: print("The purchase identifier was invalid")
+                case .paymentNotAllowed: print("The device is not allowed to make the payment")
+                case .storeProductNotAvailable: print("The product is not available in the current storefront")
+                case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
+                case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
+                case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
+                }
+            }
+        }
+    }
+    
+    @objc func moveToPreTextController() {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "MoneyUnlimitedViewController") as? MoneyUnlimitedViewController else { return }
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: false)
     }
     
     func getCalculatedData() {
@@ -219,16 +212,6 @@ class ConvertedCurrencyViewController: UIViewController {
         }
     }
     
-    lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action:
-            #selector(ConvertedCurrencyViewController.handleRefresh(_:)),
-                                 for: UIControlEvents.valueChanged)
-        refreshControl.tintColor = UIColor.lightGray
-        
-        return refreshControl
-    }()
-    
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         getCalculatedData()
         self.tableView.reloadData()
@@ -246,7 +229,7 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ConvertedCurrencyTableViewCell.self)
         
-        if indexPath.row < self.flags.count {
+        if indexPath.row < flags.count {
             if flags[indexPath.row].imageUrl.isEmpty {
                 cell.currencyImageView.image = UIImage(named: flags[indexPath.row].icon)
             } else {
@@ -294,4 +277,3 @@ extension ConvertedCurrencyViewController : UITableViewDelegate,UITableViewDataS
         return false
     }
 }
-

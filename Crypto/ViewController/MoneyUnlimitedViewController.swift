@@ -10,16 +10,38 @@ import UIKit
 import SwiftyStoreKit
 import FacebookCore
 
+protocol IAPDelegate: class {
+    func showiTuneLogin()
+}
+
 class MoneyUnlimitedViewController: UIViewController {
     @IBOutlet weak var moneyTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var unlimitedLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var hyperlinkLabel: UILabel!
-    
+    var delegate: IAPDelegate?
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(onClicLabel(sender:)))
         hyperlinkLabel.isUserInteractionEnabled = true
         hyperlinkLabel.addGestureRecognizer(tap)
+    }
+    
+    func retrieveProductIAP() {
+        SwiftyStoreKit.retrieveProductsInfo(["11212017"]) { result in
+            if let product = result.retrievedProducts.first {
+                AppEventsLogger.log("IAP prompt shown")
+                let priceString = product.localizedPrice!
+                print("Product: \(product.localizedDescription), price: \(priceString)")
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+                self.alert(message: invalidProductId)
+            }
+            else {
+                self.alert(message: (result.error?.localizedDescription)!)
+            }
+        }
     }
     
     @objc func onClicLabel(sender:UITapGestureRecognizer) {
@@ -34,7 +56,9 @@ class MoneyUnlimitedViewController: UIViewController {
             moneyTopConstraint.constant = 40
         } else {
             moneyTopConstraint.constant = -40
+            unlimitedLabelHeightConstraint.constant = 210
         }
+ 
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -42,33 +66,18 @@ class MoneyUnlimitedViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func crossButtonAction(_ sender: Any) {
+        delegate?.showiTuneLogin()
         navigationController?.popViewController(animated: false)
     }
 
     @IBAction func okayButtonAction(_ sender: Any) {
-        SwiftyStoreKit.retrieveProductsInfo(["11212017"]) { result in
-            if let product = result.retrievedProducts.first {
-                AppEventsLogger.log("IAP prompt shown")
-                let priceString = product.localizedPrice!
-                print("Product: \(product.localizedDescription), price: \(priceString)")
-            }
-            else if let invalidProductId = result.invalidProductIDs.first {
-                //                    return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
-            }
-            else {
-                print("Error: \(result.error)")
-            }
-        }
-        self.perform(#selector(inAppPurchase), with: nil, afterDelay: 2.0)
+        self.perform(#selector(inAppPurchase), with: nil, afterDelay: 0.0)
     }
     
     @objc func inAppPurchase() {
-        inAppPurchaseAlert()
+        delegate?.showiTuneLogin()
+        navigationController?.popViewController(animated: false)
     }
-}
+  }
+
